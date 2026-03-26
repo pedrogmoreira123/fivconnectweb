@@ -1,13 +1,13 @@
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
-import { MessageCircle, TicketCheck, Sparkles } from 'lucide-react';
+import { MessageCircle, TicketCheck, GitBranch, Bot } from 'lucide-react';
 
 const steps = [
   {
     icon: MessageCircle,
     number: '01',
-    title: 'Receba mensagens',
+    title: 'Conecte seu WhatsApp',
     description:
-      'Seu número de WhatsApp é conectado ao FivConnect. Todas as mensagens chegam em tempo real, organizadas por cliente.',
+      'Em minutos seu número está conectado ao FivConnect. Processo simples, rápido e estável. Todas as mensagens chegam em tempo real, organizadas por cliente.',
     color: 'from-green-400 to-emerald-500',
     lightBg: 'bg-green-50 dark:bg-green-950/20',
     lightBorder: 'border-green-200 dark:border-green-800',
@@ -18,18 +18,29 @@ const steps = [
     number: '02',
     title: 'Gerencie com tickets',
     description:
-      'Cada conversa vira um ticket com status, prioridade e fila. Sua equipe sabe exatamente o que fazer e quando.',
+      'Cada conversa vira um ticket com status, prioridade e fila. Sua equipe sabe exatamente o que fazer e quando. Nada se perde.',
     color: 'from-blue-400 to-blue-600',
     lightBg: 'bg-blue-50 dark:bg-blue-950/20',
     lightBorder: 'border-blue-200 dark:border-blue-800',
     textColor: 'text-blue-700 dark:text-blue-400',
   },
   {
-    icon: Sparkles,
+    icon: GitBranch,
     number: '03',
-    title: 'Responda com IA',
+    title: 'Crie fluxos de chatbot',
     description:
-      'Eddie, nosso agente de IA powered by Claude, responde automaticamente, escala para humanos quando necessário e aprende com o tempo.',
+      'Monte fluxos visuais de atendimento automatizado: menus, perguntas, respostas automáticas e encaminhamento para filas. Você decide cada etapa.',
+    color: 'from-yellow-400 to-amber-500',
+    lightBg: 'bg-yellow-50 dark:bg-yellow-950/20',
+    lightBorder: 'border-yellow-200 dark:border-yellow-800',
+    textColor: 'text-yellow-700 dark:text-yellow-400',
+  },
+  {
+    icon: Bot,
+    number: '04',
+    title: 'Treine seu Agente de IA',
+    description:
+      'Crie agentes de IA personalizados para sua empresa. Defina a personalidade, o conhecimento e o comportamento. O agente responde, escala para humanos e aprende.',
     color: 'from-purple-400 to-violet-600',
     lightBg: 'bg-purple-50 dark:bg-purple-950/20',
     lightBorder: 'border-purple-200 dark:border-purple-800',
@@ -53,15 +64,15 @@ export default function HowItWorks() {
             COMO FUNCIONA
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            Simples do início ao fim
+            Do zero ao atendimento inteligente em 4 passos
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Em três etapas, seu atendimento fica organizado, rápido e inteligente.
+            Configure tudo no seu ritmo. Sem código, sem complicação.
           </p>
         </div>
 
         {/* Steps */}
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {steps.map((step, i) => {
             const Icon = step.icon;
             return (
@@ -70,28 +81,28 @@ export default function HowItWorks() {
                 className={`relative transition-all duration-700 ${
                   isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                 }`}
-                style={{ transitionDelay: `${i * 150}ms` }}
+                style={{ transitionDelay: `${i * 120}ms` }}
               >
                 {/* Connector line */}
                 {i < steps.length - 1 && (
-                  <div className="hidden md:block absolute top-10 left-full w-full h-px bg-gradient-to-r from-gray-300 to-transparent dark:from-gray-600 z-0 -translate-x-4" />
+                  <div className="hidden lg:block absolute top-10 left-full w-full h-px bg-gradient-to-r from-gray-300 to-transparent dark:from-gray-600 z-0 -translate-x-4" />
                 )}
 
-                <div className={`relative z-10 p-8 rounded-2xl border ${step.lightBg} ${step.lightBorder} h-full`}>
+                <div className={`relative z-10 p-7 rounded-2xl border ${step.lightBg} ${step.lightBorder} h-full`}>
                   {/* Number */}
-                  <div className={`text-5xl font-black mb-4 ${step.textColor} opacity-20`}>
+                  <div className={`text-4xl font-black mb-3 ${step.textColor} opacity-20`}>
                     {step.number}
                   </div>
 
                   {/* Icon */}
-                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${step.color} flex items-center justify-center mb-4 shadow-lg`}>
-                    <Icon size={22} className="text-white" />
+                  <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${step.color} flex items-center justify-center mb-4 shadow-lg`}>
+                    <Icon size={20} className="text-white" />
                   </div>
 
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
                     {step.title}
                   </h3>
-                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                  <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
                     {step.description}
                   </p>
                 </div>

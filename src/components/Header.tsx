@@ -20,6 +20,8 @@ export default function Header() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  const logoSrc = theme === 'dark' ? '/logo-branca.png' : '/logo-preta.png';
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -33,12 +35,9 @@ export default function Header() {
           {/* Logo */}
           <a href="#" className="flex items-center gap-2">
             <img
-              src="/logo.svg"
+              src={logoSrc}
               alt="FivConnect"
               className="h-8 w-auto"
-              onError={(e) => {
-                (e.target as HTMLImageElement).src = '/logo-preta.png';
-              }}
             />
           </a>
 

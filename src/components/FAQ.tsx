@@ -4,9 +4,24 @@ import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 const faqs = [
   {
-    question: 'O FivConnect usa o WhatsApp oficial?',
+    question: 'Como funciona a conexão com o WhatsApp?',
     answer:
-      'Sim! O FivConnect integra com a WhatsApp Business API oficial (Meta). Isso garante segurança, conformidade e sem risco de banimento. Ajudamos você a solicitar e configurar o acesso oficial.',
+      'A conexão é simples, rápida e estável. Você escaneia um QR Code e seu número já está integrado ao painel em minutos. Sem processos burocráticos de aprovação. Basta conectar e começar a atender.',
+  },
+  {
+    question: 'Posso criar fluxos de chatbot personalizados?',
+    answer:
+      'Sim! O FivConnect tem um editor de fluxos de chatbot completo. Você cria menus interativos, perguntas, respostas condicionais, coleta de dados e encaminha para filas ou atendentes. Tudo sem código.',
+  },
+  {
+    question: 'Como funciona o Agente de IA?',
+    answer:
+      'Você cria e treina seu próprio agente de IA. Define a personalidade, o tom de voz, a base de conhecimento da sua empresa e as regras de comportamento. O agente atende seus clientes no seu estilo, e escala para um humano quando necessário.',
+  },
+  {
+    question: 'O que é o Eddie?',
+    answer:
+      'Eddie é o assistente de ajuda interno da plataforma FivConnect. Ele está disponível na Central de Ajuda para tirar dúvidas sobre como usar o sistema, configurar recursos e resolver problemas técnicos. É diferente dos agentes de IA que você cria para atender seus clientes.',
   },
   {
     question: 'Preciso instalar algum aplicativo?',
@@ -21,12 +36,7 @@ const faqs = [
   {
     question: 'Quantos números de WhatsApp posso conectar?',
     answer:
-      'Você pode conectar múltiplos números ao mesmo painel. Cada número funciona como um canal separado com suas próprias filas e atendentes.',
-  },
-  {
-    question: 'O Eddie (IA) responde qualquer tipo de pergunta?',
-    answer:
-      'Eddie é treinado com as informações da sua empresa. Você configura o conhecimento base e ele responde com base nessas informações. Para temas fora do escopo, ele encaminha para um atendente humano.',
+      'Você pode conectar múltiplos números ao mesmo painel. Cada número funciona como um canal separado com suas próprias filas, chatbots e atendentes.',
   },
   {
     question: 'Posso cancelar quando quiser?',

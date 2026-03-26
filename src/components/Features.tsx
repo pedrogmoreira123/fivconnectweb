@@ -2,22 +2,24 @@ import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import {
   MessageCircle,
   TicketCheck,
-  Sparkles,
+  Bot,
   BarChart3,
   Users,
   Paperclip,
-  Zap,
+  GitBranch,
   Shield,
+  Sparkles,
+  HelpCircle,
 } from 'lucide-react';
 
 const features = [
   {
     icon: MessageCircle,
-    title: 'WhatsApp Integrado',
+    title: 'Conexão WhatsApp Rápida',
     description:
-      'Conecte seu número oficial do WhatsApp Business e receba todas as mensagens direto no painel, sem precisar abrir o celular.',
+      'Conecte seu número de WhatsApp em minutos. Processo simples, rápido e estável — sem burocracia, sem longos processos de aprovação.',
     color: 'from-green-400 to-emerald-500',
-    badge: 'WhatsApp API',
+    badge: 'WhatsApp',
   },
   {
     icon: TicketCheck,
@@ -28,12 +30,21 @@ const features = [
     badge: 'Produtividade',
   },
   {
-    icon: Sparkles,
-    title: 'Agente IA — Eddie',
+    icon: GitBranch,
+    title: 'Fluxos de Chatbot',
     description:
-      'Powered by Claude AI, Eddie responde automaticamente, entende contexto, escala para atendentes humanos e aprende com cada interação.',
+      'Crie fluxos visuais de atendimento automatizado: menus interativos, respostas condicionais, coleta de dados e encaminhamento inteligente. Você define as regras.',
+    color: 'from-yellow-400 to-amber-500',
+    badge: 'Automação',
+    highlight: true,
+  },
+  {
+    icon: Bot,
+    title: 'Agentes de IA Personalizados',
+    description:
+      'Crie e treine agentes de IA para atender seus clientes no seu estilo. Defina a personalidade, base de conhecimento e comportamento — o agente trabalha do seu jeito.',
     color: 'from-purple-400 to-violet-600',
-    badge: 'Claude AI',
+    badge: 'IA',
     highlight: true,
   },
   {
@@ -61,12 +72,12 @@ const features = [
     badge: 'Mídia',
   },
   {
-    icon: Zap,
-    title: 'Automações e Chatbot',
+    icon: HelpCircle,
+    title: 'Central de Ajuda com Eddie',
     description:
-      'Crie fluxos de chatbot visuais com respostas automáticas, menus interativos e encaminhamento inteligente.',
-    color: 'from-yellow-400 to-amber-500',
-    badge: 'Automação',
+      'Eddie é o assistente de ajuda interno da plataforma. Tire dúvidas sobre o sistema, recursos e configurações diretamente pelo chat de suporte.',
+    color: 'from-teal-400 to-teal-600',
+    badge: 'Suporte',
   },
   {
     icon: Shield,
@@ -102,7 +113,7 @@ export default function Features() {
         </div>
 
         {/* Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {features.map((feature, i) => {
             const Icon = feature.icon;
             return (
@@ -119,7 +130,7 @@ export default function Features() {
                   <div className="absolute -top-3 left-4">
                     <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-purple-600 text-white text-[10px] font-bold">
                       <Sparkles size={10} />
-                      IA
+                      DESTAQUE
                     </span>
                   </div>
                 )}

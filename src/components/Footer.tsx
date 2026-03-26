@@ -29,6 +29,7 @@ const socials = [
 ];
 
 export default function Footer() {
+
   return (
     <footer className="bg-gray-900 dark:bg-[hsl(240,11%,13%)] text-gray-400">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -41,13 +42,7 @@ export default function Footer() {
                 src="/logo-branca.png"
                 alt="FivConnect"
                 className="h-7 w-auto"
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.style.display = 'none';
-                  target.nextElementSibling?.classList.remove('hidden');
-                }}
               />
-              <span className="hidden text-white font-bold text-lg">FivConnect</span>
             </div>
             <p className="text-sm leading-relaxed mb-6 max-w-xs">
               Atendimento via WhatsApp inteligente para PMEs. Simplifique, automatize e cresça.
@@ -94,7 +89,7 @@ export default function Footer() {
           </p>
           <p className="text-xs">
             Feito com ♥ no Brasil · Powered by{' '}
-            <span className="text-blue-400">Claude AI</span>
+            <span className="text-blue-400">Fi.V Soluções LTDA.</span>
           </p>
         </div>
       </div>
