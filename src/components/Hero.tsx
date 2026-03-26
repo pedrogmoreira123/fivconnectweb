@@ -217,7 +217,7 @@ export default function Hero() {
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-3 mb-12">
               <a
-                href="https://app.fivconnect.net/register"
+                href="https://app.fivconnect.net/cadastro"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-blue-600 dark:bg-blue-500 text-white font-semibold text-base hover:bg-blue-700 dark:hover:bg-blue-400 transition-all shadow-lg shadow-blue-600/25 hover:shadow-blue-600/40 hover:-translate-y-0.5"
               >
                 Começar Gratuitamente

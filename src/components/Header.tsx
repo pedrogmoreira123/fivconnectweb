@@ -70,7 +70,7 @@ export default function Header() {
               Entrar
             </a>
             <a
-              href="https://app.fivconnect.net/register"
+              href="https://app.fivconnect.net/cadastro"
               className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 dark:bg-blue-500 text-white text-sm font-semibold hover:bg-blue-700 dark:hover:bg-blue-400 transition-colors shadow-sm"
             >
               Começar Grátis
@@ -118,7 +118,7 @@ export default function Header() {
               Entrar
             </a>
             <a
-              href="https://app.fivconnect.net/register"
+              href="https://app.fivconnect.net/cadastro"
               className="block py-2 px-3 rounded-lg text-sm font-semibold text-center text-white bg-blue-600 dark:bg-blue-500"
             >
               Começar Grátis

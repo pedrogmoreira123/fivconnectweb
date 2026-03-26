@@ -184,7 +184,7 @@ export default function Pricing() {
 
                 {/* CTA */}
                 <a
-                  href="https://app.fivconnect.net/register"
+                  href="https://app.fivconnect.net/cadastro"
                   className={`block w-full text-center py-3 rounded-xl font-semibold text-sm transition-all mb-8 ${
                     plan.isPopular
                       ? 'bg-white text-blue-600 hover:bg-blue-50 shadow-md'
