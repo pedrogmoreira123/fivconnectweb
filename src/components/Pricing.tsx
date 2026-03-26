@@ -1,69 +1,59 @@
 import { useState } from 'react';
-import { Check, Star, Zap } from 'lucide-react';
+import { Check, Star, Zap, Gift } from 'lucide-react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 const plans = [
   {
-    id: 'basic',
-    name: 'Básico',
-    description: 'Ideal para pequenas empresas iniciando no atendimento digital',
-    monthlyPrice: 79,
-    annualPrice: 790,
-    maxUsers: 5,
-    maxQueues: 2,
+    id: 'free',
+    name: 'Plano Gratuito',
+    description: 'Experimente o FivConnect sem compromisso e veja se é para você',
+    monthlyPrice: 0,
+    annualPrice: 0,
+    isFree: true,
     isPopular: false,
-    cta: 'Começar Grátis',
+    cta: 'Criar Conta Grátis',
     features: [
-      'Até 5 usuários simultâneos',
-      '2 filas de atendimento',
+      '1 canal de WhatsApp',
+      'Até 10 conversas ativas',
       'Gestão de tickets',
       'Histórico de conversas',
-      'Relatórios básicos',
-      'Chatbot básico',
       'Suporte por email',
     ],
   },
   {
     id: 'professional',
     name: 'Profissional',
-    description: 'Para empresas em crescimento que precisam de mais recursos',
-    monthlyPrice: 189,
-    annualPrice: 1890,
-    maxUsers: 25,
-    maxQueues: 10,
+    description: 'Para empresas que querem atendimento profissional e automatizado',
+    monthlyPrice: 149,
+    annualPrice: 1490,
+    isFree: false,
     isPopular: true,
     cta: 'Assinar Agora',
     features: [
-      'Até 25 usuários simultâneos',
-      '10 filas de atendimento',
-      'Agente IA (Eddie) — powered by Claude',
-      'Relatórios avançados com exportação',
-      'API completa',
-      'Automações e chatbot inteligente',
-      'Suporte via WhatsApp prioritário',
+      'Até 10 usuários simultâneos',
+      '1 fila de atendimento',
+      'Fluxos de chatbot',
+      'Relatórios completos',
       'Dashboard de métricas em tempo real',
+      'Suporte prioritário via WhatsApp',
     ],
   },
   {
     id: 'enterprise',
     name: 'Enterprise',
-    description: 'Solução completa para grandes empresas e equipes',
-    monthlyPrice: 449,
-    annualPrice: 4490,
-    maxUsers: 100,
-    maxQueues: 999,
+    description: 'Para equipes maiores que precisam de IA e recursos avançados',
+    monthlyPrice: 289,
+    annualPrice: 2890,
+    isFree: false,
     isPopular: false,
-    cta: 'Falar com Vendas',
+    cta: 'Assinar Agora',
     features: [
-      'Até 100 usuários simultâneos',
-      'Filas ilimitadas',
-      'IA avançada com customização',
-      'Relatórios personalizados',
-      'API premium com webhooks',
-      'Automações avançadas',
-      'Suporte 24/7 dedicado',
-      'Integrações customizadas',
-      'SLA garantido',
+      'Até 25 usuários simultâneos',
+      '3 filas de atendimento',
+      'Tudo do plano Profissional',
+      'Agente de IA personalizável',
+      'API com webhooks',
+      'Suporte prioritário via WhatsApp',
     ],
   },
 ];
@@ -126,9 +116,9 @@ export default function Pricing() {
         {/* Cards */}
         <div className="grid md:grid-cols-3 gap-8 items-start">
           {plans.map((plan, i) => {
-            const price = annual ? plan.annualPrice : plan.monthlyPrice;
-            const period = annual ? '/ano' : '/mês';
-            const discount = getDiscount(plan.monthlyPrice, plan.annualPrice);
+            const price = annual && !plan.isFree ? plan.annualPrice : plan.monthlyPrice;
+            const period = annual && !plan.isFree ? '/ano' : '/mês';
+            const discount = plan.isFree ? 0 : getDiscount(plan.monthlyPrice, plan.annualPrice);
 
             return (
               <div
@@ -143,7 +133,7 @@ export default function Pricing() {
                 {/* Popular badge */}
                 {plan.isPopular && (
                   <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                    <div className="flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-amber-400 text-amber-900 text-xs font-bold shadow-lg">
+                    <div className="flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-amber-400 text-amber-900 text-xs font-bold shadow-lg whitespace-nowrap">
                       <Star size={12} fill="currentColor" />
                       MAIS POPULAR
                     </div>
@@ -152,7 +142,10 @@ export default function Pricing() {
 
                 {/* Plan name */}
                 <div className="mb-6">
-                  <div className={`flex items-center gap-2 mb-2`}>
+                  <div className="flex items-center gap-2 mb-2">
+                    {plan.isFree && (
+                      <Gift size={16} className="text-green-500" />
+                    )}
                     {plan.id === 'enterprise' && (
                       <Zap size={16} className="text-amber-500" />
                     )}
@@ -167,14 +160,22 @@ export default function Pricing() {
 
                 {/* Price */}
                 <div className="mb-6">
-                  <div className="flex items-baseline gap-1">
-                    <span className={`text-sm font-medium ${plan.isPopular ? 'text-blue-100' : 'text-gray-500 dark:text-gray-400'}`}>R$</span>
-                    <span className={`text-4xl font-black ${plan.isPopular ? 'text-white' : 'text-gray-900 dark:text-white'}`}>
-                      {price.toLocaleString('pt-BR')}
-                    </span>
-                    <span className={`text-sm ${plan.isPopular ? 'text-blue-100' : 'text-gray-500 dark:text-gray-400'}`}>{period}</span>
-                  </div>
-                  {annual && (
+                  {plan.isFree ? (
+                    <div className="flex items-baseline gap-1">
+                      <span className={`text-4xl font-black ${plan.isPopular ? 'text-white' : 'text-gray-900 dark:text-white'}`}>
+                        Grátis
+                      </span>
+                    </div>
+                  ) : (
+                    <div className="flex items-baseline gap-1">
+                      <span className={`text-sm font-medium ${plan.isPopular ? 'text-blue-100' : 'text-gray-500 dark:text-gray-400'}`}>R$</span>
+                      <span className={`text-4xl font-black ${plan.isPopular ? 'text-white' : 'text-gray-900 dark:text-white'}`}>
+                        {price.toLocaleString('pt-BR')}
+                      </span>
+                      <span className={`text-sm ${plan.isPopular ? 'text-blue-100' : 'text-gray-500 dark:text-gray-400'}`}>{period}</span>
+                    </div>
+                  )}
+                  {annual && !plan.isFree && (
                     <p className={`text-xs mt-1 font-medium ${plan.isPopular ? 'text-blue-200' : 'text-green-600 dark:text-green-400'}`}>
                       Economia de {discount}% ao ano
                     </p>
@@ -183,7 +184,7 @@ export default function Pricing() {
 
                 {/* CTA */}
                 <a
-                  href={plan.id === 'enterprise' ? 'mailto:vendas@fivconnect.net' : 'https://app.fivconnect.net/register'}
+                  href="https://app.fivconnect.net/register"
                   className={`block w-full text-center py-3 rounded-xl font-semibold text-sm transition-all mb-8 ${
                     plan.isPopular
                       ? 'bg-white text-blue-600 hover:bg-blue-50 shadow-md'
@@ -218,7 +219,7 @@ export default function Pricing() {
 
         {/* Bottom note */}
         <p className="text-center text-sm text-gray-500 dark:text-gray-400 mt-10">
-          Todos os planos incluem 14 dias grátis. Sem cartão de crédito.{' '}
+          Todos os planos incluem 7 dias grátis. Sem cartão de crédito.{' '}
           <a href="mailto:suporte@fivconnect.net" className="text-blue-600 dark:text-blue-400 hover:underline">
             Dúvidas? Fale conosco.
           </a>

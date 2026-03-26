@@ -14,8 +14,6 @@ import {
   Users,
   Bell,
 } from 'lucide-react';
-import { useTheme } from '../hooks/useTheme';
-
 const stats = [
   { value: '+500', label: 'Empresas Atendidas' },
   { value: '98%', label: 'Satisfação dos Clientes' },
@@ -178,8 +176,6 @@ function DashboardMockup() {
 
 export default function Hero() {
   const [visible, setVisible] = useState(false);
-  const { theme } = useTheme();
-  const logoSrc = theme === 'dark' ? '/logo-branca.png' : '/logo-preta.png';
 
   useEffect(() => {
     const t = setTimeout(() => setVisible(true), 100);
@@ -199,11 +195,6 @@ export default function Hero() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left: Copy */}
           <div className={`transition-all duration-700 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            {/* Logo */}
-            <div className="mb-8">
-              <img src={logoSrc} alt="FivConnect" className="h-10 w-auto" />
-            </div>
-
             {/* Badge */}
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 text-xs font-semibold mb-6 border border-blue-200 dark:border-blue-700">
               <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
@@ -242,13 +233,25 @@ export default function Hero() {
             </div>
 
             {/* Stats */}
-            <div className="flex flex-wrap gap-8">
+            <div className="flex flex-wrap gap-8 mb-8">
               {stats.map(stat => (
                 <div key={stat.label}>
                   <div className="text-2xl font-bold text-gray-900 dark:text-white">{stat.value}</div>
                   <div className="text-sm text-gray-500 dark:text-gray-400">{stat.label}</div>
                 </div>
               ))}
+            </div>
+
+            {/* Mobile app badge */}
+            <div className="flex items-center gap-3 flex-wrap">
+              <span className="text-xs text-gray-500 dark:text-gray-400">Aplicativo mobile disponível:</span>
+              <a
+                href="#"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gray-900 dark:bg-white/10 text-white dark:text-gray-200 text-xs font-medium border border-gray-700 dark:border-white/10 hover:bg-gray-800 dark:hover:bg-white/20 transition-colors"
+              >
+                <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 fill-current" aria-hidden="true"><path d="M3.18 23.76c.3.17.64.19.96.08l13.05-7.4-2.83-2.83-11.18 10.15zm-1.7-20.1C1.2 4 1 4.5 1 5.14v13.72c0 .64.2 1.14.49 1.48l.08.07 7.69-7.69v-.18L1.56 3.59l-.08.07zm17.84 8.87l-2.21-1.26-3.16 3.16 3.16 3.16 2.24-1.27c.64-.36.64-1.56-.03-1.79zm-17.04 9.1l11.04-10.02-2.83-2.83L2.28 19.63l1 1.01v-.01z"/></svg>
+                Google Play
+              </a>
             </div>
           </div>
 
