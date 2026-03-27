@@ -19,10 +19,10 @@ const steps = [
     title: 'Gerencie com tickets',
     description:
       'Cada conversa vira um ticket com status, prioridade e fila. Sua equipe sabe exatamente o que fazer e quando. Nada se perde.',
-    color: 'from-blue-400 to-blue-600',
-    lightBg: 'bg-blue-50 dark:bg-blue-950/20',
-    lightBorder: 'border-blue-200 dark:border-blue-800',
-    textColor: 'text-blue-700 dark:text-blue-400',
+    color: 'from-orange-400 to-orange-600',
+    lightBg: 'bg-orange-50 dark:bg-orange-950/20',
+    lightBorder: 'border-orange-200 dark:border-orange-800',
+    textColor: 'text-orange-600 dark:text-orange-400',
   },
   {
     icon: GitBranch,
@@ -60,7 +60,7 @@ export default function HowItWorks() {
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <span className="inline-block px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 text-xs font-semibold mb-4">
+          <span className="inline-block px-3 py-1 rounded-full bg-orange-100 dark:bg-orange-900/40 text-orange-700 dark:text-orange-300 text-xs font-semibold mb-4">
             COMO FUNCIONA
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">

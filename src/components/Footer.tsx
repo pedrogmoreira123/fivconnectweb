@@ -89,7 +89,7 @@ export default function Footer() {
           </p>
           <p className="text-xs">
             Feito com ♥ no Brasil · Powered by{' '}
-            <span className="text-blue-400">Fi.V Soluções LTDA.</span>
+            <span className="text-orange-400">Fi.V Soluções LTDA.</span>
           </p>
         </div>
       </div>

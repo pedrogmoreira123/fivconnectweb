@@ -16,7 +16,7 @@ const testimonials = [
     role: 'Fundador',
     company: 'TechSolutions',
     avatar: 'CM',
-    avatarColor: 'from-blue-400 to-blue-600',
+    avatarColor: 'from-orange-400 to-orange-600',
     rating: 5,
     text: 'Economizamos 30% do tempo da equipe com as automações. O painel é intuitivo e os relatórios nos ajudam a tomar decisões melhores.',
   },
@@ -43,7 +43,7 @@ export default function Testimonials() {
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <span className="inline-block px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 text-xs font-semibold mb-4">
+          <span className="inline-block px-3 py-1 rounded-full bg-orange-100 dark:bg-orange-900/40 text-orange-700 dark:text-orange-300 text-xs font-semibold mb-4">
             DEPOIMENTOS
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">

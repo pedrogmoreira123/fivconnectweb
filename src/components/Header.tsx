@@ -47,7 +47,7 @@ export default function Header() {
               <a
                 key={link.href}
                 href={link.href}
-                className="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                className="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 transition-colors"
               >
                 {link.label}
               </a>
@@ -65,13 +65,13 @@ export default function Header() {
             </button>
             <a
               href="https://app.fivconnect.net"
-              className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+              className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 transition-colors"
             >
               Entrar
             </a>
             <a
               href="https://app.fivconnect.net/cadastro"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 dark:bg-blue-500 text-white text-sm font-semibold hover:bg-blue-700 dark:hover:bg-blue-400 transition-colors shadow-sm"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-orange-500 dark:bg-orange-500 text-white text-sm font-semibold hover:bg-orange-600 dark:hover:bg-orange-400 transition-colors shadow-sm"
             >
               Começar Grátis
             </a>
@@ -119,7 +119,7 @@ export default function Header() {
             </a>
             <a
               href="https://app.fivconnect.net/cadastro"
-              className="block py-2 px-3 rounded-lg text-sm font-semibold text-center text-white bg-blue-600 dark:bg-blue-500"
+              className="block py-2 px-3 rounded-lg text-sm font-semibold text-center text-white bg-orange-500 dark:bg-orange-500"
             >
               Começar Grátis
             </a>

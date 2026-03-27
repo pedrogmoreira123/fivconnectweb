@@ -75,7 +75,7 @@ export default function Pricing() {
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <span className="inline-block px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 text-xs font-semibold mb-4">
+          <span className="inline-block px-3 py-1 rounded-full bg-orange-100 dark:bg-orange-900/40 text-orange-700 dark:text-orange-300 text-xs font-semibold mb-4">
             PLANOS E PREÇOS
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
@@ -91,7 +91,7 @@ export default function Pricing() {
               onClick={() => setAnnual(false)}
               className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
                 !annual
-                  ? 'bg-blue-600 text-white shadow'
+                  ? 'bg-orange-500 text-white shadow'
                   : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
               }`}
             >
@@ -101,12 +101,12 @@ export default function Pricing() {
               onClick={() => setAnnual(true)}
               className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 ${
                 annual
-                  ? 'bg-blue-600 text-white shadow'
+                  ? 'bg-orange-500 text-white shadow'
                   : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
               }`}
             >
               Anual
-              <span className={`text-xs px-1.5 py-0.5 rounded-full font-bold ${annual ? 'bg-blue-500 text-white' : 'bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-400'}`}>
+              <span className={`text-xs px-1.5 py-0.5 rounded-full font-bold ${annual ? 'bg-orange-400 text-white' : 'bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-400'}`}>
                 -20%
               </span>
             </button>
@@ -125,7 +125,7 @@ export default function Pricing() {
                 key={plan.id}
                 className={`relative rounded-2xl p-8 transition-all duration-700 ${
                   plan.isPopular
-                    ? 'bg-gradient-to-b from-blue-600 to-blue-700 dark:from-blue-500 dark:to-blue-600 text-white shadow-2xl shadow-blue-600/30 scale-105'
+                    ? 'bg-gradient-to-b from-[#f87944] to-orange-600 dark:from-[#f87944] dark:to-orange-600 text-white shadow-2xl shadow-orange-500/30 scale-105'
                     : 'bg-white dark:bg-[hsl(240,11%,23%)] border border-gray-200 dark:border-white/10 shadow-sm hover:shadow-md'
                 } ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
                 style={{ transitionDelay: `${i * 100}ms` }}
@@ -153,7 +153,7 @@ export default function Pricing() {
                       {plan.name}
                     </h3>
                   </div>
-                  <p className={`text-sm leading-relaxed ${plan.isPopular ? 'text-blue-100' : 'text-gray-500 dark:text-gray-400'}`}>
+                  <p className={`text-sm leading-relaxed ${plan.isPopular ? 'text-orange-100' : 'text-gray-500 dark:text-gray-400'}`}>
                     {plan.description}
                   </p>
                 </div>
@@ -168,15 +168,15 @@ export default function Pricing() {
                     </div>
                   ) : (
                     <div className="flex items-baseline gap-1">
-                      <span className={`text-sm font-medium ${plan.isPopular ? 'text-blue-100' : 'text-gray-500 dark:text-gray-400'}`}>R$</span>
+                      <span className={`text-sm font-medium ${plan.isPopular ? 'text-orange-100' : 'text-gray-500 dark:text-gray-400'}`}>R$</span>
                       <span className={`text-4xl font-black ${plan.isPopular ? 'text-white' : 'text-gray-900 dark:text-white'}`}>
                         {price.toLocaleString('pt-BR')}
                       </span>
-                      <span className={`text-sm ${plan.isPopular ? 'text-blue-100' : 'text-gray-500 dark:text-gray-400'}`}>{period}</span>
+                      <span className={`text-sm ${plan.isPopular ? 'text-orange-100' : 'text-gray-500 dark:text-gray-400'}`}>{period}</span>
                     </div>
                   )}
                   {annual && !plan.isFree && (
-                    <p className={`text-xs mt-1 font-medium ${plan.isPopular ? 'text-blue-200' : 'text-green-600 dark:text-green-400'}`}>
+                    <p className={`text-xs mt-1 font-medium ${plan.isPopular ? 'text-orange-200' : 'text-green-600 dark:text-green-400'}`}>
                       Economia de {discount}% ao ano
                     </p>
                   )}
@@ -187,26 +187,26 @@ export default function Pricing() {
                   href="https://app.fivconnect.net/cadastro"
                   className={`block w-full text-center py-3 rounded-xl font-semibold text-sm transition-all mb-8 ${
                     plan.isPopular
-                      ? 'bg-white text-blue-600 hover:bg-blue-50 shadow-md'
-                      : 'bg-blue-600 dark:bg-blue-500 text-white hover:bg-blue-700 dark:hover:bg-blue-400 shadow-sm'
+                      ? 'bg-white text-orange-600 hover:bg-orange-50 shadow-md'
+                      : 'bg-orange-500 dark:bg-orange-500 text-white hover:bg-orange-600 dark:hover:bg-orange-400 shadow-sm'
                   }`}
                 >
                   {plan.cta}
                 </a>
 
                 {/* Divider */}
-                <div className={`border-t mb-6 ${plan.isPopular ? 'border-blue-500' : 'border-gray-100 dark:border-white/10'}`} />
+                <div className={`border-t mb-6 ${plan.isPopular ? 'border-orange-400' : 'border-gray-100 dark:border-white/10'}`} />
 
                 {/* Features */}
                 <ul className="space-y-3">
                   {plan.features.map(feature => (
                     <li key={feature} className="flex items-start gap-3">
                       <div className={`mt-0.5 w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 ${
-                        plan.isPopular ? 'bg-blue-500' : 'bg-blue-100 dark:bg-blue-900/40'
+                        plan.isPopular ? 'bg-orange-400' : 'bg-orange-100 dark:bg-orange-900/40'
                       }`}>
-                        <Check size={10} className={plan.isPopular ? 'text-white' : 'text-blue-600 dark:text-blue-400'} strokeWidth={3} />
+                        <Check size={10} className={plan.isPopular ? 'text-white' : 'text-orange-600 dark:text-orange-400'} strokeWidth={3} />
                       </div>
-                      <span className={`text-sm ${plan.isPopular ? 'text-blue-50' : 'text-gray-700 dark:text-gray-300'}`}>
+                      <span className={`text-sm ${plan.isPopular ? 'text-orange-50' : 'text-gray-700 dark:text-gray-300'}`}>
                         {feature}
                       </span>
                     </li>
@@ -220,7 +220,7 @@ export default function Pricing() {
         {/* Bottom note */}
         <p className="text-center text-sm text-gray-500 dark:text-gray-400 mt-10">
           Todos os planos incluem 7 dias grátis. Sem cartão de crédito.{' '}
-          <a href="mailto:suporte@fivconnect.net" className="text-blue-600 dark:text-blue-400 hover:underline">
+          <a href="mailto:suporte@fivconnect.net" className="text-orange-500 dark:text-orange-400 hover:underline">
             Dúvidas? Fale conosco.
           </a>
         </p>

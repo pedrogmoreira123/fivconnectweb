@@ -33,7 +33,7 @@ function DashboardMockup() {
   return (
     <div className="relative w-full max-w-2xl mx-auto">
       {/* Glow */}
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 blur-3xl rounded-3xl" />
+      <div className="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-amber-500/20 blur-3xl rounded-3xl" />
 
       {/* Window */}
       <div className="relative bg-white dark:bg-[hsl(240,11%,23%)] rounded-2xl shadow-2xl border border-gray-200/80 dark:border-white/10 overflow-hidden">
@@ -52,7 +52,7 @@ function DashboardMockup() {
           </div>
           <div className="flex items-center gap-1.5">
             <Bell size={12} className="text-gray-400" />
-            <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white text-[8px] font-bold">A</div>
+            <div className="w-6 h-6 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center text-white text-[8px] font-bold">A</div>
           </div>
         </div>
 
@@ -68,7 +68,7 @@ function DashboardMockup() {
                 key={label}
                 className={`flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium cursor-pointer transition-colors ${
                   active
-                    ? 'bg-blue-600 text-white shadow-sm'
+                    ? 'bg-orange-500 text-white shadow-sm'
                     : 'text-gray-600 dark:text-gray-400 hover:bg-gray-200/60 dark:hover:bg-white/5'
                 }`}
               >
@@ -83,9 +83,9 @@ function DashboardMockup() {
             {/* Top bar */}
             <div className="flex items-center justify-between px-4 py-2.5 border-b border-gray-100 dark:border-white/10">
               <div className="flex items-center gap-2">
-                <Inbox size={14} className="text-blue-600 dark:text-blue-400" />
+                <Inbox size={14} className="text-orange-500 dark:text-orange-400" />
                 <span className="text-xs font-semibold text-gray-800 dark:text-gray-200">Conversas</span>
-                <span className="text-[10px] px-1.5 py-0.5 bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 rounded-full font-semibold">24</span>
+                <span className="text-[10px] px-1.5 py-0.5 bg-orange-100 dark:bg-orange-900/40 text-orange-700 dark:text-orange-300 rounded-full font-semibold">24</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <Users size={12} className="text-gray-400" />
@@ -96,9 +96,9 @@ function DashboardMockup() {
             {/* KPI strip */}
             <div className="grid grid-cols-3 gap-2 px-3 py-2.5 border-b border-gray-100 dark:border-white/10">
               {[
-                { label: 'Abertas', value: '24', color: 'text-blue-600 dark:text-blue-400', icon: MessageCircle },
+                { label: 'Abertas', value: '24', color: 'text-orange-500 dark:text-orange-400', icon: MessageCircle },
                 { label: 'Resolvidas', value: '187', color: 'text-green-600 dark:text-green-400', icon: CheckCircle },
-                { label: 'Espera', value: '4m', color: 'text-orange-500 dark:text-orange-400', icon: Clock },
+                { label: 'Espera', value: '4m', color: 'text-amber-500 dark:text-amber-400', icon: Clock },
               ].map(({ label, value, color, icon: Icon }) => (
                 <div key={label} className="bg-gray-50 dark:bg-white/5 rounded-lg p-2 text-center">
                   <Icon size={12} className={`mx-auto mb-0.5 ${color}`} />
@@ -118,7 +118,7 @@ function DashboardMockup() {
               ].map(conv => (
                 <div key={conv.name} className="flex items-center gap-2 px-2 py-1.5 rounded-lg hover:bg-gray-50 dark:hover:bg-white/5 cursor-pointer">
                   <div className="relative flex-shrink-0">
-                    <div className="w-7 h-7 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white text-[10px] font-bold">
+                    <div className="w-7 h-7 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center text-white text-[10px] font-bold">
                       {conv.name[0]}
                     </div>
                     <div className={`absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full border border-white dark:border-[hsl(240,11%,23%)] ${
@@ -132,7 +132,7 @@ function DashboardMockup() {
                   <div className="flex flex-col items-end gap-1 flex-shrink-0">
                     <div className="text-[9px] text-gray-400">{conv.time}</div>
                     {conv.unread > 0 && (
-                      <div className="w-4 h-4 rounded-full bg-blue-600 text-white text-[8px] font-bold flex items-center justify-center">{conv.unread}</div>
+                      <div className="w-4 h-4 rounded-full bg-orange-500 text-white text-[8px] font-bold flex items-center justify-center">{conv.unread}</div>
                     )}
                   </div>
                 </div>
@@ -183,11 +183,11 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center pt-16 overflow-hidden bg-gradient-to-b from-blue-50/50 via-white to-white dark:from-[hsl(240,11%,18%)] dark:via-[hsl(240,11%,20%)] dark:to-[hsl(240,11%,20%)]">
+    <section className="relative min-h-screen flex items-center pt-16 overflow-hidden bg-gradient-to-b from-orange-50/50 via-white to-white dark:from-[hsl(240,11%,18%)] dark:via-[hsl(240,11%,20%)] dark:to-[hsl(240,11%,20%)]">
       {/* Background decorations */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-1/4 w-96 h-96 bg-blue-400/10 dark:bg-blue-400/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-1/4 w-80 h-80 bg-cyan-400/10 dark:bg-cyan-400/5 rounded-full blur-3xl" />
+        <div className="absolute top-20 left-1/4 w-96 h-96 bg-orange-400/10 dark:bg-orange-400/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-1/4 w-80 h-80 bg-amber-400/10 dark:bg-amber-400/5 rounded-full blur-3xl" />
         <div className="absolute top-1/3 right-0 w-64 h-64 bg-purple-400/5 rounded-full blur-3xl" />
       </div>
 
@@ -196,14 +196,14 @@ export default function Hero() {
           {/* Left: Copy */}
           <div className={`transition-all duration-700 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 text-xs font-semibold mb-6 border border-blue-200 dark:border-blue-700">
-              <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-orange-100 dark:bg-orange-900/40 text-orange-700 dark:text-orange-300 text-xs font-semibold mb-6 border border-orange-200 dark:border-orange-700">
+              <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse" />
               Plataforma de Atendimento Inteligente
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white leading-tight mb-6">
               Atendimento via{' '}
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-400">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-500 to-amber-400 dark:from-orange-400 dark:to-amber-300">
                 WhatsApp
               </span>{' '}
               que sua empresa merecia
@@ -218,7 +218,7 @@ export default function Hero() {
             <div className="flex flex-col sm:flex-row gap-3 mb-12">
               <a
                 href="https://app.fivconnect.net/cadastro"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-blue-600 dark:bg-blue-500 text-white font-semibold text-base hover:bg-blue-700 dark:hover:bg-blue-400 transition-all shadow-lg shadow-blue-600/25 hover:shadow-blue-600/40 hover:-translate-y-0.5"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-orange-500 dark:bg-orange-500 text-white font-semibold text-base hover:bg-orange-600 dark:hover:bg-orange-400 transition-all shadow-lg shadow-orange-500/25 hover:shadow-orange-500/40 hover:-translate-y-0.5"
               >
                 Começar Gratuitamente
                 <ArrowRight size={18} />
@@ -227,7 +227,7 @@ export default function Hero() {
                 href="#como-funciona"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl border border-gray-200 dark:border-white/20 text-gray-700 dark:text-gray-200 font-semibold text-base hover:bg-gray-50 dark:hover:bg-white/5 transition-all"
               >
-                <Play size={16} className="text-blue-600 dark:text-blue-400" />
+                <Play size={16} className="text-orange-500 dark:text-orange-400" />
                 Ver Demonstração
               </a>
             </div>

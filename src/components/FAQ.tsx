@@ -92,7 +92,7 @@ export default function FAQ() {
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <span className="inline-block px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 text-xs font-semibold mb-4">
+          <span className="inline-block px-3 py-1 rounded-full bg-orange-100 dark:bg-orange-900/40 text-orange-700 dark:text-orange-300 text-xs font-semibold mb-4">
             FAQ
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
@@ -100,7 +100,7 @@ export default function FAQ() {
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-300">
             Ainda tem dúvidas?{' '}
-            <a href="mailto:suporte@fivconnect.net" className="text-blue-600 dark:text-blue-400 hover:underline">
+            <a href="mailto:suporte@fivconnect.net" className="text-orange-500 dark:text-orange-400 hover:underline">
               Fale conosco
             </a>
           </p>

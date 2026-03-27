@@ -28,7 +28,7 @@ const features = [
     title: 'Gestão de Tickets',
     description:
       'Cada conversa vira um ticket com status (aberto, em andamento, resolvido), prioridade e fila de atendimento.',
-    color: 'from-blue-400 to-blue-600',
+    color: 'from-orange-400 to-orange-600',
     badge: 'Produtividade',
   },
   {
@@ -77,7 +77,7 @@ const features = [
     icon: HelpCircle,
     title: 'Central de Ajuda com Eddie',
     description:
-      'Eddie é o assistente de ajuda interno da plataforma. Tire dúvidas sobre o sistema, recursos e configurações diretamente pelo chat de suporte.',
+      'Eddie é o assistente de ajuda interno da plataforma FivConnect. Tire dúvidas sobre o sistema, recursos e configurações diretamente pelo chat de suporte.',
     color: 'from-teal-400 to-teal-600',
     badge: 'Suporte',
   },
@@ -103,7 +103,7 @@ export default function Features() {
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <span className="inline-block px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 text-xs font-semibold mb-4">
+          <span className="inline-block px-3 py-1 rounded-full bg-orange-100 dark:bg-orange-900/40 text-orange-700 dark:text-orange-300 text-xs font-semibold mb-4">
             FUNCIONALIDADES
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
@@ -120,10 +120,10 @@ export default function Features() {
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-blue-600 via-blue-600 to-blue-500 dark:from-blue-500 dark:via-blue-600 dark:to-blue-700 p-8 sm:p-10">
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#f87944] via-orange-500 to-amber-500 dark:from-[#f87944] dark:via-orange-500 dark:to-amber-400 p-8 sm:p-10">
             {/* Decorative blobs */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4 pointer-events-none" />
-            <div className="absolute bottom-0 left-1/3 w-48 h-48 bg-cyan-400/20 rounded-full blur-2xl translate-y-1/2 pointer-events-none" />
+            <div className="absolute bottom-0 left-1/3 w-48 h-48 bg-amber-400/20 rounded-full blur-2xl translate-y-1/2 pointer-events-none" />
 
             <div className="relative flex flex-col lg:flex-row items-start lg:items-center gap-8">
               {/* Icon + text */}
@@ -135,9 +135,9 @@ export default function Features() {
 
                 <h3 className="text-2xl sm:text-3xl font-bold text-white mb-3 leading-tight">
                   Atenda seus clientes da{' '}
-                  <span className="text-blue-200">palma da sua mão</span>
+                  <span className="text-orange-100">palma da sua mão</span>
                 </h3>
-                <p className="text-blue-100 text-base leading-relaxed mb-6 max-w-xl">
+                <p className="text-orange-50 text-base leading-relaxed mb-6 max-w-xl">
                   Leve o FivConnect para onde for. Com o app mobile você tem controle total do seu atendimento a qualquer hora, em qualquer lugar — sem precisar abrir o computador.
                 </p>
 
@@ -151,15 +151,15 @@ export default function Features() {
                     'Transfira e resolva tickets na hora',
                   ].map(item => (
                     <li key={item} className="flex items-center gap-2">
-                      <CheckCircle size={15} className="text-blue-200 flex-shrink-0" />
-                      <span className="text-sm text-blue-50">{item}</span>
+                      <CheckCircle size={15} className="text-orange-200 flex-shrink-0" />
+                      <span className="text-sm text-white/90">{item}</span>
                     </li>
                   ))}
                 </ul>
 
                 <a
                   href="#"
-                  className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white text-blue-600 font-bold text-sm hover:bg-blue-50 transition-colors shadow-lg"
+                  className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white text-orange-600 font-bold text-sm hover:bg-orange-50 transition-colors shadow-lg"
                 >
                   <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current" aria-hidden="true">
                     <path d="M3.18 23.76c.3.17.64.19.96.08l13.05-7.4-2.83-2.83-11.18 10.15zm-1.7-20.1C1.2 4 1 4.5 1 5.14v13.72c0 .64.2 1.14.49 1.48l.08.07 7.69-7.69v-.18L1.56 3.59l-.08.07zm17.84 8.87l-2.21-1.26-3.16 3.16 3.16 3.16 2.24-1.27c.64-.36.64-1.56-.03-1.79zm-17.04 9.1l11.04-10.02-2.83-2.83L2.28 19.63l1 1.01v-.01z"/>
@@ -185,16 +185,16 @@ export default function Features() {
                     {/* App content */}
                     <div className="flex-1 bg-white dark:bg-[hsl(240,11%,23%)] mx-1 mb-1 rounded-[1.8rem] overflow-hidden">
                       {/* App header */}
-                      <div className="bg-blue-600 px-4 py-3">
-                        <div className="text-[10px] text-blue-200 font-medium">FivConnect</div>
+                      <div className="bg-[#f87944] px-4 py-3">
+                        <div className="text-[10px] text-orange-100 font-medium">FivConnect</div>
                         <div className="text-xs text-white font-bold">Conversas</div>
                       </div>
                       {/* KPI mini */}
                       <div className="grid grid-cols-3 gap-1 p-2">
                         {[
-                          { label: 'Abertas', value: '8', color: 'text-blue-600' },
+                          { label: 'Abertas', value: '8', color: 'text-orange-500' },
                           { label: 'Resolvidas', value: '42', color: 'text-green-600' },
-                          { label: 'Espera', value: '3m', color: 'text-orange-500' },
+                          { label: 'Espera', value: '3m', color: 'text-amber-500' },
                         ].map(k => (
                           <div key={k.label} className="bg-gray-50 rounded-lg p-1.5 text-center">
                             <div className={`text-sm font-bold ${k.color}`}>{k.value}</div>
@@ -211,7 +211,7 @@ export default function Features() {
                           { name: 'Carlos M.', msg: 'Ok, entendi.', unread: false },
                         ].map(c => (
                           <div key={c.name} className="flex items-center gap-2 py-1.5 border-b border-gray-100 last:border-0">
-                            <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white text-[8px] font-bold flex-shrink-0">
+                            <div className="w-6 h-6 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center text-white text-[8px] font-bold flex-shrink-0">
                               {c.name[0]}
                             </div>
                             <div className="flex-1 min-w-0">
@@ -219,7 +219,7 @@ export default function Features() {
                               <div className="text-[8px] text-gray-400 truncate">{c.msg}</div>
                             </div>
                             {c.unread && (
-                              <div className="w-3 h-3 rounded-full bg-blue-600 flex-shrink-0" />
+                              <div className="w-3 h-3 rounded-full bg-orange-500 flex-shrink-0" />
                             )}
                           </div>
                         ))}
@@ -227,7 +227,7 @@ export default function Features() {
                     </div>
                   </div>
                   {/* Glow under phone */}
-                  <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-32 h-8 bg-blue-400/30 blur-xl rounded-full" />
+                  <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-32 h-8 bg-orange-400/30 blur-xl rounded-full" />
                 </div>
               </div>
             </div>
@@ -244,7 +244,7 @@ export default function Features() {
                 className={`group relative p-6 rounded-2xl border transition-all duration-700 hover:-translate-y-1 hover:shadow-lg ${
                   feature.highlight
                     ? 'border-purple-200 dark:border-purple-800 bg-purple-50/50 dark:bg-purple-950/20 ring-1 ring-purple-300 dark:ring-purple-700'
-                    : 'border-gray-200 dark:border-white/10 bg-white dark:bg-[hsl(240,11%,23%)] hover:border-blue-200 dark:hover:border-blue-800'
+                    : 'border-gray-200 dark:border-white/10 bg-white dark:bg-[hsl(240,11%,23%)] hover:border-orange-200 dark:hover:border-orange-800'
                 } ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
                 style={{ transitionDelay: `${i * 60}ms` }}
               >

@@ -9,9 +9,9 @@ export default {
     extend: {
       colors: {
         primary: {
-          DEFAULT: 'hsl(221, 83%, 53%)',
-          dark: 'hsl(217, 91%, 65%)',
-          foreground: 'hsl(210, 40%, 98%)',
+          DEFAULT: '#f87944',
+          dark: '#fb923c',
+          foreground: '#ffffff',
         },
       },
       fontFamily: {
