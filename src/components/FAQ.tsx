@@ -1,57 +1,30 @@
 import { useState } from 'react';
-import { ChevronDown } from 'lucide-react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 const faqs = [
   {
-    question: 'Como funciona a conexão com o WhatsApp?',
-    answer:
-      'A conexão é simples, rápida e estável. Você escaneia um QR Code e seu número já está integrado ao painel em minutos. Sem processos burocráticos de aprovação. Basta conectar e começar a atender.',
+    question: 'Preciso instalar algum aplicativo ou plugin?',
+    answer: 'Não. O Fi.V Connect roda 100% no navegador e como PWA no celular. Você só precisa do seu número de WhatsApp e cinco minutos — sem plugins, sem código, sem consultoria.',
   },
   {
-    question: 'Posso criar fluxos de chatbot personalizados?',
-    answer:
-      'Sim! O FivConnect tem um editor de fluxos de chatbot completo. Você cria menus interativos, perguntas, respostas condicionais, coleta de dados e encaminha para filas ou atendentes. Tudo sem código.',
+    question: 'A IA pode responder errado pros meus clientes?',
+    answer: 'A IA só responde o que você ensina. Você cadastra seu catálogo, horários e respostas padrão — e quando ela não tem certeza, escala automaticamente pra um humano. Nada sai no automático sem você aprovar.',
   },
   {
-    question: 'Como funciona o Agente de IA?',
-    answer:
-      'Você cria e treina seu próprio agente de IA. Define a personalidade, o tom de voz, a base de conhecimento da sua empresa e as regras de comportamento. O agente atende seus clientes no seu estilo, e escala para um humano quando necessário.',
+    question: 'Funciona com WhatsApp normal ou precisa ser Business?',
+    answer: 'Funciona com ambos. Recomendamos usar o WhatsApp Business (gratuito) para ter perfil comercial, catálogo e mensagens automáticas nativas.',
   },
   {
-    question: 'O que é o Eddie?',
-    answer:
-      'Eddie é o assistente de ajuda interno da plataforma FivConnect. Ele está disponível na Central de Ajuda para tirar dúvidas sobre como usar o sistema, configurar recursos e resolver problemas técnicos. É diferente dos agentes de IA que você cria para atender seus clientes.',
+    question: 'Meus dados e os dos meus clientes ficam seguros?',
+    answer: 'Sim. Toda comunicação usa criptografia AES-256 (padrão bancário) e nossa infraestrutura é 100% brasileira, dentro da LGPD. Você tem controle total sobre quem da sua equipe vê o quê.',
   },
   {
-    question: 'Preciso instalar algum aplicativo?',
-    answer:
-      'Não. O FivConnect é 100% baseado na web. Acesse pelo navegador de qualquer computador, tablet ou celular. Sem instalação, sem complicação.',
+    question: 'E se eu não gostar? Posso cancelar?',
+    answer: 'Cancela quando quiser, sem multa, sem pergunta, sem burocracia. Os 7 primeiros dias são totalmente gratuitos — e não pedimos cartão pra começar.',
   },
   {
-    question: 'Como funciona o período de teste gratuito?',
-    answer:
-      'Todos os planos têm 14 dias de teste grátis, sem necessidade de cartão de crédito. Você experimenta todos os recursos do plano escolhido e só paga se quiser continuar.',
-  },
-  {
-    question: 'Quantos números de WhatsApp posso conectar?',
-    answer:
-      'Você pode conectar múltiplos números ao mesmo painel. Cada número funciona como um canal separado com suas próprias filas, chatbots e atendentes.',
-  },
-  {
-    question: 'Posso cancelar quando quiser?',
-    answer:
-      'Sim, sem fidelidade. Você cancela a qualquer momento direto pelo painel, sem precisar falar com ninguém. O acesso continua até o fim do período pago.',
-  },
-  {
-    question: 'Os dados são seguros?',
-    answer:
-      'Seus dados ficam em servidores seguros com criptografia em trânsito e em repouso. Seguimos as melhores práticas de segurança e estamos em conformidade com a LGPD.',
-  },
-  {
-    question: 'Tem suporte técnico?',
-    answer:
-      'Sim! Plano Básico: suporte por email. Plano Profissional: suporte prioritário via WhatsApp. Plano Enterprise: suporte dedicado 24/7 com SLA garantido.',
+    question: 'Minha equipe precisa de treinamento pra usar?',
+    answer: 'Não. A tela foi desenhada pra parecer WhatsApp do lado direito e inbox de e-mail do lado esquerdo — qualquer atendente entende em menos de 10 minutos. Temos vídeos curtos de 1-2 min pra cada função.',
   },
 ];
 
@@ -59,21 +32,34 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="border border-gray-200 dark:border-white/10 rounded-xl overflow-hidden">
+    <div
+      className="border-b"
+      style={{ borderColor: 'var(--line)' }}
+    >
       <button
         onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between gap-4 p-5 text-left bg-white dark:bg-[hsl(240,11%,23%)] hover:bg-gray-50 dark:hover:bg-white/5 transition-colors"
+        className="w-full flex items-center justify-between gap-4 py-5 text-left transition-colors"
         aria-expanded={open}
       >
-        <span className="text-sm font-semibold text-gray-900 dark:text-white">{question}</span>
-        <ChevronDown
-          size={16}
-          className={`text-gray-400 flex-shrink-0 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
-        />
+        <span className="text-base font-semibold" style={{ color: 'var(--ink)' }}>{question}</span>
+        <div
+          className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 transition-colors"
+          style={{
+            background: open ? 'var(--coral)' : 'var(--cream-3)',
+            color: open ? '#fff' : 'var(--ink-3)',
+          }}
+        >
+          <svg
+            width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round"
+            style={{ transform: open ? 'rotate(45deg)' : 'none', transition: 'transform 0.2s' }}
+          >
+            <path d="M12 5v14M5 12h14" />
+          </svg>
+        </div>
       </button>
       {open && (
-        <div className="px-5 pb-5 bg-white dark:bg-[hsl(240,11%,23%)]">
-          <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">{answer}</p>
+        <div className="pb-5">
+          <p className="text-base leading-relaxed" style={{ color: 'var(--ink-2)' }}>{answer}</p>
         </div>
       )}
     </div>
@@ -84,37 +70,38 @@ export default function FAQ() {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <section id="faq" className="py-24 bg-gray-50 dark:bg-[hsl(240,11%,18%)]">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
+    <section id="faq" className="py-24" style={{ background: 'var(--cream-2)' }}>
+      <div className="max-w-[760px] mx-auto px-7" ref={ref}>
         {/* Header */}
-        <div
-          className={`text-center mb-12 transition-all duration-700 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-        >
-          <span className="inline-block px-3 py-1 rounded-full bg-orange-100 dark:bg-orange-900/40 text-orange-700 dark:text-orange-300 text-xs font-semibold mb-4">
-            FAQ
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            Perguntas frequentes
+        <div className={`text-center mb-14 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <span className="eyebrow mb-5 block">Perguntas frequentes</span>
+          <h2
+            className="text-4xl sm:text-5xl mb-5"
+            style={{ fontFamily: 'Fraunces, Georgia, serif', fontWeight: 600, color: 'var(--ink)' }}
+          >
+            Tudo que você quis perguntar{' '}
+            <span style={{ color: 'var(--coral)', fontStyle: 'italic', fontWeight: 500 }}>antes de assinar.</span>
           </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-300">
-            Ainda tem dúvidas?{' '}
-            <a href="mailto:suporte@fivconnect.net" className="text-orange-500 dark:text-orange-400 hover:underline">
+        </div>
+
+        {/* FAQ list */}
+        <div className={`transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div style={{ borderTop: '1px solid var(--line)' }}>
+            {faqs.map(faq => (
+              <FAQItem key={faq.question} question={faq.question} answer={faq.answer} />
+            ))}
+          </div>
+
+          <p className="mt-8 text-sm text-center" style={{ color: 'var(--ink-3)' }}>
+            Ainda com dúvidas?{' '}
+            <a
+              href="mailto:suporte@fivconnect.net"
+              className="font-semibold transition-colors hover:underline"
+              style={{ color: 'var(--coral)' }}
+            >
               Fale conosco
             </a>
           </p>
-        </div>
-
-        {/* FAQ List */}
-        <div
-          className={`space-y-3 transition-all duration-700 delay-200 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-        >
-          {faqs.map(faq => (
-            <FAQItem key={faq.question} question={faq.question} answer={faq.answer} />
-          ))}
         </div>
       </div>
     </section>

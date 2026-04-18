@@ -1,281 +1,326 @@
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
-import {
-  MessageCircle,
-  TicketCheck,
-  Bot,
-  BarChart3,
-  Users,
-  Paperclip,
-  GitBranch,
-  Shield,
-  Sparkles,
-  HelpCircle,
-  Smartphone,
-  CheckCircle,
-} from 'lucide-react';
-
-const features = [
-  {
-    icon: MessageCircle,
-    title: 'Conexão WhatsApp Rápida',
-    description:
-      'Conecte seu número de WhatsApp em minutos. Processo simples, rápido e estável — sem burocracia, sem longos processos de aprovação.',
-    color: 'from-green-400 to-emerald-500',
-    badge: 'WhatsApp',
-  },
-  {
-    icon: TicketCheck,
-    title: 'Gestão de Tickets',
-    description:
-      'Cada conversa vira um ticket com status (aberto, em andamento, resolvido), prioridade e fila de atendimento.',
-    color: 'from-orange-400 to-orange-600',
-    badge: 'Produtividade',
-  },
-  {
-    icon: GitBranch,
-    title: 'Fluxos de Chatbot',
-    description:
-      'Crie fluxos visuais de atendimento automatizado: menus interativos, respostas condicionais, coleta de dados e encaminhamento inteligente. Você define as regras.',
-    color: 'from-yellow-400 to-amber-500',
-    badge: 'Automação',
-    highlight: true,
-  },
-  {
-    icon: Bot,
-    title: 'Agentes de IA Personalizados',
-    description:
-      'Crie e treine agentes de IA para atender seus clientes no seu estilo. Defina a personalidade, base de conhecimento e comportamento — o agente trabalha do seu jeito.',
-    color: 'from-purple-400 to-violet-600',
-    badge: 'IA',
-    highlight: true,
-  },
-  {
-    icon: BarChart3,
-    title: 'Relatórios e Métricas',
-    description:
-      'Dashboard em tempo real com tickets abertos, tempo médio de espera, volume por fila, atendimentos por agente e muito mais.',
-    color: 'from-orange-400 to-amber-500',
-    badge: 'Analytics',
-  },
-  {
-    icon: Users,
-    title: 'Multi-Atendente',
-    description:
-      'Vários atendentes simultâneos, filas de atendimento, transferência de tickets e controle de acesso por perfil.',
-    color: 'from-cyan-400 to-sky-500',
-    badge: 'Equipes',
-  },
-  {
-    icon: Paperclip,
-    title: 'Suporte a Mídia',
-    description:
-      'Envie e receba imagens, áudios, documentos e vídeos diretamente no painel. Tudo organizado na conversa.',
-    color: 'from-pink-400 to-rose-500',
-    badge: 'Mídia',
-  },
-  {
-    icon: HelpCircle,
-    title: 'Central de Ajuda com Eddie',
-    description:
-      'Eddie é o assistente de ajuda interno da plataforma FivConnect. Tire dúvidas sobre o sistema, recursos e configurações diretamente pelo chat de suporte.',
-    color: 'from-teal-400 to-teal-600',
-    badge: 'Suporte',
-  },
-  {
-    icon: Shield,
-    title: 'Segurança e Controle',
-    description:
-      'Permissões por perfil, logs de atividade, histórico completo de conversas e dados seguros em nuvem.',
-    color: 'from-slate-400 to-slate-600',
-    badge: 'Segurança',
-  },
-];
 
 export default function Features() {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <section id="funcionalidades" className="py-24 bg-white dark:bg-[hsl(240,11%,20%)]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
+    <section id="funcionalidades" className="py-24" style={{ background: 'var(--cream)' }}>
+      <div className="max-w-[1200px] mx-auto px-7" ref={ref}>
         {/* Header */}
-        <div
-          className={`text-center mb-16 transition-all duration-700 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-        >
-          <span className="inline-block px-3 py-1 rounded-full bg-orange-100 dark:bg-orange-900/40 text-orange-700 dark:text-orange-300 text-xs font-semibold mb-4">
-            FUNCIONALIDADES
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            Tudo que você precisa em um só lugar
+        <div className={`text-center mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <span className="eyebrow mb-5 block">Funcionalidades</span>
+          <h2
+            className="text-4xl sm:text-5xl mb-5"
+            style={{ fontFamily: 'Fraunces, Georgia, serif', fontWeight: 600, color: 'var(--ink)' }}
+          >
+            Tudo que você precisa,{' '}
+            <span style={{ color: 'var(--amber-c)', fontStyle: 'italic', fontWeight: 500 }}>nada que você não precisa.</span>
           </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Ferramentas pensadas para PMEs que querem crescer sem perder a qualidade no atendimento.
+          <p className="text-lg max-w-xl mx-auto" style={{ color: 'var(--ink-2)' }}>
+            Ferramentas pensadas para PMEs que querem crescer sem perder qualidade no atendimento.
           </p>
         </div>
 
-        {/* Mobile App highlight — full width */}
-        <div
-          className={`mb-8 transition-all duration-700 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-        >
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#f87944] via-orange-500 to-amber-500 dark:from-[#f87944] dark:via-orange-500 dark:to-amber-400 p-8 sm:p-10">
-            {/* Decorative blobs */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4 pointer-events-none" />
-            <div className="absolute bottom-0 left-1/3 w-48 h-48 bg-amber-400/20 rounded-full blur-2xl translate-y-1/2 pointer-events-none" />
+        {/* Bento grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
 
-            <div className="relative flex flex-col lg:flex-row items-start lg:items-center gap-8">
-              {/* Icon + text */}
-              <div className="flex-1">
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/20 text-white text-xs font-semibold mb-4">
-                  <Smartphone size={13} />
-                  APLICATIVO MOBILE — GOOGLE PLAY
+          {/* IA — large dark cell */}
+          <div
+            className={`lg:col-span-2 rounded-2xl p-8 border transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+            style={{ background: 'var(--graphite)', borderColor: 'rgba(255,255,255,0.08)', transitionDelay: '0ms' }}
+          >
+            <span className="eyebrow mb-4 block" style={{ color: 'rgba(245,239,228,0.4)' }}>Destaque · IA</span>
+            <h3
+              className="text-2xl sm:text-3xl mb-3"
+              style={{ fontFamily: 'Fraunces, Georgia, serif', fontWeight: 600, color: '#F5EFE4' }}
+            >
+              Uma IA treinada no seu negócio, não um chatbot genérico.
+            </h3>
+            <p className="text-sm leading-relaxed mb-6" style={{ color: 'rgba(245,239,228,0.55)' }}>
+              Ela aprende seu catálogo, seus horários, suas respostas favoritas. Responde em 3 segundos e entrega a conversa pro humano com o resumo pronto.
+            </p>
+
+            {/* IA demo */}
+            <div
+              className="grid grid-cols-2 gap-3 rounded-xl p-4"
+              style={{ background: 'rgba(255,255,255,0.06)' }}
+            >
+              {/* Cliente */}
+              <div>
+                <div className="flex items-center gap-1.5 mb-3">
+                  <span className="w-1.5 h-1.5 rounded-full" style={{ background: 'rgba(245,239,228,0.4)' }} />
+                  <span className="text-[10px] font-semibold" style={{ color: 'rgba(245,239,228,0.4)' }}>Cliente</span>
                 </div>
-
-                <h3 className="text-2xl sm:text-3xl font-bold text-white mb-3 leading-tight">
-                  Atenda seus clientes da{' '}
-                  <span className="text-orange-100">palma da sua mão</span>
-                </h3>
-                <p className="text-orange-50 text-base leading-relaxed mb-6 max-w-xl">
-                  Leve o FivConnect para onde for. Com o app mobile você tem controle total do seu atendimento a qualquer hora, em qualquer lugar — sem precisar abrir o computador.
-                </p>
-
-                <ul className="grid sm:grid-cols-2 gap-2 mb-8">
-                  {[
-                    'Responda conversas em tempo real',
-                    'Visualize o dashboard de métricas',
-                    'Acompanhe atendimentos abertos',
-                    'Gerencie tickets por prioridade',
-                    'Receba notificações instantâneas',
-                    'Transfira e resolva tickets na hora',
-                  ].map(item => (
-                    <li key={item} className="flex items-center gap-2">
-                      <CheckCircle size={15} className="text-orange-200 flex-shrink-0" />
-                      <span className="text-sm text-white/90">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <a
-                  href="#"
-                  className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white text-orange-600 font-bold text-sm hover:bg-orange-50 transition-colors shadow-lg"
+                <div
+                  className="rounded-xl px-3 py-2 text-[12px] mb-2"
+                  style={{ background: 'rgba(255,255,255,0.08)', color: '#F5EFE4' }}
                 >
-                  <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current" aria-hidden="true">
-                    <path d="M3.18 23.76c.3.17.64.19.96.08l13.05-7.4-2.83-2.83-11.18 10.15zm-1.7-20.1C1.2 4 1 4.5 1 5.14v13.72c0 .64.2 1.14.49 1.48l.08.07 7.69-7.69v-.18L1.56 3.59l-.08.07zm17.84 8.87l-2.21-1.26-3.16 3.16 3.16 3.16 2.24-1.27c.64-.36.64-1.56-.03-1.79zm-17.04 9.1l11.04-10.02-2.83-2.83L2.28 19.63l1 1.01v-.01z"/>
-                  </svg>
-                  Baixar no Google Play
-                </a>
+                  "Oi, vocês entregam em Guarulhos?"
+                </div>
+                <div
+                  className="rounded-xl px-3 py-2 text-[12px]"
+                  style={{ background: 'rgba(255,255,255,0.08)', color: '#F5EFE4' }}
+                >
+                  "E pago em quantas vezes?"
+                </div>
               </div>
-
-              {/* Phone mockup */}
-              <div className="flex-shrink-0 hidden sm:flex items-center justify-center">
-                <div className="relative">
-                  {/* Phone frame */}
-                  <div className="w-48 h-80 rounded-[2.5rem] bg-gray-900 border-4 border-gray-700 shadow-2xl overflow-hidden flex flex-col">
-                    {/* Status bar */}
-                    <div className="flex items-center justify-between px-5 pt-3 pb-1">
-                      <span className="text-[9px] text-white font-semibold">9:41</span>
-                      <div className="w-16 h-4 bg-gray-800 rounded-full" />
-                      <div className="flex gap-1">
-                        <div className="w-3 h-2 bg-white/60 rounded-sm" />
-                        <div className="w-1.5 h-2 bg-white/40 rounded-sm" />
-                      </div>
-                    </div>
-                    {/* App content */}
-                    <div className="flex-1 bg-white dark:bg-[hsl(240,11%,23%)] mx-1 mb-1 rounded-[1.8rem] overflow-hidden">
-                      {/* App header */}
-                      <div className="bg-[#f87944] px-4 py-3">
-                        <div className="text-[10px] text-orange-100 font-medium">FivConnect</div>
-                        <div className="text-xs text-white font-bold">Conversas</div>
-                      </div>
-                      {/* KPI mini */}
-                      <div className="grid grid-cols-3 gap-1 p-2">
-                        {[
-                          { label: 'Abertas', value: '8', color: 'text-orange-500' },
-                          { label: 'Resolvidas', value: '42', color: 'text-green-600' },
-                          { label: 'Espera', value: '3m', color: 'text-amber-500' },
-                        ].map(k => (
-                          <div key={k.label} className="bg-gray-50 rounded-lg p-1.5 text-center">
-                            <div className={`text-sm font-bold ${k.color}`}>{k.value}</div>
-                            <div className="text-[7px] text-gray-400">{k.label}</div>
-                          </div>
-                        ))}
-                      </div>
-                      {/* Conversation rows */}
-                      <div className="px-2 space-y-1">
-                        {[
-                          { name: 'Maria O.', msg: 'Preciso de ajuda...', unread: true },
-                          { name: 'João S.', msg: 'Obrigado!', unread: false },
-                          { name: 'Ana C.', msg: 'Quando chega?', unread: true },
-                          { name: 'Carlos M.', msg: 'Ok, entendi.', unread: false },
-                        ].map(c => (
-                          <div key={c.name} className="flex items-center gap-2 py-1.5 border-b border-gray-100 last:border-0">
-                            <div className="w-6 h-6 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center text-white text-[8px] font-bold flex-shrink-0">
-                              {c.name[0]}
-                            </div>
-                            <div className="flex-1 min-w-0">
-                              <div className="text-[9px] font-semibold text-gray-800 truncate">{c.name}</div>
-                              <div className="text-[8px] text-gray-400 truncate">{c.msg}</div>
-                            </div>
-                            {c.unread && (
-                              <div className="w-3 h-3 rounded-full bg-orange-500 flex-shrink-0" />
-                            )}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                  {/* Glow under phone */}
-                  <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-32 h-8 bg-orange-400/30 blur-xl rounded-full" />
+              {/* IA */}
+              <div>
+                <div className="flex items-center gap-1.5 mb-3">
+                  <span className="w-1.5 h-1.5 rounded-full" style={{ background: 'var(--coral)', boxShadow: '0 0 0 3px rgba(255,122,89,0.25)' }} />
+                  <span className="text-[10px] font-semibold" style={{ color: 'var(--coral)' }}>Fi.V · IA</span>
+                </div>
+                <div
+                  className="rounded-xl px-3 py-2 text-[12px] mb-2"
+                  style={{ background: 'rgba(255,122,89,0.15)', color: '#F5EFE4', border: '1px solid rgba(255,122,89,0.2)' }}
+                >
+                  "Sim! Guarulhos, 48h, frete R$ 18."
+                </div>
+                <div
+                  className="rounded-xl px-3 py-2 text-[12px]"
+                  style={{ background: 'rgba(255,122,89,0.15)', color: '#F5EFE4', border: '1px solid rgba(255,122,89,0.2)' }}
+                >
+                  "Em até 3x sem juros no PIX."
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {features.map((feature, i) => {
-            const Icon = feature.icon;
-            return (
-              <div
-                key={feature.title}
-                className={`group relative p-6 rounded-2xl border transition-all duration-700 hover:-translate-y-1 hover:shadow-lg ${
-                  feature.highlight
-                    ? 'border-purple-200 dark:border-purple-800 bg-purple-50/50 dark:bg-purple-950/20 ring-1 ring-purple-300 dark:ring-purple-700'
-                    : 'border-gray-200 dark:border-white/10 bg-white dark:bg-[hsl(240,11%,23%)] hover:border-orange-200 dark:hover:border-orange-800'
-                } ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-                style={{ transitionDelay: `${i * 60}ms` }}
-              >
-                {feature.highlight && (
-                  <div className="absolute -top-3 left-4">
-                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-purple-600 text-white text-[10px] font-bold">
-                      <Sparkles size={10} />
-                      DESTAQUE
-                    </span>
+          {/* Filas */}
+          <div
+            className={`rounded-2xl p-7 border transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+            style={{ background: 'var(--cream-2)', borderColor: 'var(--line)', transitionDelay: '60ms' }}
+          >
+            <span className="eyebrow mb-4 block">Filas</span>
+            <h3
+              className="text-xl mb-2"
+              style={{ fontFamily: 'Fraunces, Georgia, serif', fontWeight: 600, color: 'var(--ink)' }}
+            >
+              Ninguém esperando sem resposta.
+            </h3>
+            <p className="text-sm leading-relaxed mb-5" style={{ color: 'var(--ink-2)' }}>
+              Cada conversa vira um ticket com prioridade e responsável.
+            </p>
+            <div className="flex flex-col gap-2">
+              {[
+                { label: 'Vendas', count: 7, color: 'var(--coral)' },
+                { label: 'Suporte', count: 3, color: 'var(--green)' },
+                { label: 'Financeiro', count: 1, color: 'var(--amber-c)' },
+              ].map(q => (
+                <div
+                  key={q.label}
+                  className="flex items-center justify-between rounded-xl px-3 py-2"
+                  style={{ background: 'var(--cream-3)' }}
+                >
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full" style={{ background: q.color }} />
+                    <span className="text-sm font-medium" style={{ color: 'var(--ink)' }}>{q.label}</span>
                   </div>
-                )}
-
-                <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-4 shadow-md`}>
-                  <Icon size={18} className="text-white" />
+                  <span className="text-sm font-bold" style={{ color: q.color }}>{q.count}</span>
                 </div>
+              ))}
+            </div>
+          </div>
 
-                <div className="mb-2">
-                  <span className="text-[10px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider">
-                    {feature.badge}
-                  </span>
+          {/* Dashboard */}
+          <div
+            className={`rounded-2xl p-7 border transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+            style={{ background: 'var(--cream-2)', borderColor: 'var(--line)', transitionDelay: '120ms' }}
+          >
+            <span className="eyebrow mb-4 block">Dashboard</span>
+            <h3
+              className="text-xl mb-2"
+              style={{ fontFamily: 'Fraunces, Georgia, serif', fontWeight: 600, color: 'var(--ink)' }}
+            >
+              Métricas em tempo real.
+            </h3>
+            <p className="text-sm leading-relaxed mb-5" style={{ color: 'var(--ink-2)' }}>
+              Saiba quem atendeu mais, mais rápido e melhor.
+            </p>
+            <div className="grid grid-cols-2 gap-2">
+              {[
+                { l: 'Abertas', v: '11' },
+                { l: 'Online', v: '10' },
+                { l: 'T. médio', v: '1m43s' },
+                { l: 'Hoje', v: '77' },
+              ].map(m => (
+                <div
+                  key={m.l}
+                  className="rounded-xl px-3 py-2.5 text-center"
+                  style={{ background: 'var(--cream-3)' }}
+                >
+                  <div className="text-[10px] mb-1" style={{ color: 'var(--ink-3)' }}>{m.l}</div>
+                  <div
+                    className="text-lg font-bold"
+                    style={{ fontFamily: 'Fraunces, Georgia, serif', color: 'var(--ink)' }}
+                  >
+                    {m.v}
+                  </div>
                 </div>
+              ))}
+            </div>
+          </div>
 
-                <h3 className="text-base font-bold text-gray-900 dark:text-white mb-2">
-                  {feature.title}
-                </h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-                  {feature.description}
-                </p>
+          {/* WhatsApp */}
+          <div
+            className={`rounded-2xl p-7 border transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+            style={{ background: 'var(--cream-2)', borderColor: 'var(--line)', transitionDelay: '180ms' }}
+          >
+            <span className="eyebrow mb-4 block" style={{ color: '#075E54' }}>WhatsApp</span>
+            <h3
+              className="text-xl mb-2"
+              style={{ fontFamily: 'Fraunces, Georgia, serif', fontWeight: 600, color: 'var(--ink)' }}
+            >
+              Conexão em 5 minutos.
+            </h3>
+            <p className="text-sm leading-relaxed mb-4" style={{ color: 'var(--ink-2)' }}>
+              QR Code e pronto — nenhum plugin, nenhum código.
+            </p>
+            <div className="flex flex-col gap-1.5">
+              {[
+                { name: 'Ana Mendes', msg: 'Quando vocês abrem amanhã?' },
+                { name: 'Carlos Lima', msg: 'Ainda dá tempo pro almoço?' },
+              ].map(c => (
+                <div
+                  key={c.name}
+                  className="rounded-xl px-3 py-2 text-[11px]"
+                  style={{ background: 'var(--cream-3)' }}
+                >
+                  <span className="font-semibold" style={{ color: 'var(--ink)' }}>{c.name}: </span>
+                  <span style={{ color: 'var(--ink-2)' }}>{c.msg}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Automação */}
+          <div
+            className={`rounded-2xl p-7 border transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+            style={{ background: 'var(--cream-2)', borderColor: 'var(--line)', transitionDelay: '240ms' }}
+          >
+            <span className="eyebrow mb-4 block">Automação</span>
+            <h3
+              className="text-xl mb-2"
+              style={{ fontFamily: 'Fraunces, Georgia, serif', fontWeight: 600, color: 'var(--ink)' }}
+            >
+              Fluxos visuais, sem código.
+            </h3>
+            <p className="text-sm leading-relaxed mb-5" style={{ color: 'var(--ink-2)' }}>
+              Monte chatbots com menus, perguntas e encaminhamentos.
+            </p>
+            <div className="flex items-center gap-2">
+              {['Início', 'Menu', 'Fila'].map((node, i) => (
+                <div key={node} className="flex items-center gap-2">
+                  <div
+                    className="px-3 py-1.5 rounded-xl text-[11px] font-semibold"
+                    style={{
+                      background: i === 1 ? 'var(--coral)' : 'var(--cream-3)',
+                      color: i === 1 ? '#fff' : 'var(--ink)',
+                    }}
+                  >
+                    {node}
+                  </div>
+                  {i < 2 && (
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--ink-3)" strokeWidth="2.4" strokeLinecap="round">
+                      <path d="M5 12h14M13 5l7 7-7 7" />
+                    </svg>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Equipe */}
+          <div
+            className={`rounded-2xl p-7 border transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+            style={{ background: 'var(--cream-2)', borderColor: 'var(--line)', transitionDelay: '300ms' }}
+          >
+            <span className="eyebrow mb-4 block">Equipe</span>
+            <h3
+              className="text-xl mb-2"
+              style={{ fontFamily: 'Fraunces, Georgia, serif', fontWeight: 600, color: 'var(--ink)' }}
+            >
+              Vários atendentes, um número só.
+            </h3>
+            <p className="text-sm leading-relaxed mb-5" style={{ color: 'var(--ink-2)' }}>
+              Filas por departamento e transferência de tickets.
+            </p>
+            <div className="flex items-center -space-x-2">
+              {['A', 'M', 'R', 'L'].map((l, i) => (
+                <div
+                  key={l}
+                  className="w-9 h-9 rounded-full border-2 flex items-center justify-center text-sm font-bold text-white"
+                  style={{
+                    background: ['#FF7A59', '#2F9E6E', '#6C5CE7', '#E8923C'][i],
+                    borderColor: 'var(--cream-2)',
+                  }}
+                >
+                  {l}
+                </div>
+              ))}
+              <div
+                className="w-9 h-9 rounded-full border-2 flex items-center justify-center text-xs font-bold"
+                style={{ background: 'var(--cream-3)', borderColor: 'var(--cream-2)', color: 'var(--ink-3)' }}
+              >
+                +7
               </div>
-            );
-          })}
+            </div>
+          </div>
+
+          {/* Relatórios */}
+          <div
+            className={`rounded-2xl p-7 border transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+            style={{ background: 'var(--cream-2)', borderColor: 'var(--line)', transitionDelay: '360ms' }}
+          >
+            <span className="eyebrow mb-4 block">Relatórios</span>
+            <h3
+              className="text-xl mb-2"
+              style={{ fontFamily: 'Fraunces, Georgia, serif', fontWeight: 600, color: 'var(--ink)' }}
+            >
+              Exporte em PDF e Excel.
+            </h3>
+            <p className="text-sm leading-relaxed mb-4" style={{ color: 'var(--ink-2)' }}>
+              Performance por agente, fila e período.
+            </p>
+            <svg viewBox="0 0 200 68" preserveAspectRatio="none" className="w-full h-12">
+              <defs>
+                <linearGradient id="chartGrad" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0%" stopColor="var(--coral)" stopOpacity="0.35" />
+                  <stop offset="100%" stopColor="var(--coral)" stopOpacity="0" />
+                </linearGradient>
+              </defs>
+              <path d="M0,50 Q30,45 50,38 T100,28 T150,18 L200,8 L200,68 L0,68 Z" fill="url(#chartGrad)" />
+              <path d="M0,50 Q30,45 50,38 T100,28 T150,18 L200,8" fill="none" stroke="var(--coral)" strokeWidth="2" />
+              <circle cx="200" cy="8" r="3" fill="var(--coral)" />
+            </svg>
+          </div>
+
+          {/* Segurança */}
+          <div
+            className={`rounded-2xl p-7 border transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+            style={{ background: 'var(--cream-2)', borderColor: 'var(--line)', transitionDelay: '420ms' }}
+          >
+            <span className="eyebrow mb-4 block">Segurança</span>
+            <h3
+              className="text-xl mb-2"
+              style={{ fontFamily: 'Fraunces, Georgia, serif', fontWeight: 600, color: 'var(--ink)' }}
+            >
+              Criptografia AES-256.
+            </h3>
+            <p className="text-sm leading-relaxed mb-4" style={{ color: 'var(--ink-2)' }}>
+              Conversas protegidas com padrão bancário.
+            </p>
+            <div
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-semibold border"
+              style={{ background: 'var(--green-soft)', borderColor: 'rgba(47,158,110,0.25)', color: 'var(--green)' }}
+            >
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" />
+                <path d="M7 11V7a5 5 0 0110 0v4" />
+              </svg>
+              AES-256 · uptime 99.9% · LGPD
+            </div>
+          </div>
         </div>
       </div>
     </section>

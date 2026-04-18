@@ -1,212 +1,231 @@
 import { useState } from 'react';
-import { Check, Star, Zap, Gift } from 'lucide-react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 const plans = [
   {
     id: 'free',
-    name: 'Plano Gratuito',
-    description: 'Experimente o FivConnect sem compromisso e veja se é para você',
-    monthlyPrice: 0,
-    annualPrice: 0,
-    isFree: true,
-    isPopular: false,
-    cta: 'Criar Conta Grátis',
+    name: 'Gratuito',
+    icon: (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="3" y="3" width="18" height="18" rx="3" />
+        <path d="M9 9h6v6H9z" />
+      </svg>
+    ),
+    description: 'Experimente o Fi.V sem compromisso, no seu ritmo.',
+    monthlyPrice: null,
+    annualPrice: null,
+    cta: 'Começar grátis',
+    ctaStyle: 'ghost',
     features: [
       '1 canal de WhatsApp',
       'Até 10 conversas ativas',
       'Gestão de tickets',
-      'Histórico de conversas',
-      'Suporte por email',
+      'Dashboard básico',
     ],
   },
   {
     id: 'professional',
     name: 'Profissional',
-    description: 'Para empresas que querem atendimento profissional e automatizado',
+    icon: (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+      </svg>
+    ),
+    description: 'Para empresas que querem atendimento automatizado e IA.',
     monthlyPrice: 149,
-    annualPrice: 1490,
-    isFree: false,
+    annualPrice: 119,
+    cta: 'Testar 7 dias grátis',
+    ctaStyle: 'primary',
     isPopular: true,
-    cta: 'Assinar Agora',
     features: [
       'Até 10 usuários simultâneos',
       '1 fila de atendimento',
-      'Fluxos de chatbot',
+      'Fluxos de chatbot ilimitados',
+      'Agente de IA (1.000 respostas/mês)',
       'Relatórios completos',
-      'Dashboard de métricas em tempo real',
-      'Suporte prioritário via WhatsApp',
     ],
   },
   {
-    id: 'enterprise',
-    name: 'Enterprise',
-    description: 'Para equipes maiores que precisam de IA e recursos avançados',
+    id: 'advanced',
+    name: 'Avançado',
+    icon: (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+        <polygon points="12 2 15 8.5 22 9.3 17 14 18 21 12 17.8 6 21 7 14 2 9.3 9 8.5 12 2" />
+      </svg>
+    ),
+    description: 'Para equipes maiores que precisam de IA e recursos avançados.',
     monthlyPrice: 289,
-    annualPrice: 2890,
-    isFree: false,
-    isPopular: false,
-    cta: 'Assinar Agora',
+    annualPrice: 231,
+    cta: 'Testar 7 dias grátis',
+    ctaStyle: 'dark',
     features: [
       'Até 25 usuários simultâneos',
       '3 filas de atendimento',
       'Tudo do plano Profissional',
-      'Agente de IA personalizável',
-      'API com webhooks',
-      'Suporte prioritário via WhatsApp',
+      'IA ilimitada + treinamento próprio',
+      'Gerente de sucesso dedicado',
     ],
   },
 ];
-
-function getDiscount(monthly: number, annual: number) {
-  return Math.round(((monthly * 12 - annual) / (monthly * 12)) * 100);
-}
 
 export default function Pricing() {
   const [annual, setAnnual] = useState(false);
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <section id="planos" className="py-24 bg-gray-50 dark:bg-[hsl(240,11%,18%)]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
+    <section id="planos" className="py-24" style={{ background: 'var(--cream)' }}>
+      <div className="max-w-[1200px] mx-auto px-7" ref={ref}>
         {/* Header */}
-        <div
-          className={`text-center mb-12 transition-all duration-700 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-        >
-          <span className="inline-block px-3 py-1 rounded-full bg-orange-100 dark:bg-orange-900/40 text-orange-700 dark:text-orange-300 text-xs font-semibold mb-4">
-            PLANOS E PREÇOS
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            Planos para todos os tamanhos
+        <div className={`text-center mb-12 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <span className="eyebrow mb-5 block">Planos e preços</span>
+          <h2
+            className="text-4xl sm:text-5xl mb-5"
+            style={{ fontFamily: 'Fraunces, Georgia, serif', fontWeight: 600, color: 'var(--ink)' }}
+          >
+            Planos para{' '}
+            <span style={{ color: 'var(--coral)', fontStyle: 'italic', fontWeight: 500 }}>todos os tamanhos.</span>
           </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-8">
-            Comece grátis e escale conforme seu negócio cresce. Cancele quando quiser.
+          <p className="text-lg max-w-xl mx-auto mb-8" style={{ color: 'var(--ink-2)' }}>
+            Comece grátis e escale conforme o negócio cresce. Cancele quando quiser, sem multa.
           </p>
 
           {/* Toggle */}
-          <div className="inline-flex items-center gap-4 p-1 bg-white dark:bg-[hsl(240,11%,23%)] rounded-xl border border-gray-200 dark:border-white/10 shadow-sm">
-            <button
-              onClick={() => setAnnual(false)}
-              className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
-                !annual
-                  ? 'bg-orange-500 text-white shadow'
-                  : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
-              }`}
-            >
-              Mensal
-            </button>
-            <button
-              onClick={() => setAnnual(true)}
-              className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 ${
-                annual
-                  ? 'bg-orange-500 text-white shadow'
-                  : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
-              }`}
-            >
-              Anual
-              <span className={`text-xs px-1.5 py-0.5 rounded-full font-bold ${annual ? 'bg-orange-400 text-white' : 'bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-400'}`}>
-                -20%
-              </span>
-            </button>
+          <div
+            className="inline-flex items-center p-1 rounded-xl border"
+            style={{ background: 'var(--cream-2)', borderColor: 'var(--line)' }}
+          >
+            {[
+              { label: 'Mensal', value: false },
+              { label: 'Anual', value: true, badge: '-20%' },
+            ].map(opt => (
+              <button
+                key={String(opt.value)}
+                onClick={() => setAnnual(opt.value)}
+                className="px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2"
+                style={{
+                  background: annual === opt.value ? 'var(--coral)' : 'transparent',
+                  color: annual === opt.value ? '#fff' : 'var(--ink-2)',
+                }}
+              >
+                {opt.label}
+                {opt.badge && (
+                  <span
+                    className="text-[10px] px-1.5 py-0.5 rounded-full font-bold"
+                    style={{
+                      background: annual ? 'rgba(255,255,255,0.25)' : 'var(--green-soft)',
+                      color: annual ? '#fff' : 'var(--green)',
+                    }}
+                  >
+                    {opt.badge}
+                  </span>
+                )}
+              </button>
+            ))}
           </div>
         </div>
 
         {/* Cards */}
-        <div className="grid md:grid-cols-3 gap-8 items-start">
+        <div className="grid md:grid-cols-3 gap-6 items-stretch">
           {plans.map((plan, i) => {
-            const price = annual && !plan.isFree ? plan.annualPrice : plan.monthlyPrice;
-            const period = annual && !plan.isFree ? '/ano' : '/mês';
-            const discount = plan.isFree ? 0 : getDiscount(plan.monthlyPrice, plan.annualPrice);
+            const price = annual ? plan.annualPrice : plan.monthlyPrice;
 
             return (
               <div
                 key={plan.id}
-                className={`relative rounded-2xl p-8 transition-all duration-700 ${
-                  plan.isPopular
-                    ? 'bg-gradient-to-b from-[#f87944] to-orange-600 dark:from-[#f87944] dark:to-orange-600 text-white shadow-2xl shadow-orange-500/30 scale-105'
-                    : 'bg-white dark:bg-[hsl(240,11%,23%)] border border-gray-200 dark:border-white/10 shadow-sm hover:shadow-md'
-                } ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-                style={{ transitionDelay: `${i * 100}ms` }}
+                className={`relative rounded-2xl p-8 border flex flex-col transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+                style={{
+                  background: plan.isPopular ? 'var(--graphite)' : 'var(--cream-2)',
+                  borderColor: plan.isPopular ? 'rgba(255,122,89,0.3)' : 'var(--line)',
+                  transitionDelay: `${i * 100}ms`,
+                  transform: plan.isPopular && isVisible ? 'scale(1.025)' : undefined,
+                }}
               >
-                {/* Popular badge */}
                 {plan.isPopular && (
                   <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                    <div className="flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-amber-400 text-amber-900 text-xs font-bold shadow-lg whitespace-nowrap">
-                      <Star size={12} fill="currentColor" />
-                      MAIS POPULAR
-                    </div>
+                    <span
+                      className="inline-flex items-center gap-1 px-4 py-1.5 rounded-full text-[11px] font-bold whitespace-nowrap"
+                      style={{ background: 'var(--amber-c)', color: '#fff' }}
+                    >
+                      ★ Mais popular
+                    </span>
                   </div>
                 )}
 
                 {/* Plan name */}
-                <div className="mb-6">
+                <div className="mb-5">
                   <div className="flex items-center gap-2 mb-2">
-                    {plan.isFree && (
-                      <Gift size={16} className="text-green-500" />
-                    )}
-                    {plan.id === 'enterprise' && (
-                      <Zap size={16} className="text-amber-500" />
-                    )}
-                    <h3 className={`text-xl font-bold ${plan.isPopular ? 'text-white' : 'text-gray-900 dark:text-white'}`}>
+                    <span style={{ color: plan.isPopular ? 'rgba(245,239,228,0.6)' : 'var(--ink-3)' }}>
+                      {plan.icon}
+                    </span>
+                    <h3
+                      className="text-xl font-semibold"
+                      style={{ fontFamily: 'Fraunces, Georgia, serif', color: plan.isPopular ? '#F5EFE4' : 'var(--ink)' }}
+                    >
                       {plan.name}
                     </h3>
                   </div>
-                  <p className={`text-sm leading-relaxed ${plan.isPopular ? 'text-orange-100' : 'text-gray-500 dark:text-gray-400'}`}>
+                  <p className="text-sm leading-relaxed" style={{ color: plan.isPopular ? 'rgba(245,239,228,0.5)' : 'var(--ink-3)' }}>
                     {plan.description}
                   </p>
                 </div>
 
                 {/* Price */}
                 <div className="mb-6">
-                  {plan.isFree ? (
-                    <div className="flex items-baseline gap-1">
-                      <span className={`text-4xl font-black ${plan.isPopular ? 'text-white' : 'text-gray-900 dark:text-white'}`}>
-                        Grátis
-                      </span>
+                  {price === null ? (
+                    <div
+                      className="text-4xl font-bold"
+                      style={{ fontFamily: 'Fraunces, Georgia, serif', color: plan.isPopular ? '#F5EFE4' : 'var(--ink)' }}
+                    >
+                      Grátis
                     </div>
                   ) : (
                     <div className="flex items-baseline gap-1">
-                      <span className={`text-sm font-medium ${plan.isPopular ? 'text-orange-100' : 'text-gray-500 dark:text-gray-400'}`}>R$</span>
-                      <span className={`text-4xl font-black ${plan.isPopular ? 'text-white' : 'text-gray-900 dark:text-white'}`}>
-                        {price.toLocaleString('pt-BR')}
+                      <span className="text-sm" style={{ color: plan.isPopular ? 'rgba(245,239,228,0.4)' : 'var(--ink-3)' }}>R$</span>
+                      <span
+                        className="text-4xl font-bold"
+                        style={{ fontFamily: 'Fraunces, Georgia, serif', color: plan.isPopular ? '#F5EFE4' : 'var(--ink)' }}
+                      >
+                        {price}
                       </span>
-                      <span className={`text-sm ${plan.isPopular ? 'text-orange-100' : 'text-gray-500 dark:text-gray-400'}`}>{period}</span>
+                      <span className="text-sm" style={{ color: plan.isPopular ? 'rgba(245,239,228,0.4)' : 'var(--ink-3)' }}>/mês</span>
                     </div>
-                  )}
-                  {annual && !plan.isFree && (
-                    <p className={`text-xs mt-1 font-medium ${plan.isPopular ? 'text-orange-200' : 'text-green-600 dark:text-green-400'}`}>
-                      Economia de {discount}% ao ano
-                    </p>
                   )}
                 </div>
 
                 {/* CTA */}
                 <a
                   href="https://app.fivconnect.net/cadastro"
-                  className={`block w-full text-center py-3 rounded-xl font-semibold text-sm transition-all mb-8 ${
-                    plan.isPopular
-                      ? 'bg-white text-orange-600 hover:bg-orange-50 shadow-md'
-                      : 'bg-orange-500 dark:bg-orange-500 text-white hover:bg-orange-600 dark:hover:bg-orange-400 shadow-sm'
-                  }`}
+                  className="block w-full text-center py-3 rounded-xl font-semibold text-sm transition-all mb-7"
+                  style={
+                    plan.ctaStyle === 'primary'
+                      ? { background: 'var(--coral)', color: '#fff' }
+                      : plan.ctaStyle === 'ghost'
+                      ? { background: 'transparent', color: 'var(--ink)', border: '1px solid var(--line-2)' }
+                      : { background: '#F5EFE4', color: 'var(--graphite)' }
+                  }
                 >
                   {plan.cta}
                 </a>
 
                 {/* Divider */}
-                <div className={`border-t mb-6 ${plan.isPopular ? 'border-orange-400' : 'border-gray-100 dark:border-white/10'}`} />
+                <div
+                  className="border-t mb-6"
+                  style={{ borderColor: plan.isPopular ? 'rgba(245,239,228,0.1)' : 'var(--line)' }}
+                />
 
                 {/* Features */}
-                <ul className="space-y-3">
+                <ul className="space-y-3 flex-1">
                   {plan.features.map(feature => (
                     <li key={feature} className="flex items-start gap-3">
-                      <div className={`mt-0.5 w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 ${
-                        plan.isPopular ? 'bg-orange-400' : 'bg-orange-100 dark:bg-orange-900/40'
-                      }`}>
-                        <Check size={10} className={plan.isPopular ? 'text-white' : 'text-orange-600 dark:text-orange-400'} strokeWidth={3} />
-                      </div>
-                      <span className={`text-sm ${plan.isPopular ? 'text-orange-50' : 'text-gray-700 dark:text-gray-300'}`}>
+                      <svg
+                        className="flex-shrink-0 mt-0.5"
+                        width="15" height="15" viewBox="0 0 24 24" fill="none"
+                        stroke={plan.isPopular ? 'var(--coral)' : 'var(--green)'}
+                        strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
+                      >
+                        <path d="M20 6L9 17l-5-5" />
+                      </svg>
+                      <span className="text-sm" style={{ color: plan.isPopular ? 'rgba(245,239,228,0.65)' : 'var(--ink-2)' }}>
                         {feature}
                       </span>
                     </li>
@@ -217,12 +236,11 @@ export default function Pricing() {
           })}
         </div>
 
-        {/* Bottom note */}
-        <p className="text-center text-sm text-gray-500 dark:text-gray-400 mt-10">
-          Todos os planos incluem 7 dias grátis. Sem cartão de crédito.{' '}
-          <a href="mailto:suporte@fivconnect.net" className="text-orange-500 dark:text-orange-400 hover:underline">
-            Dúvidas? Fale conosco.
-          </a>
+        <p className="text-center text-sm mt-10" style={{ color: 'var(--ink-3)' }}>
+          Todos os planos incluem{' '}
+          <strong style={{ color: 'var(--ink)' }}>criptografia AES-256</strong>,{' '}
+          <strong style={{ color: 'var(--ink)' }}>LGPD</strong> e{' '}
+          <strong style={{ color: 'var(--ink)' }}>uptime monitorado 24h</strong>.
         </p>
       </div>
     </section>

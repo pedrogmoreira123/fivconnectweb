@@ -1,53 +1,64 @@
-import { ArrowRight, MessageCircle } from 'lucide-react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 export default function CTASection() {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <section className="py-24 bg-white dark:bg-[hsl(240,11%,20%)]">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center" ref={ref}>
+    <section className="py-24" style={{ background: 'var(--cream)' }}>
+      <div className="max-w-[900px] mx-auto px-7 text-center" ref={ref}>
         <div
-          className={`relative rounded-3xl overflow-hidden transition-all duration-700 ${
-            isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
-          }`}
+          className={`relative rounded-3xl overflow-hidden px-10 py-20 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+          style={{ background: 'var(--graphite)' }}
         >
-          {/* Background gradient */}
-          <div className="absolute inset-0 bg-gradient-to-br from-[#f87944] via-orange-500 to-amber-500" />
+          {/* Orbs */}
+          <div
+            className="absolute top-0 right-0 w-80 h-80 rounded-full blur-3xl pointer-events-none"
+            style={{ background: 'var(--coral)', opacity: 0.15, transform: 'translate(30%, -40%)' }}
+          />
+          <div
+            className="absolute bottom-0 left-0 w-64 h-64 rounded-full blur-3xl pointer-events-none"
+            style={{ background: 'var(--amber-c)', opacity: 0.1, transform: 'translate(-30%, 40%)' }}
+          />
 
-          {/* Decorative blobs */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
-          <div className="absolute bottom-0 left-0 w-64 h-64 bg-amber-400/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/4" />
-
-          {/* Content */}
-          <div className="relative px-8 py-16 sm:px-16 sm:py-20">
-            <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-white/20 mb-6">
-              <MessageCircle size={28} className="text-white" />
-            </div>
-
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">
-              Comece a atender melhor{' '}
-              <span className="text-orange-100">ainda hoje</span>
+          <div className="relative">
+            <h2
+              className="text-4xl sm:text-5xl lg:text-6xl mb-6"
+              style={{
+                fontFamily: 'Fraunces, Georgia, serif',
+                fontWeight: 600,
+                color: '#F5EFE4',
+                lineHeight: 1.05,
+              }}
+            >
+              Pare de perder cliente<br />na madrugada.
             </h2>
 
-            <p className="text-lg text-orange-50 max-w-2xl mx-auto mb-10 leading-relaxed">
-              Junte-se a centenas de empresas que já transformaram o atendimento com FivConnect.
-              7 dias grátis, sem cartão de crédito.
+            <p className="text-lg mb-10 max-w-xl mx-auto" style={{ color: 'rgba(245,239,228,0.6)' }}>
+              Teste o Fi.V Connect por 7 dias, sem cartão de crédito. Se não ver valor, não cobramos nada.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href="https://app.fivconnect.net/cadastro"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-white text-orange-600 font-bold text-base hover:bg-orange-50 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold text-base transition-all hover:opacity-90 hover:-translate-y-0.5 shadow-xl"
+                style={{ background: 'var(--coral)', color: '#fff', boxShadow: '0 12px 32px rgba(255,122,89,0.35)' }}
               >
-                Começar Gratuitamente
-                <ArrowRight size={18} />
+                Testar grátis por 7 dias
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round">
+                  <path d="M5 12h14M13 5l7 7-7 7" />
+                </svg>
               </a>
               <a
-                href="mailto:vendas@fivconnect.net"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl border-2 border-white/30 text-white font-bold text-base hover:bg-white/10 transition-all"
+                href="#showcase"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold text-base transition-all border"
+                style={{
+                  borderColor: 'rgba(245,239,228,0.2)',
+                  color: 'rgba(245,239,228,0.8)',
+                }}
+                onMouseEnter={e => { e.currentTarget.style.background = 'rgba(245,239,228,0.08)'; }}
+                onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; }}
               >
-                Falar com Especialista
+                Ver a plataforma
               </a>
             </div>
           </div>

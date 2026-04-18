@@ -2,12 +2,86 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  :root {
-    --primary: 18 93% 62%;
-    --primary-dark: 24 95% 61%;
-  }
+/* ── Fonte principal: Munika ───────────────────────────────────────── */
+@font-face {
+  font-family: 'Munika';
+  src: url('/fonts/Munika-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Munika';
+  src: url('/fonts/Munika-RegularItalic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Munika';
+  src: url('/fonts/Munika-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Munika';
+  src: url('/fonts/Munika-Semibold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Munika';
+  src: url('/fonts/Munika-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Munika';
+  src: url('/fonts/Munika-Black.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
 
+/* ── Design System Variables ───────────────────────────────────────── */
+:root {
+  --coral: #FF7A59;
+  --coral-600: #F26444;
+  --coral-700: #D9502F;
+  --amber-c: #E8923C;
+  --amber-soft: #F4B880;
+  --graphite: #1A1816;
+  --graphite-2: #2A2520;
+  --graphite-3: #3D3630;
+  --ink: #1A1816;
+  --ink-2: #4A433C;
+  --ink-3: #7A7169;
+  --cream: #FAF7F2;
+  --cream-2: #F3EDE3;
+  --cream-3: #EADFCE;
+  --line: rgba(26, 24, 22, 0.08);
+  --line-2: rgba(26, 24, 22, 0.14);
+  --green: #2F9E6E;
+  --green-soft: #D8F0E3;
+  --purple: #6C5CE7;
+}
+
+.dark {
+  --ink: #F5EFE4;
+  --ink-2: #CFC6B8;
+  --ink-3: #8E8577;
+  --cream: #14110F;
+  --cream-2: #1E1A16;
+  --cream-3: #2A241F;
+  --line: rgba(245, 239, 228, 0.08);
+  --line-2: rgba(245, 239, 228, 0.14);
+  --green-soft: rgba(47, 158, 110, 0.18);
+}
+
+@layer base {
   * {
     box-sizing: border-box;
     margin: 0;
@@ -19,23 +93,75 @@
   }
 
   body {
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: 'Munika', system-ui, -apple-system, 'Segoe UI', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: var(--cream);
+    color: var(--ink);
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Fraunces', Georgia, serif;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+
+  h4, h5, h6 {
+    font-family: 'Munika', system-ui, sans-serif;
+    letter-spacing: -0.01em;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    body, a, button, [role="button"] {
+      cursor: none;
+    }
+  }
+}
+
+@layer components {
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.14em] uppercase;
+    color: var(--coral-700);
+    font-family: 'Munika', system-ui, sans-serif;
+  }
+  .eyebrow::before {
+    content: "";
+    display: inline-block;
+    width: 18px;
+    height: 1px;
+    background: currentColor;
+    flex-shrink: 0;
+  }
+
+  .display-heading {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+
+  .display-accent {
+    color: var(--coral);
+    font-style: italic;
+    font-weight: 500;
+  }
+
+  .display-accent-amber {
+    color: var(--amber-c);
+    font-style: italic;
+    font-weight: 500;
   }
 }
 
 @layer utilities {
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-orange-500 to-amber-400;
-  }
-
-  .dark .text-gradient {
-    @apply from-orange-400 to-amber-300;
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #FF7A59, #E8923C);
   }
 
   .bg-gradient-primary {
-    background: linear-gradient(135deg, #f87944 0%, #f59e0b 100%);
+    background: linear-gradient(135deg, #FF7A59 0%, #E8923C 100%);
   }
 
   .card-glass {
