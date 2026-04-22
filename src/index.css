@@ -67,6 +67,10 @@
   --green: #2F9E6E;
   --green-soft: #D8F0E3;
   --purple: #6C5CE7;
+  --coral-soft: rgba(255, 122, 89, 0.1);
+  --coral-active: #F26444;
+  --muted: rgba(0, 0, 0, 0.06);
+  --surface: #FFFFFF;
 }
 
 .dark {
@@ -79,6 +83,8 @@
   --line: rgba(245, 239, 228, 0.08);
   --line-2: rgba(245, 239, 228, 0.14);
   --green-soft: rgba(47, 158, 110, 0.18);
+  --muted: rgba(255, 255, 255, 0.08);
+  --surface: #2A241F;
 }
 
 @layer base {

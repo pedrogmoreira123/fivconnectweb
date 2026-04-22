@@ -38,10 +38,10 @@ function PhoneMockup() {
         className="relative rounded-[2.5rem] shadow-2xl overflow-hidden border-4"
         style={{ borderColor: '#1A1816', background: '#F5EFE4' }}
       >
-        {/* WA Header */}
+        {/* Header */}
         <div
           className="flex items-center gap-3 px-4 py-3"
-          style={{ background: '#075E54' }}
+          style={{ background: 'linear-gradient(135deg, #FF7A59, #E8923C)' }}
         >
           <svg
             className="text-white opacity-70"
@@ -52,20 +52,20 @@ function PhoneMockup() {
           </svg>
           <div
             className="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold"
-            style={{ background: '#128C7E' }}
+            style={{ background: 'rgba(255,255,255,0.25)' }}
           >
             JS
           </div>
           <div>
             <div className="text-white text-sm font-semibold leading-none">João Silva</div>
-            <div className="text-[#acefeb] text-[10px] leading-none mt-0.5">online · via Fi.V</div>
+            <div className="text-[10px] leading-none mt-0.5" style={{ color: 'rgba(255,255,255,0.75)' }}>online · via Fi.V</div>
           </div>
         </div>
 
-        {/* WA Body */}
+        {/* Chat Body */}
         <div
           className="flex flex-col gap-2 px-3 py-3 min-h-[300px]"
-          style={{ background: '#E7F5DF url("data:image/svg+xml,%3Csvg width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'%2300000006\' fill-rule=\'evenodd\'%3E%3Ccircle cx=\'3\' cy=\'3\' r=\'1\'/%3E%3C/g%3E%3C/svg%3E")' }}
+          style={{ background: '#FAF7F2' }}
         >
           {bubbles.slice(0, step).map((b, i) => (
             <div
@@ -74,22 +74,32 @@ function PhoneMockup() {
               style={{ animation: 'bubbleIn 0.35s ease-out both' }}
             >
               <div
-                className="max-w-[85%] rounded-xl px-3 py-2 text-[13px] leading-snug shadow-sm relative"
+                className="max-w-[90%] px-3 py-2 text-[13px] leading-snug shadow-sm relative"
                 style={{
-                  background: b.side === 'out' ? '#DCF8C6' : '#fff',
-                  color: '#1A1816',
+                  background: b.side === 'out' ? '#FF7A59' : '#fff',
+                  color: b.side === 'out' ? '#fff' : '#1A1816',
+                  borderRadius: '16px',
+                  ...(b.side === 'out' ? { borderTopRightRadius: '4px' } : { borderTopLeftRadius: '4px' }),
                 }}
               >
                 {b.ai && (
                   <span
                     className="inline-block text-[9px] font-bold mr-1 px-1 py-0.5 rounded"
-                    style={{ background: '#E8923C', color: '#fff', letterSpacing: '0.06em' }}
+                    style={{ background: 'rgba(255,255,255,0.25)', color: '#fff', letterSpacing: '0.06em' }}
                   >
                     IA
                   </span>
                 )}
                 {b.text}
-                <span className="text-[9px] ml-2 opacity-50 float-right mt-1">{b.time}</span>
+                <span className="text-[9px] ml-2 float-right mt-1 flex items-center gap-0.5" style={{ opacity: b.side === 'out' ? 0.8 : 0.5 }}>
+                  {b.time}
+                  {b.side === 'out' && (
+                    <svg width="14" height="8" viewBox="0 0 16 8" fill="none" className="inline ml-0.5">
+                      <path d="M1 5L4.5 8L10.5 1" stroke="rgba(255,255,255,0.9)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M5.5 5L9 8L15 1" stroke="rgba(255,255,255,0.9)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  )}
+                </span>
               </div>
             </div>
           ))}
@@ -98,15 +108,15 @@ function PhoneMockup() {
           {step === bubbles.length && (
             <div className="flex justify-end" style={{ animation: 'bubbleIn 0.35s ease-out both' }}>
               <div
-                className="rounded-xl px-3 py-2.5 shadow-sm flex gap-1 items-center"
-                style={{ background: '#DCF8C6' }}
+                className="px-3 py-2.5 shadow-sm flex gap-1.5 items-center"
+                style={{ background: '#FF7A59', borderRadius: '16px', borderTopRightRadius: '4px' }}
               >
                 {[0, 0.2, 0.4].map((d, i) => (
                   <span
                     key={i}
                     className="w-1.5 h-1.5 rounded-full"
                     style={{
-                      background: '#075E54',
+                      background: 'rgba(255,255,255,0.85)',
                       animation: `typing 1.2s ${d}s ease-in-out infinite`,
                     }}
                   />

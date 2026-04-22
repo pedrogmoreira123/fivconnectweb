@@ -139,14 +139,15 @@ export default function Showcase() {
                 {convList.map(c => (
                   <div
                     key={c.av}
-                    className="flex items-start gap-2.5 p-3 border-b cursor-pointer"
+                    className="flex items-start gap-2.5 p-3 border-b cursor-pointer transition-all duration-200"
                     style={{
                       borderColor: 'rgba(255,255,255,0.04)',
-                      background: c.active ? 'rgba(255,122,89,0.1)' : 'transparent',
+                      background: c.active ? 'rgba(255,122,89,0.12)' : 'transparent',
+                      borderLeft: c.active ? '3px solid var(--coral)' : '3px solid transparent',
                     }}
                   >
                     <div
-                      className="w-8 h-8 rounded-full flex items-center justify-center text-white text-[11px] font-bold flex-shrink-0"
+                      className="w-9 h-9 rounded-full flex items-center justify-center text-white text-[11px] font-bold flex-shrink-0"
                       style={{ background: c.bg }}
                     >
                       {c.av}
@@ -180,18 +181,32 @@ export default function Showcase() {
             <div className="flex-1 flex flex-col min-w-0">
               {/* Chat header */}
               <div
-                className="flex items-center gap-3 px-4 py-3 border-b flex-shrink-0"
-                style={{ borderColor: 'rgba(255,255,255,0.06)' }}
+                className="flex items-center gap-3 px-4 py-3 border-b flex-shrink-0 sticky top-0 z-10"
+                style={{
+                  borderColor: 'rgba(255,255,255,0.06)',
+                  background: 'rgba(26,24,22,0.95)',
+                  backdropFilter: 'blur(8px)',
+                  WebkitBackdropFilter: 'blur(8px)',
+                }}
               >
                 <div
-                  className="w-8 h-8 rounded-full flex items-center justify-center text-white text-[11px] font-bold"
+                  className="w-8 h-8 rounded-full flex items-center justify-center text-white text-[11px] font-bold flex-shrink-0"
                   style={{ background: 'linear-gradient(135deg,#FFD37A,#FF7A59)' }}
                 >
                   JS
                 </div>
-                <div>
+                <div className="flex-1 min-w-0">
                   <div className="text-sm font-semibold" style={{ color: '#F5EFE4' }}>João Silva</div>
-                  <div className="text-[10px]" style={{ color: 'rgba(245,239,228,0.4)' }}>+55 11 94xxx-0213 · Vendas</div>
+                  <div className="text-[10px] flex items-center gap-1" style={{ color: 'rgba(245,239,228,0.4)' }}>
+                    <span className="w-1.5 h-1.5 rounded-full inline-block" style={{ background: 'var(--green)' }} />
+                    +55 11 94xxx-0213 · Vendas
+                  </div>
+                </div>
+                {/* Options button */}
+                <div className="opacity-40 hover:opacity-70 transition-opacity cursor-pointer flex gap-0.5 px-1">
+                  {[0,1,2].map(d => (
+                    <span key={d} className="w-1 h-1 rounded-full" style={{ background: 'rgba(245,239,228,0.6)' }} />
+                  ))}
                 </div>
               </div>
 
@@ -199,41 +214,107 @@ export default function Showcase() {
               <div className="flex-1 flex flex-col gap-2 p-4 overflow-hidden">
                 <div className="text-[10px] text-center mb-1" style={{ color: 'rgba(245,239,228,0.3)' }}>Hoje · 14:02</div>
                 {chatMessages.map((m, i) => (
-                  <div key={i} className={`flex ${m.side === 'out' ? 'justify-end' : 'justify-start'}`}>
+                  <div
+                    key={i}
+                    className={`flex ${m.side === 'out' ? 'justify-end' : 'justify-start'}`}
+                    style={{ animation: isVisible ? `bubbleIn 0.3s ease-out ${0.2 + i * 0.09}s both` : 'none', opacity: isVisible ? undefined : 0 }}
+                  >
                     <div
-                      className="max-w-[70%] rounded-xl px-3 py-2 text-xs leading-relaxed"
+                      className="max-w-[70%] px-3 py-2 text-xs leading-relaxed"
                       style={{
-                        background: m.side === 'out'
-                          ? (m.ai ? 'rgba(232,146,60,0.15)' : 'rgba(255,122,89,0.15)')
-                          : 'rgba(255,255,255,0.08)',
-                        color: '#F5EFE4',
-                        border: m.ai ? '1px solid rgba(232,146,60,0.3)' : 'none',
+                        background: m.side === 'out' ? 'var(--coral)' : 'rgba(255,255,255,0.08)',
+                        color: m.side === 'out' ? '#fff' : '#F5EFE4',
+                        borderRadius: '16px',
+                        ...(m.side === 'out' ? { borderTopRightRadius: '4px' } : { borderTopLeftRadius: '4px' }),
                       }}
                     >
                       {m.ai && (
-                        <div className="text-[9px] font-bold mb-1" style={{ color: '#E8923C', letterSpacing: '0.06em' }}>
-                          🤖 IA · respondeu em 3s
+                        <div className="text-[9px] font-bold mb-1 flex items-center gap-1" style={{ color: 'rgba(255,255,255,0.8)', letterSpacing: '0.06em' }}>
+                          <span>🤖</span>
+                          <span>IA · respondeu em 3s</span>
                         </div>
                       )}
                       {m.text}
+                      {m.side === 'out' && (
+                        <div className="flex items-center justify-end gap-0.5 mt-0.5">
+                          <svg width="14" height="8" viewBox="0 0 16 8" fill="none">
+                            <path d="M1 5L4.5 8L10.5 1" stroke="rgba(255,255,255,0.7)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M5.5 5L9 8L15 1" stroke="rgba(255,255,255,0.7)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                        </div>
+                      )}
                     </div>
                   </div>
                 ))}
+
+                {/* Typing indicator */}
+                <div
+                  className="flex justify-start"
+                  style={{ animation: isVisible ? 'bubbleIn 0.3s ease-out 1.0s both' : 'none', opacity: isVisible ? undefined : 0 }}
+                >
+                  <div
+                    className="px-3 py-2.5 flex gap-1.5 items-center"
+                    style={{ background: 'rgba(255,255,255,0.08)', borderRadius: '16px', borderTopLeftRadius: '4px' }}
+                  >
+                    {[0, 0.2, 0.4].map((d, i) => (
+                      <span
+                        key={i}
+                        className="w-1.5 h-1.5 rounded-full"
+                        style={{
+                          background: 'rgba(245,239,228,0.5)',
+                          animation: `typing 1.2s ${d}s ease-in-out infinite`,
+                        }}
+                      />
+                    ))}
+                  </div>
+                </div>
               </div>
 
               {/* Input */}
-              <div className="flex items-center gap-2 px-4 py-3 border-t" style={{ borderColor: 'rgba(255,255,255,0.06)' }}>
+              <div
+                className="flex items-center gap-2 px-3 py-2.5 border-t flex-shrink-0"
+                style={{
+                  borderColor: 'rgba(255,255,255,0.06)',
+                  background: 'rgba(26,24,22,0.95)',
+                  backdropFilter: 'blur(8px)',
+                  WebkitBackdropFilter: 'blur(8px)',
+                }}
+              >
+                {/* Emoji */}
+                <button className="flex-shrink-0 opacity-40 hover:opacity-70 transition-opacity">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="rgba(245,239,228,0.8)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+                    <line x1="9" y1="9" x2="9.01" y2="9" strokeWidth="3"/>
+                    <line x1="15" y1="9" x2="15.01" y2="9" strokeWidth="3"/>
+                  </svg>
+                </button>
+                {/* Attach */}
+                <button className="flex-shrink-0 opacity-40 hover:opacity-70 transition-opacity">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="rgba(245,239,228,0.8)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"/>
+                  </svg>
+                </button>
                 <div
-                  className="flex-1 rounded-xl px-3 py-2 text-xs"
+                  className="flex-1 rounded-xl px-3 py-1.5 text-xs"
                   style={{ background: 'rgba(255,255,255,0.08)', color: 'rgba(245,239,228,0.3)' }}
                 >
                   Digite sua mensagem…
                 </div>
+                {/* Mic */}
+                <button className="flex-shrink-0 opacity-40 hover:opacity-70 transition-opacity">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="rgba(245,239,228,0.8)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                    <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                    <line x1="12" y1="19" x2="12" y2="23"/>
+                    <line x1="8" y1="23" x2="16" y2="23"/>
+                  </svg>
+                </button>
                 <div
-                  className="w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0"
+                  className="w-7 h-7 rounded-xl flex items-center justify-center flex-shrink-0 transition-all hover:opacity-90"
                   style={{ background: 'var(--coral)' }}
                 >
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
                     <line x1="22" y1="2" x2="11" y2="13" />
                     <polygon points="22 2 15 22 11 13 2 9 22 2" fill="white" stroke="none" />
                   </svg>

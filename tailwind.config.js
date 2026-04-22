@@ -76,8 +76,8 @@ export default {
           '100%': { opacity: '1', transform: 'translateY(0) scale(1)' },
         },
         typing: {
-          '0%, 60%, 100%': { opacity: '0.3' },
-          '30%': { opacity: '1' },
+          '0%, 60%, 100%': { opacity: '0.3', transform: 'translateY(0)' },
+          '30%': { opacity: '1', transform: 'translateY(-3px)' },
         },
       },
     },
