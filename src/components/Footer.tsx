@@ -1,4 +1,4 @@
-import { navigate } from '../hooks/useRoute';
+﻿import { navigate } from '../hooks/useRoute';
 
 const footerLinks = {
   Produto: [
@@ -124,25 +124,13 @@ export default function Footer() {
           style={{ borderColor: 'rgba(245,239,228,0.08)', color: 'rgba(245,239,228,0.3)' }}
         >
           <div>© 2026 Fi.V Connect · Todos os direitos reservados</div>
-          <div className="flex items-center gap-5">
-            {[
-              { label: 'Termos', href: '/termos-de-uso' },
-              { label: 'Privacidade', href: '/politica-de-privacidade' },
-              { label: 'LGPD', href: '/politica-de-privacidade#lgpd' },
-            ].map(l => (
-              <a
-                key={l.label}
-                href={l.href}
-                onClick={(e) => { e.preventDefault(); navigate(l.href); }}
-                className="transition-colors hover:text-white"
-                style={{ color: 'rgba(245,239,228,0.3)' }}
-              >
-                {l.label}
-              </a>
-            ))}
+          <div style={{ color: 'rgba(245,239,228,0.2)' }}>
+            <span style={{ color: 'var(--coral)' }}>F I. V CONNECT LTDA</span>
+            {' · CNPJ: 00.000.000/0001-00'}
           </div>
         </div>
       </div>
     </footer>
   );
 }
+
