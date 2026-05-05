@@ -15,6 +15,9 @@ import CustomCursor from './components/CustomCursor';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import TermsOfUse from './components/TermsOfUse';
 import CookieBanner from './components/CookieBanner';
+import Contact from './components/Contact';
+import LGPD from './components/LGPD';
+import EddieChat from './components/EddieChat';
 import { useRoute } from './hooks/useRoute';
 
 function LandingPage() {
@@ -47,13 +50,24 @@ function App() {
     return null;
   }
 
+  if (path === '/contato') {
+    return (
+      <>
+        <CustomCursor />
+        <Contact />
+      </>
+    );
+  }
+
   return (
     <>
       <CustomCursor />
       <CookieBanner />
+      <EddieChat />
       {path === '/politica-de-privacidade' && <PrivacyPolicy />}
       {path === '/termos-de-uso' && <TermsOfUse />}
-      {path !== '/politica-de-privacidade' && path !== '/termos-de-uso' && <LandingPage />}
+      {path === '/lgpd' && <LGPD />}
+      {path !== '/politica-de-privacidade' && path !== '/termos-de-uso' && path !== '/lgpd' && <LandingPage />}
     </>
   );
 }

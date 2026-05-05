@@ -15,7 +15,7 @@ function Section({ id, title, children }: { id?: string; title: string; children
 
 export default function PrivacyPolicy() {
   const { theme } = useTheme();
-  const logoSrc = theme === 'dark' ? '/logo-branca.png' : '/logo-preta.png';
+  const logoSrc = theme === 'dark' ? '/logo-branca.svg' : '/logo-preta.svg';
 
   return (
     <div className="min-h-screen bg-cream-50 dark:bg-[hsl(25,8%,13%)] transition-colors duration-300">
@@ -23,7 +23,7 @@ export default function PrivacyPolicy() {
       <header className="border-b border-gray-200 dark:border-white/10 bg-cream-50/90 dark:bg-[hsl(25,8%,13%)]/90 backdrop-blur-md sticky top-0 z-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <a href="/" onClick={(e) => { e.preventDefault(); navigate('/'); }}>
-            <img src={logoSrc} alt="Fi.V Connect" className="h-7 w-auto" />
+            <img src={logoSrc} alt="Fi.V Connect" className="h-10 w-auto" />
           </a>
           <button
             onClick={() => navigate('/')}

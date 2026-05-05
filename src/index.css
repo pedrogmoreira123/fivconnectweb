@@ -160,6 +160,37 @@
   }
 }
 
+/* ── Social icon hover label ───────────────────────────────────────── */
+.social-icon-link {
+  overflow: visible;
+}
+
+.social-icon-text {
+  position: absolute;
+  left: calc(100% + 8px);
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 500;
+  color: #F5EFE4;
+  background: rgba(26, 24, 22, 0.85);
+  padding: 3px 10px;
+  border-radius: 6px;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(6px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.social-icon-link:hover .social-icon-text {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.social-icon-link:hover > span:first-child {
+  background: var(--coral) !important;
+  color: #fff;
+}
+
 @layer utilities {
   .text-gradient {
     @apply bg-clip-text text-transparent;
