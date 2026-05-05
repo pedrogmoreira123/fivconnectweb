@@ -42,6 +42,11 @@ function LandingPage() {
 function App() {
   const path = useRoute();
 
+  if (path === '/cadastro') {
+    window.location.replace('https://app.fivconnect.net/cadastro');
+    return null;
+  }
+
   return (
     <>
       <CustomCursor />
