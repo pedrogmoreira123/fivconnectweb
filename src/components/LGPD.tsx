@@ -105,7 +105,7 @@ export default function LGPD() {
         </p>
 
         <Section title="1. Identificação do Controlador e do Encarregado">
-          <p><strong>Controlador:</strong> Fi.V Connect LTDA · CNPJ: 00.000.000/0001-00</p>
+          <p><strong>Controlador:</strong> Fi.V Connect LTDA · CNPJ: 66.624.400/0001-86</p>
           <p><strong>Endereço:</strong> [endereço completo]</p>
           <p><strong>Encarregado (DPO):</strong> [nome do encarregado] · <a href="mailto:dpo@fivconnect.net" style={{ color: 'var(--coral)' }}>dpo@fivconnect.net</a></p>
           <p className="text-xs mt-2" style={{ color: 'var(--ink-3)' }}>
@@ -336,7 +336,7 @@ export default function LGPD() {
         </div>
 
         <p className="text-xs text-center mt-8" style={{ color: 'var(--ink-3)' }}>
-          Fi.V Connect LTDA · CNPJ: 00.000.000/0001-00 · Documento válido em todo território nacional
+          Fi.V Connect LTDA · CNPJ: 66.624.400/0001-86 · Documento válido em todo território nacional
         </p>
       </main>
     </div>

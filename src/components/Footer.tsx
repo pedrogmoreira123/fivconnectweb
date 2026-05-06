@@ -123,8 +123,8 @@ export default function Footer() {
             <span>© 2026 Fi.V Connect · Todos os direitos reservados</span>
             <span style={{ color: 'rgba(245,239,228,0.15)' }} className="hidden sm:inline">·</span>
             <span>
-              <span style={{ color: 'var(--coral)' }}>FI.V CONNECT LTDA</span>
-              {' · CNPJ: 00.000.000/0001-00'}
+              <span style={{ color: 'var(--coral)' }}>Fi.V Connect LTDA</span>
+              {' · CNPJ: 66.624.400/0001-86'}
             </span>
           </div>
           <div className="flex items-center gap-4">

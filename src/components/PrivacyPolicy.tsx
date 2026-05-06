@@ -52,7 +52,7 @@ export default function PrivacyPolicy() {
 
         {/* Intro */}
         <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-10 text-sm">
-          A Fi.V Soluções LTDA ("Fi.V Connect", "nós") respeita a privacidade dos seus usuários.
+          A Fi.V Connect LTDA ("Fi.V Connect", "nós") respeita a privacidade dos seus usuários.
           Esta Política de Privacidade descreve como coletamos, usamos, armazenamos e protegemos
           as informações pessoais fornecidas ao utilizar nossos serviços. Ao acessar ou usar o
           Fi.V Connect, você concorda com os termos desta política.
@@ -60,8 +60,8 @@ export default function PrivacyPolicy() {
 
         <Section title="1. Quem somos">
           <p>
-            <strong className="text-gray-800 dark:text-gray-100">Razão social:</strong> Fi.V Soluções LTDA<br />
-            <strong className="text-gray-800 dark:text-gray-100">CNPJ:</strong> [a preencher]<br />
+            <strong className="text-gray-800 dark:text-gray-100">Razão social:</strong> Fi.V Connect LTDA<br />
+            <strong className="text-gray-800 dark:text-gray-100">CNPJ:</strong> 66.624.400/0001-86<br />
             <strong className="text-gray-800 dark:text-gray-100">Endereço:</strong> [a preencher]<br />
             <strong className="text-gray-800 dark:text-gray-100">E-mail do DPO:</strong> contato@fivconnect.net
           </p>
@@ -193,7 +193,7 @@ export default function PrivacyPolicy() {
       <footer className="border-t border-gray-200 dark:border-white/10 py-8">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-gray-500 dark:text-gray-400">
-            © 2026 Fi.V Connect — Fi.V Soluções LTDA. Todos os direitos reservados.
+            © 2026 Fi.V Connect — Fi.V Connect LTDA. Todos os direitos reservados.
           </p>
           <button
             onClick={() => navigate('/')}

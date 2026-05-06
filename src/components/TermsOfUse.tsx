@@ -53,7 +53,7 @@ export default function TermsOfUse() {
         {/* Intro */}
         <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-10 text-sm">
           Estes Termos de Uso ("Termos") regulam o acesso e uso da plataforma Fi.V Connect,
-          operada pela Fi.V Soluções LTDA ("Fi.V Connect", "nós"). Ao criar uma conta ou utilizar
+          operada pela Fi.V Connect LTDA ("Fi.V Connect", "nós"). Ao criar uma conta ou utilizar
           nossos serviços, você ("Usuário") concorda integralmente com estes Termos. Caso não
           concorde, não utilize a plataforma.
         </p>
@@ -144,7 +144,7 @@ export default function TermsOfUse() {
         <Section title="7. Propriedade Intelectual">
           <p>
             Todos os direitos sobre a plataforma Fi.V Connect — incluindo código-fonte, design,
-            marca, logotipo e conteúdo — pertencem exclusivamente à Fi.V Soluções LTDA. É
+            marca, logotipo e conteúdo — pertencem exclusivamente à Fi.V Connect LTDA. É
             proibida a reprodução, modificação, distribuição ou uso comercial sem autorização
             prévia e por escrito.
           </p>
@@ -205,7 +205,7 @@ export default function TermsOfUse() {
       <footer className="border-t border-gray-200 dark:border-white/10 py-8">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-gray-500 dark:text-gray-400">
-            © 2026 Fi.V Connect — Fi.V Soluções LTDA. Todos os direitos reservados.
+            © 2026 Fi.V Connect — Fi.V Connect LTDA. Todos os direitos reservados.
           </p>
           <button
             onClick={() => navigate('/')}
