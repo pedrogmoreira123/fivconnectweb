@@ -1,4 +1,5 @@
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
+import { trackContatoConversion } from '../gtag';
 
 export default function CTASection() {
   const { ref, isVisible } = useScrollAnimation();
@@ -40,6 +41,7 @@ export default function CTASection() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href="https://app.fivconnect.net/cadastro"
+                onClick={trackContatoConversion}
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold text-base transition-all hover:opacity-90 hover:-translate-y-0.5 shadow-xl"
                 style={{ background: 'var(--coral)', color: '#fff', boxShadow: '0 12px 32px rgba(255,122,89,0.35)' }}
               >

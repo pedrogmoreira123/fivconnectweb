@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { ArrowRight, Play } from 'lucide-react';
+import { trackContatoConversion } from '../gtag';
 
 const bubbles = [
   { side: 'in',  text: 'Olá! Vocês ainda têm o kit Gráfica Sol?', time: '14:02', delay: 0.1 },
@@ -240,6 +241,7 @@ export default function Hero() {
             <div className="flex flex-col sm:flex-row gap-3 mb-9">
               <a
                 href="https://app.fivconnect.net/cadastro"
+                onClick={trackContatoConversion}
                 className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-white font-semibold text-base transition-all hover:opacity-90 hover:-translate-y-0.5 shadow-lg"
                 style={{ background: 'var(--coral)', boxShadow: '0 8px 24px rgba(255,122,89,0.3)' }}
               >

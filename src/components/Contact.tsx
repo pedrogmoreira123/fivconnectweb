@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { ArrowLeft, Send, CheckCircle, AlertCircle } from 'lucide-react';
 import { navigate } from '../hooks/useRoute';
+import { trackContatoConversion } from '../gtag';
 
 interface FormState {
   nome: string;
@@ -52,6 +53,7 @@ export default function Contact() {
         return;
       }
 
+      trackContatoConversion();
       setStatus('success');
     } catch {
       setErrorMsg('Falha na conexão. Verifique sua internet e tente novamente.');
