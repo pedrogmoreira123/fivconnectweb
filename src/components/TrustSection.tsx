@@ -5,7 +5,7 @@ export default function TrustSection() {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <section className="py-24" style={{ background: 'var(--cream-2)' }}>
+    <section className="py-28 sm:py-32" style={{ background: 'var(--cream-2)' }}>
       <div className="max-w-[1200px] mx-auto px-7" ref={ref}>
 
         {/* Headline */}

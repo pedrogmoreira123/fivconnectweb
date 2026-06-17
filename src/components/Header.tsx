@@ -5,7 +5,7 @@ import { useTheme } from '../hooks/useTheme';
 const navLinks = [
   { label: 'Como funciona', href: '#como-funciona' },
   { label: 'Funcionalidades', href: '#funcionalidades' },
-  { label: 'Ver a plataforma', href: '#showcase' },
+  { label: 'Ver a plataforma', href: '#ver-plataforma' },
   { label: 'Planos', href: '#planos' },
   { label: 'FAQ', href: '#faq' },
 ];
@@ -23,7 +23,7 @@ function Logo() {
       <span
         className="ml-2.5 pl-2.5"
         style={{
-          fontFamily: 'Munika, system-ui, sans-serif',
+          fontFamily: 'Plus Jakarta Sans, system-ui, sans-serif',
           fontSize: '10px',
           fontWeight: 600,
           letterSpacing: '0.14em',

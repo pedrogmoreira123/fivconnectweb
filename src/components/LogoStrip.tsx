@@ -29,7 +29,7 @@ export default function LogoStrip() {
                 key={b.name}
                 className="text-base font-semibold opacity-50 hover:opacity-80 transition-opacity"
                 style={{
-                  fontFamily: b.serif ? 'Fraunces, Georgia, serif' : 'Munika, system-ui, sans-serif',
+                  fontFamily: b.serif ? 'Fraunces, Georgia, serif' : 'Plus Jakarta Sans, system-ui, sans-serif',
                   color: 'var(--ink)',
                 }}
               >

@@ -51,9 +51,9 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['Munika', 'system-ui', 'sans-serif'],
+        sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
         display: ['Fraunces', 'Georgia', 'serif'],
-        body: ['Munika', 'system-ui', 'sans-serif'],
+        body: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
       },
       animation: {

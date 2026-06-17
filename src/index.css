@@ -2,49 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ── Fonte principal: Munika ───────────────────────────────────────── */
-@font-face {
-  font-family: 'Munika';
-  src: url('/fonts/Munika-Regular.otf') format('opentype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Munika';
-  src: url('/fonts/Munika-RegularItalic.otf') format('opentype');
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Munika';
-  src: url('/fonts/Munika-Medium.otf') format('opentype');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Munika';
-  src: url('/fonts/Munika-Semibold.otf') format('opentype');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Munika';
-  src: url('/fonts/Munika-Bold.otf') format('opentype');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Munika';
-  src: url('/fonts/Munika-Black.otf') format('opentype');
-  font-weight: 900;
-  font-style: normal;
-  font-display: swap;
-}
+/* ── Tipografia ────────────────────────────────────────────────────────
+   Display/títulos: Fraunces (com itálico de destaque)
+   Texto e UI:      Plus Jakarta Sans
+   Técnico:         JetBrains Mono
+   (todas carregadas via Google Fonts no index.html)                       */
 
 /* ── Design System Variables ───────────────────────────────────────── */
 :root {
@@ -99,7 +61,7 @@
   }
 
   body {
-    font-family: 'Munika', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background-color: var(--cream);
@@ -114,7 +76,7 @@
   }
 
   h4, h5, h6 {
-    font-family: 'Munika', system-ui, sans-serif;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
     letter-spacing: -0.01em;
   }
 
@@ -129,7 +91,7 @@
   .eyebrow {
     @apply inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.14em] uppercase;
     color: var(--coral-700);
-    font-family: 'Munika', system-ui, sans-serif;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
   }
   .eyebrow::before {
     content: "";

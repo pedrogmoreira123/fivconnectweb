@@ -5,7 +5,7 @@ export default function CTASection() {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <section className="py-24" style={{ background: 'var(--cream)' }}>
+    <section className="py-28 sm:py-32" style={{ background: 'var(--cream)' }}>
       <div className="max-w-[900px] mx-auto px-7 text-center" ref={ref}>
         <div
           className={`relative rounded-3xl overflow-hidden px-10 py-20 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
