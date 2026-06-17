@@ -19,80 +19,134 @@ const heroStats = [
 function PhoneMockup() {
   const [step, setStep] = useState(0);
 
+  // Roda uma única vez: revela os balões um a um e para no último.
   useEffect(() => {
-    const interval = setInterval(() => {
-      setStep(s => (s >= bubbles.length ? 0 : s + 1));
-    }, 1200);
-    return () => clearInterval(interval);
-  }, []);
+    if (step >= bubbles.length) return;
+    const t = setTimeout(() => setStep(s => s + 1), step === 0 ? 500 : 1100);
+    return () => clearTimeout(t);
+  }, [step]);
 
   return (
-    <div className="relative w-full max-w-sm mx-auto">
+    <div className="relative w-full max-w-[300px] mx-auto">
       {/* Glow */}
       <div
-        className="absolute inset-0 rounded-3xl blur-3xl opacity-25"
+        className="absolute inset-0 rounded-[3rem] blur-3xl opacity-25"
         style={{ background: 'radial-gradient(ellipse, #FF7A59 0%, #E8923C 60%, transparent 100%)' }}
       />
 
       {/* Phone frame */}
       <div
-        className="relative rounded-[2.5rem] shadow-2xl overflow-hidden border-4"
-        style={{ borderColor: '#1A1816', background: '#F5EFE4' }}
+        className="relative rounded-[2.8rem] shadow-2xl overflow-hidden border-[7px]"
+        style={{ borderColor: 'var(--graphite)', background: 'var(--cream-2)' }}
       >
-        {/* Header */}
+        {/* Notch */}
         <div
-          className="flex items-center gap-3 px-4 py-3"
-          style={{ background: 'linear-gradient(135deg, #FF7A59, #E8923C)' }}
+          className="absolute top-0 left-1/2 -translate-x-1/2 z-20 w-24 h-[18px] rounded-b-2xl"
+          style={{ background: 'var(--graphite)' }}
+        />
+
+        {/* Status bar */}
+        <div
+          className="flex items-center justify-between px-5 pt-2 pb-1 text-[10px] font-semibold"
+          style={{ background: 'var(--cream-2)', color: 'var(--ink)' }}
         >
-          <svg
-            className="text-white opacity-70"
-            width="16" height="16" viewBox="0 0 24 24" fill="none"
-            stroke="white" strokeWidth="2.4" strokeLinecap="round"
-          >
-            <path d="M15 18l-6-6 6-6" />
-          </svg>
-          <div
-            className="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold"
-            style={{ background: 'rgba(255,255,255,0.25)' }}
-          >
-            JS
-          </div>
-          <div>
-            <div className="text-white text-sm font-semibold leading-none">João Silva</div>
-            <div className="text-[10px] leading-none mt-0.5" style={{ color: 'rgba(255,255,255,0.75)' }}>online · via Fi.V</div>
+          <span style={{ fontFamily: '"JetBrains Mono", monospace' }}>14:03</span>
+          <div className="flex items-center gap-1.5" style={{ color: 'var(--ink)' }}>
+            <svg width="15" height="10" viewBox="0 0 18 12" fill="currentColor">
+              <rect x="0" y="8" width="3" height="4" rx="1" />
+              <rect x="5" y="5" width="3" height="7" rx="1" />
+              <rect x="10" y="2" width="3" height="10" rx="1" />
+              <rect x="15" y="0" width="3" height="12" rx="1" opacity="0.4" />
+            </svg>
+            <svg width="13" height="10" viewBox="0 0 16 12" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
+              <path d="M1 4.5a10 10 0 0114 0" />
+              <path d="M3.5 7a6.5 6.5 0 019 0" />
+              <circle cx="8" cy="10" r="0.6" fill="currentColor" stroke="none" />
+            </svg>
+            <svg width="20" height="11" viewBox="0 0 26 12" fill="none">
+              <rect x="0.5" y="0.5" width="22" height="11" rx="3" stroke="currentColor" opacity="0.6" />
+              <rect x="2" y="2" width="15" height="8" rx="1.5" fill="currentColor" />
+              <rect x="24" y="3.5" width="2" height="5" rx="1" fill="currentColor" opacity="0.6" />
+            </svg>
           </div>
         </div>
 
-        {/* Chat Body */}
+        {/* App header */}
         <div
-          className="flex flex-col gap-2 px-3 py-3 min-h-[300px]"
-          style={{ background: '#FAF7F2' }}
+          className="flex items-center gap-2.5 px-3 py-2.5 border-b"
+          style={{ background: 'var(--cream-2)', borderColor: 'var(--line)' }}
         >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--ink-3)" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+          <div
+            className="w-8 h-8 rounded-full flex items-center justify-center text-white text-[11px] font-bold flex-shrink-0"
+            style={{ background: 'linear-gradient(135deg,#FFD37A,#FF7A59)' }}
+          >
+            JS
+          </div>
+          <div className="flex-1 min-w-0">
+            <div className="text-[13px] font-semibold leading-tight" style={{ color: 'var(--ink)' }}>João Silva</div>
+            <div className="text-[10px] flex items-center gap-1 leading-tight mt-0.5" style={{ color: 'var(--ink-3)' }}>
+              <span className="w-1.5 h-1.5 rounded-full" style={{ background: 'var(--green)' }} />
+              online · Vendas
+            </div>
+          </div>
+          <span
+            className="text-[9px] font-bold px-2 py-1 rounded-full flex-shrink-0"
+            style={{ background: 'rgba(255,122,89,0.18)', color: 'var(--coral)', fontFamily: '"JetBrains Mono", monospace' }}
+          >
+            #2841
+          </span>
+          <div className="flex flex-col gap-[3px] px-1">
+            {[0, 1, 2].map(d => (
+              <span key={d} className="w-[3px] h-[3px] rounded-full" style={{ background: 'var(--ink-3)' }} />
+            ))}
+          </div>
+        </div>
+
+        {/* Chat area — altura fixa: as mensagens ancoram embaixo e o excesso é cortado no topo */}
+        <div
+          className="flex flex-col justify-end gap-2 px-3 py-3 h-[332px] overflow-hidden"
+          style={{
+            background: 'var(--surface)',
+            color: 'var(--ink)',
+            backgroundImage: 'radial-gradient(var(--muted) 1px, transparent 0)',
+            backgroundSize: '15px 15px',
+          }}
+        >
+          <div className="self-center text-[9px] px-2 py-0.5 rounded-full mb-1 flex-shrink-0" style={{ background: 'var(--muted)', color: 'var(--ink-3)' }}>
+            Hoje · 14:02
+          </div>
           {bubbles.slice(0, step).map((b, i) => (
             <div
               key={i}
-              className={`flex ${b.side === 'out' ? 'justify-end' : 'justify-start'}`}
+              className={`flex flex-shrink-0 ${b.side === 'out' ? 'justify-end' : 'justify-start'}`}
               style={{ animation: 'bubbleIn 0.35s ease-out both' }}
             >
               <div
-                className="max-w-[90%] px-3 py-2 text-[13px] leading-snug shadow-sm relative"
+                className="max-w-[82%] px-3 py-2 text-[12.5px] leading-snug shadow-sm relative"
                 style={{
-                  background: b.side === 'out' ? '#FF7A59' : '#fff',
-                  color: b.side === 'out' ? '#fff' : '#1A1816',
-                  borderRadius: '16px',
+                  background: b.side === 'out' ? 'var(--coral)' : 'var(--muted)',
+                  color: b.side === 'out' ? '#fff' : 'var(--ink)',
+                  border: b.side === 'out' ? 'none' : '1px solid var(--line)',
+                  borderRadius: '15px',
                   ...(b.side === 'out' ? { borderTopRightRadius: '4px' } : { borderTopLeftRadius: '4px' }),
                 }}
               >
                 {b.ai && (
                   <span
-                    className="inline-block text-[9px] font-bold mr-1 px-1 py-0.5 rounded"
-                    style={{ background: 'rgba(255,255,255,0.25)', color: '#fff', letterSpacing: '0.06em' }}
+                    className="flex items-center gap-1 text-[9px] font-bold mb-1"
+                    style={{ color: 'rgba(255,255,255,0.9)', letterSpacing: '0.06em' }}
                   >
-                    IA
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 2l1.6 4.8L18 8l-4.4 1.2L12 14l-1.6-4.8L6 8z" />
+                    </svg>
+                    IA · respondeu em 3s
                   </span>
                 )}
                 {b.text}
-                <span className="text-[9px] ml-2 float-right mt-1 flex items-center gap-0.5" style={{ opacity: b.side === 'out' ? 0.8 : 0.5 }}>
+                <span className="text-[9px] ml-2 float-right mt-1 flex items-center gap-0.5" style={{ opacity: b.side === 'out' ? 0.85 : 0.5 }}>
                   {b.time}
                   {b.side === 'out' && (
                     <svg width="14" height="8" viewBox="0 0 16 8" fill="none" className="inline ml-0.5">
@@ -105,12 +159,12 @@ function PhoneMockup() {
             </div>
           ))}
 
-          {/* Typing indicator */}
-          {step === bubbles.length && (
-            <div className="flex justify-end" style={{ animation: 'bubbleIn 0.35s ease-out both' }}>
+          {/* Indicador de digitação — só enquanto faltam balões (some no fim) */}
+          {step > 0 && step < bubbles.length && bubbles[step]?.side === 'out' && (
+            <div className="flex justify-end flex-shrink-0" style={{ animation: 'bubbleIn 0.35s ease-out both' }}>
               <div
                 className="px-3 py-2.5 shadow-sm flex gap-1.5 items-center"
-                style={{ background: '#FF7A59', borderRadius: '16px', borderTopRightRadius: '4px' }}
+                style={{ background: 'var(--coral)', borderRadius: '15px', borderTopRightRadius: '4px' }}
               >
                 {[0, 0.2, 0.4].map((d, i) => (
                   <span
@@ -126,20 +180,57 @@ function PhoneMockup() {
             </div>
           )}
         </div>
+
+        {/* Input bar */}
+        <div
+          className="flex items-center gap-2 px-3 py-2.5 border-t"
+          style={{ background: 'var(--cream-2)', borderColor: 'var(--line)' }}
+        >
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--ink-3)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+            <line x1="9" y1="9" x2="9.01" y2="9" strokeWidth="3" />
+            <line x1="15" y1="9" x2="15.01" y2="9" strokeWidth="3" />
+          </svg>
+          <div
+            className="flex-1 rounded-full px-3 py-2 text-[11px]"
+            style={{ background: 'var(--muted)', color: 'var(--ink-3)' }}
+          >
+            Digite sua mensagem…
+          </div>
+          <div
+            className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
+            style={{ background: 'var(--coral)' }}
+          >
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="22" y1="2" x2="11" y2="13" />
+              <polygon points="22 2 15 22 11 13 2 9 22 2" fill="white" stroke="none" />
+            </svg>
+          </div>
+        </div>
       </div>
 
-      {/* Notification float */}
+      {/* Notification float — "cai" do topo uma vez, e fica acima do notch (z-30) */}
       <div
-        className="absolute -top-3 -right-6 flex items-center gap-2 rounded-xl px-3 py-2 shadow-xl border"
-        style={{ background: 'var(--cream)', borderColor: 'var(--line)', minWidth: '170px' }}
+        className="absolute -top-8 right-0 z-30 flex items-center gap-2.5 rounded-xl px-3 py-2.5 shadow-xl border"
+        style={{
+          background: 'var(--cream)',
+          borderColor: 'var(--line)',
+          minWidth: '178px',
+          animation: 'notifDrop 0.6s cubic-bezier(0.2,0.8,0.2,1) 0.7s both',
+        }}
       >
         <div
-          className="w-2 h-2 rounded-full flex-shrink-0"
-          style={{ background: 'var(--green)', boxShadow: '0 0 0 3px rgba(47,158,110,0.25)' }}
-        />
+          className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0"
+          style={{ background: 'rgba(47,158,110,0.14)' }}
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+          </svg>
+        </div>
         <div>
-          <div className="text-[11px] font-semibold" style={{ color: 'var(--ink)' }}>Nova mensagem</div>
-          <div className="text-[10px]" style={{ color: 'var(--ink-3)' }}>Maria Eduarda · há 2s</div>
+          <div className="text-[11px] font-semibold leading-tight" style={{ color: 'var(--ink)' }}>Nova mensagem</div>
+          <div className="text-[10px] leading-tight mt-0.5" style={{ color: 'var(--ink-3)' }}>Maria Eduarda · há 2s</div>
         </div>
       </div>
 
@@ -159,25 +250,6 @@ function PhoneMockup() {
             <span className="font-bold ml-2" style={{ color: row.up ? 'var(--green)' : 'var(--ink)' }}>{row.n}</span>
           </div>
         ))}
-      </div>
-
-      {/* Agente tag */}
-      <div
-        className="absolute top-1/2 -right-4 flex items-center gap-2 rounded-xl px-2.5 py-2 shadow-lg border"
-        style={{ background: 'var(--green-soft)', borderColor: 'rgba(47,158,110,0.25)', transform: 'translateY(-50%)' }}
-      >
-        <div
-          className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0"
-          style={{ background: 'var(--green)' }}
-        >
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M20 6L9 17l-5-5" />
-          </svg>
-        </div>
-        <div>
-          <div className="text-[11px] font-semibold" style={{ color: 'var(--green)' }}>Agente respondeu</div>
-          <div className="text-[10px]" style={{ color: 'var(--ink-3)' }}>em 3s · automático</div>
-        </div>
       </div>
     </div>
   );
@@ -249,7 +321,7 @@ export default function Hero() {
                 <ArrowRight size={17} />
               </a>
               <a
-                href="#showcase"
+                href="#ver-plataforma"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-base transition-all border hover:opacity-80"
                 style={{ borderColor: 'var(--line-2)', color: 'var(--ink)' }}
               >
@@ -307,6 +379,13 @@ export default function Hero() {
         @keyframes typing {
           0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
           30% { opacity: 1; transform: translateY(-2px); }
+        }
+        @keyframes notifDrop {
+          0%   { opacity: 0; transform: translateY(-26px) scale(0.96); }
+          100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          [style*="notifDrop"] { animation: none !important; opacity: 1 !important; transform: none !important; }
         }
       `}</style>
     </section>

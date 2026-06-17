@@ -69,7 +69,7 @@ export default function Contact() {
     background: 'var(--surface)',
     color: 'var(--ink)',
     fontSize: '15px',
-    fontFamily: 'Munika, system-ui, sans-serif',
+    fontFamily: 'Plus Jakarta Sans, system-ui, sans-serif',
     outline: 'none',
     transition: 'border-color 0.2s',
     boxSizing: 'border-box',
@@ -102,7 +102,7 @@ export default function Contact() {
             <span
               className="ml-2.5 pl-2.5"
               style={{
-                fontFamily: 'Munika, system-ui, sans-serif',
+                fontFamily: 'Plus Jakarta Sans, system-ui, sans-serif',
                 fontSize: '10px',
                 fontWeight: 600,
                 letterSpacing: '0.14em',

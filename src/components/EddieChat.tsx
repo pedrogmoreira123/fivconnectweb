@@ -224,7 +224,7 @@ export default function EddieChat() {
                 background: 'var(--cream-2)',
                 border: '1.5px solid var(--line-2)',
                 color: 'var(--ink)',
-                fontFamily: 'Munika, system-ui, sans-serif',
+                fontFamily: 'Plus Jakarta Sans, system-ui, sans-serif',
               }}
               onFocus={e => (e.target.style.borderColor = 'var(--coral)')}
               onBlur={e => (e.target.style.borderColor = 'var(--line-2)')}

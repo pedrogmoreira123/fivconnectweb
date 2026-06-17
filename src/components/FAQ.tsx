@@ -70,7 +70,7 @@ export default function FAQ() {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <section id="faq" className="py-24" style={{ background: 'var(--cream-2)' }}>
+    <section id="faq" className="py-28 sm:py-32" style={{ background: 'var(--cream-2)' }}>
       <div className="max-w-[760px] mx-auto px-7" ref={ref}>
         {/* Header */}
         <div className={`text-center mb-14 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>

@@ -4,10 +4,7 @@ import LogoStrip from './components/LogoStrip';
 import BeforeAfter from './components/BeforeAfter';
 import HowItWorks from './components/HowItWorks';
 import Features from './components/Features';
-import AISpotlight from './components/AISpotlight';
-import Showcase from './components/Showcase';
 import Numbers from './components/Numbers';
-import Reports from './components/Reports';
 import UseCases from './components/UseCases';
 import Testimonial from './components/Testimonial';
 import TrustSection from './components/TrustSection';
@@ -34,10 +31,7 @@ function LandingPage() {
         <BeforeAfter />
         <HowItWorks />
         <Features />
-        <AISpotlight />
-        <Showcase />
         <Numbers />
-        <Reports />
         <UseCases />
         <Testimonial />
         <TrustSection />

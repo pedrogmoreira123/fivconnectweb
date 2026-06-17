@@ -12,7 +12,7 @@ export default function Numbers() {
 
   return (
     <section
-      className="py-20"
+      className="py-24 sm:py-28"
       style={{ background: 'var(--graphite)' }}
     >
       <div className="max-w-[1200px] mx-auto px-7" ref={ref}>

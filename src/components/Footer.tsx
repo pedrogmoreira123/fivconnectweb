@@ -4,7 +4,7 @@ import { trackContatoConversion } from '../gtag';
 const footerLinks = {
   Produto: [
     { label: 'Funcionalidades', href: '#funcionalidades' },
-    { label: 'Ver a plataforma', href: '#showcase' },
+    { label: 'Ver a plataforma', href: '#ver-plataforma' },
     { label: 'Planos e Preços', href: '#planos' },
     { label: 'FAQ', href: '#faq' },
   ],
@@ -54,7 +54,7 @@ export default function Footer() {
               Fi<span style={{ color: 'var(--coral)' }}>.</span>V{' '}
               <span
                 style={{
-                  fontFamily: 'Munika, system-ui, sans-serif',
+                  fontFamily: 'Plus Jakarta Sans, system-ui, sans-serif',
                   fontSize: '10px',
                   fontWeight: 600,
                   letterSpacing: '0.14em',

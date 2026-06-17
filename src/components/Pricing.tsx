@@ -58,7 +58,7 @@ export default function Pricing() {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <section id="planos" className="py-24" style={{ background: 'var(--cream)' }}>
+    <section id="planos" className="py-28 sm:py-32" style={{ background: 'var(--cream)' }}>
       <div className="max-w-[1200px] mx-auto px-7" ref={ref}>
         {/* Header */}
         <div className={`text-center mb-12 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>

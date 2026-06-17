@@ -4,7 +4,7 @@ export default function Testimonial() {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <section className="py-24" style={{ background: 'var(--cream)' }}>
+    <section className="py-28 sm:py-32" style={{ background: 'var(--cream)' }}>
       <div className="max-w-[1200px] mx-auto px-7" ref={ref}>
         <div
           className={`grid lg:grid-cols-2 gap-10 items-center p-10 sm:p-14 rounded-3xl border transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
