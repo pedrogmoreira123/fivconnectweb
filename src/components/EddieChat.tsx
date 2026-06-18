@@ -1,9 +1,143 @@
 import { useState, useRef, useEffect } from 'react';
+import type { ReactNode } from 'react';
 import { Send, X, Bot, User, ChevronDown } from 'lucide-react';
 
 interface Message {
   role: 'user' | 'assistant';
   content: string;
+}
+
+/* ----------------------------------------------------------------
+   Renderizador de markdown leve (sem dependências externas).
+   Suporta: **negrito**, *itálico* / _itálico_, `código`,
+   [texto](url), links crus, listas (- / * / 1.) e quebras de linha.
+------------------------------------------------------------------- */
+
+// Formatação inline dentro de uma linha de texto.
+function renderInline(text: string, keyPrefix: string): ReactNode[] {
+  const nodes: ReactNode[] = [];
+  // Ordem importa: negrito antes de itálico para não conflitar com **.
+  const pattern =
+    /(\*\*([^*]+)\*\*)|(__([^_]+)__)|(\*([^*]+)\*)|(_([^_]+)_)|(`([^`]+)`)|(\[([^\]]+)\]\(([^)]+)\))|((?:https?:\/\/)[^\s)]+)/g;
+
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+  let i = 0;
+
+  while ((match = pattern.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      nodes.push(text.slice(lastIndex, match.index));
+    }
+    const key = `${keyPrefix}-${i++}`;
+
+    if (match[2] !== undefined) {
+      nodes.push(<strong key={key} style={{ fontWeight: 700 }}>{match[2]}</strong>);
+    } else if (match[4] !== undefined) {
+      nodes.push(<strong key={key} style={{ fontWeight: 700 }}>{match[4]}</strong>);
+    } else if (match[6] !== undefined) {
+      nodes.push(<em key={key}>{match[6]}</em>);
+    } else if (match[8] !== undefined) {
+      nodes.push(<em key={key}>{match[8]}</em>);
+    } else if (match[10] !== undefined) {
+      nodes.push(
+        <code
+          key={key}
+          style={{
+            background: 'rgba(26,24,22,0.06)',
+            borderRadius: '4px',
+            padding: '1px 5px',
+            fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace',
+            fontSize: '0.85em',
+          }}
+        >
+          {match[10]}
+        </code>
+      );
+    } else if (match[12] !== undefined) {
+      nodes.push(
+        <a
+          key={key}
+          href={match[13]}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ color: 'var(--coral)', textDecoration: 'underline', wordBreak: 'break-word' }}
+        >
+          {match[12]}
+        </a>
+      );
+    } else if (match[14] !== undefined) {
+      nodes.push(
+        <a
+          key={key}
+          href={match[14]}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ color: 'var(--coral)', textDecoration: 'underline', wordBreak: 'break-word' }}
+        >
+          {match[14]}
+        </a>
+      );
+    }
+    lastIndex = pattern.lastIndex;
+  }
+
+  if (lastIndex < text.length) {
+    nodes.push(text.slice(lastIndex));
+  }
+  return nodes;
+}
+
+// Quebra o texto em blocos (parágrafos + listas) e aplica formatação inline.
+function renderMarkdown(content: string): ReactNode {
+  const lines = content.split('\n');
+  const blocks: ReactNode[] = [];
+  let list: { ordered: boolean; items: string[] } | null = null;
+  let key = 0;
+
+  const flushList = () => {
+    if (!list) return;
+    const items = list.items;
+    blocks.push(
+      list.ordered ? (
+        <ol key={`b-${key++}`} style={{ margin: '4px 0', paddingLeft: '1.25em', listStyle: 'decimal' }}>
+          {items.map((it, idx) => (
+            <li key={idx} style={{ margin: '2px 0' }}>{renderInline(it, `li-${key}-${idx}`)}</li>
+          ))}
+        </ol>
+      ) : (
+        <ul key={`b-${key++}`} style={{ margin: '4px 0', paddingLeft: '1.25em', listStyle: 'disc' }}>
+          {items.map((it, idx) => (
+            <li key={idx} style={{ margin: '2px 0' }}>{renderInline(it, `li-${key}-${idx}`)}</li>
+          ))}
+        </ul>
+      )
+    );
+    list = null;
+  };
+
+  for (const raw of lines) {
+    const line = raw.trimEnd();
+    const ulMatch = /^\s*[-*]\s+(.*)$/.exec(line);
+    const olMatch = /^\s*\d+\.\s+(.*)$/.exec(line);
+
+    if (ulMatch) {
+      if (!list || list.ordered) { flushList(); list = { ordered: false, items: [] }; }
+      list.items.push(ulMatch[1]);
+    } else if (olMatch) {
+      if (!list || !list.ordered) { flushList(); list = { ordered: true, items: [] }; }
+      list.items.push(olMatch[1]);
+    } else if (line.trim() === '') {
+      flushList();
+    } else {
+      flushList();
+      blocks.push(
+        <p key={`b-${key++}`} style={{ margin: '4px 0' }}>{renderInline(line, `p-${key}`)}</p>
+      );
+    }
+  }
+  flushList();
+
+  return <>{blocks}</>;
 }
 
 const INITIAL_MESSAGE: Message = {
@@ -58,7 +192,7 @@ export default function EddieChat() {
     } catch {
       setMessages(prev => [...prev, {
         role: 'assistant',
-        content: 'Estou com problemas técnicos agora. Entre em contato: contato@fivconnect.net ou WhatsApp +55 (11) 9 4327-4695',
+        content: 'Estou com problemas técnicos agora. Entre em contato: contato@fivconnect.net ou WhatsApp +55 (11) 9 4474-5067',
       }]);
     } finally {
       setLoading(false);
@@ -158,13 +292,13 @@ export default function EddieChat() {
                   </div>
                 )}
                 <div
-                  className="max-w-[80%] px-3.5 py-2.5 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap"
+                  className={`max-w-[80%] px-3.5 py-2.5 rounded-2xl text-sm leading-relaxed ${msg.role === 'user' ? 'whitespace-pre-wrap' : ''}`}
                   style={msg.role === 'user'
                     ? { background: 'var(--coral)', color: '#fff', borderBottomRightRadius: '4px' }
-                    : { background: 'var(--cream-2)', color: 'var(--ink)', border: '1px solid var(--line)', borderBottomLeftRadius: '4px' }
+                    : { background: '#FFFFFF', color: 'var(--ink)', border: '1px solid var(--line)', borderBottomLeftRadius: '4px' }
                   }
                 >
-                  {msg.content}
+                  {msg.role === 'user' ? msg.content : renderMarkdown(msg.content)}
                 </div>
                 {msg.role === 'user' && (
                   <div
