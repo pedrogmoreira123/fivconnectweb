@@ -13,6 +13,90 @@ interface Message {
    [texto](url), links crus, listas (- / * / 1.) e quebras de linha.
 ------------------------------------------------------------------- */
 
+// Renderiza um link comum (o link aparece normalmente dentro do texto).
+function renderLink(url: string, label: string | null, key: string): ReactNode {
+  const hasCustomLabel = label !== null && label.trim() !== '' && label !== url;
+  return (
+    <a
+      key={key}
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      style={{ color: 'var(--coral)', textDecoration: 'underline', wordBreak: 'break-word' }}
+    >
+      {hasCustomLabel ? label : url}
+    </a>
+  );
+}
+
+interface CtaButton {
+  label: string;
+  url: string;
+}
+
+/* Extrai botões de ação do texto. O Eddie insere tokens crus no formato:
+     {{botao|Texto do botão|https://link}}
+   Eles são removidos do corpo e renderizados como botões no fim da mensagem. */
+function extractButtons(content: string): { text: string; buttons: CtaButton[] } {
+  const buttons: CtaButton[] = [];
+  const re = /\{\{\s*botao\s*\|\s*([^|]+?)\s*\|\s*([^}]+?)\s*\}\}/gi;
+  const text = content
+    .replace(re, (_full, label: string, url: string) => {
+      buttons.push({ label: label.trim(), url: url.trim() });
+      return '';
+    })
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+  return { text, buttons };
+}
+
+// Botão de ação (CTA) renderizado no rodapé da mensagem, estilo WhatsApp.
+function CtaButtonLink({ label, url }: CtaButton) {
+  const isWhats = /wa\.me|whatsapp/i.test(url);
+  return (
+    <a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: '6px',
+        background: isWhats ? '#25D366' : 'var(--coral)',
+        color: '#fff',
+        fontWeight: 600,
+        borderRadius: '12px',
+        padding: '9px 14px',
+        textDecoration: 'none',
+        fontSize: '0.9em',
+        lineHeight: 1.2,
+        width: '100%',
+        boxSizing: 'border-box',
+      }}
+    >
+      {label} →
+    </a>
+  );
+}
+
+// Renderiza o conteúdo de uma mensagem do assistente: texto formatado + botões.
+function renderAssistantMessage(content: string): ReactNode {
+  const { text, buttons } = extractButtons(content);
+  return (
+    <>
+      {text && renderMarkdown(text)}
+      {buttons.length > 0 && (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginTop: text ? '8px' : 0 }}>
+          {buttons.map((b, i) => (
+            <CtaButtonLink key={i} label={b.label} url={b.url} />
+          ))}
+        </div>
+      )}
+    </>
+  );
+}
+
 // Formatação inline dentro de uma linha de texto.
 function renderInline(text: string, keyPrefix: string): ReactNode[] {
   const nodes: ReactNode[] = [];
@@ -54,29 +138,9 @@ function renderInline(text: string, keyPrefix: string): ReactNode[] {
         </code>
       );
     } else if (match[12] !== undefined) {
-      nodes.push(
-        <a
-          key={key}
-          href={match[13]}
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{ color: 'var(--coral)', textDecoration: 'underline', wordBreak: 'break-word' }}
-        >
-          {match[12]}
-        </a>
-      );
+      nodes.push(renderLink(match[13], match[12], key));
     } else if (match[14] !== undefined) {
-      nodes.push(
-        <a
-          key={key}
-          href={match[14]}
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{ color: 'var(--coral)', textDecoration: 'underline', wordBreak: 'break-word' }}
-        >
-          {match[14]}
-        </a>
-      );
+      nodes.push(renderLink(match[14], null, key));
     }
     lastIndex = pattern.lastIndex;
   }
@@ -298,7 +362,7 @@ export default function EddieChat() {
                     : { background: '#FFFFFF', color: 'var(--ink)', border: '1px solid var(--line)', borderBottomLeftRadius: '4px' }
                   }
                 >
-                  {msg.role === 'user' ? msg.content : renderMarkdown(msg.content)}
+                  {msg.role === 'user' ? msg.content : renderAssistantMessage(msg.content)}
                 </div>
                 {msg.role === 'user' && (
                   <div
