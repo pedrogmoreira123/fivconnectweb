@@ -13,6 +13,65 @@ interface Message {
    [texto](url), links crus, listas (- / * / 1.) e quebras de linha.
 ------------------------------------------------------------------- */
 
+// Rótulo amigável + estilo de "botão" para links conhecidos.
+// Mesmo que o Eddie mande só a URL crua, ela vira um CTA legível.
+function knownCta(url: string): string | null {
+  const u = url.toLowerCase();
+  if (u.includes('/cadastro') || u.includes('/signup') || u.includes('/registrar')) {
+    return 'Clique aqui para se cadastrar';
+  }
+  if (u.includes('wa.me') || u.includes('whatsapp')) return 'Falar no WhatsApp';
+  if (u.includes('app.fivconnect.net')) return 'Acessar a plataforma';
+  return null;
+}
+
+// Renderiza um link: CTA destacado quando conhecido, link comum caso contrário.
+function renderLink(url: string, label: string | null, key: string): ReactNode {
+  const cta = knownCta(url);
+  const hasCustomLabel = label !== null && label.trim() !== '' && label !== url;
+
+  // Links conhecidos (cadastro, WhatsApp, plataforma) viram botão de CTA,
+  // usando o texto enviado pelo Eddie quando houver, ou o rótulo padrão.
+  if (cta) {
+    return (
+      <a
+        key={key}
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: '4px',
+          background: 'var(--coral)',
+          color: '#fff',
+          fontWeight: 600,
+          borderRadius: '9999px',
+          padding: '6px 14px',
+          textDecoration: 'none',
+          margin: '3px 0',
+          fontSize: '0.9em',
+          lineHeight: 1.2,
+        }}
+      >
+        {hasCustomLabel ? label : cta} →
+      </a>
+    );
+  }
+
+  return (
+    <a
+      key={key}
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      style={{ color: 'var(--coral)', textDecoration: 'underline', wordBreak: 'break-word' }}
+    >
+      {hasCustomLabel ? label : url}
+    </a>
+  );
+}
+
 // Formatação inline dentro de uma linha de texto.
 function renderInline(text: string, keyPrefix: string): ReactNode[] {
   const nodes: ReactNode[] = [];
@@ -54,29 +113,9 @@ function renderInline(text: string, keyPrefix: string): ReactNode[] {
         </code>
       );
     } else if (match[12] !== undefined) {
-      nodes.push(
-        <a
-          key={key}
-          href={match[13]}
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{ color: 'var(--coral)', textDecoration: 'underline', wordBreak: 'break-word' }}
-        >
-          {match[12]}
-        </a>
-      );
+      nodes.push(renderLink(match[13], match[12], key));
     } else if (match[14] !== undefined) {
-      nodes.push(
-        <a
-          key={key}
-          href={match[14]}
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{ color: 'var(--coral)', textDecoration: 'underline', wordBreak: 'break-word' }}
-        >
-          {match[14]}
-        </a>
-      );
+      nodes.push(renderLink(match[14], null, key));
     }
     lastIndex = pattern.lastIndex;
   }
