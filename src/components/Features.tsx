@@ -4,17 +4,27 @@ import {
 } from 'lucide-react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
-/* ── Janela de produto (tema escuro quente, com barra de título) ───────── */
+/* ── Paleta dos gráficos (espelha o produto real) ───────────────────────── */
+const CHART = {
+  purple: '#7C5CFC',
+  red: '#EF4444',
+  blue: '#3B82F6',
+  green: 'var(--green)',
+  amber: 'var(--amber-c)',
+  gray: 'var(--ink-3)',
+};
+
+/* ── Janela de produto — tema CLARO, fiel à UI real (barra do navegador) ── */
 function MockupWindow({ section, children }: { section: string; children: ReactNode }) {
   return (
     <div
       className="rounded-2xl overflow-hidden border shadow-2xl"
-      style={{ borderColor: 'rgba(255,255,255,0.08)', background: 'var(--graphite)' }}
+      style={{ borderColor: 'var(--line-2)', background: 'var(--surface)' }}
     >
-      {/* Barra de título */}
+      {/* Barra do navegador */}
       <div
         className="flex items-center gap-3 px-4 py-2.5 border-b"
-        style={{ background: 'var(--graphite-2)', borderColor: 'rgba(255,255,255,0.07)' }}
+        style={{ background: 'var(--cream-2)', borderColor: 'var(--line)' }}
       >
         <div className="flex gap-1.5 flex-shrink-0">
           {['#FF5F56', '#FFBD2E', '#27C93F'].map(c => (
@@ -24,109 +34,167 @@ function MockupWindow({ section, children }: { section: string; children: ReactN
         <div
           className="flex-1 mx-auto max-w-[280px] text-center text-[11px] px-3 py-1 rounded-md truncate"
           style={{
-            background: 'rgba(255,255,255,0.06)',
-            color: 'rgba(245,239,228,0.5)',
+            background: 'var(--muted)',
+            color: 'var(--ink-3)',
             fontFamily: '"JetBrains Mono", monospace',
           }}
         >
           app.fivconnect.net · {section}
         </div>
-        {/* espaçador p/ equilibrar os 3 dots */}
         <div className="w-[52px] flex-shrink-0 hidden sm:block" />
       </div>
-      <div className="p-4 sm:p-5">{children}</div>
+      <div className="p-3.5 sm:p-4" style={{ background: 'var(--cream-2)' }}>{children}</div>
     </div>
   );
 }
 
-/* ── 1 · Conversas — inbox (rail + lista + chat com bolha "IA respondeu") ─ */
+/* ── Donut SVG (Distribuição por status) ────────────────────────────────── */
+function Donut({
+  segments, centerTop, centerSub, size = 92,
+}: {
+  segments: { value: number; color: string }[];
+  centerTop: string;
+  centerSub: string;
+  size?: number;
+}) {
+  const total = segments.reduce((s, x) => s + x.value, 0) || 1;
+  // Pré-calcula dash e offset acumulado (sem mutação durante o render).
+  const arcs = segments.reduce<{ dash: number; offset: number; color: string }[]>((acc, seg) => {
+    const dash = (seg.value / total) * 100;
+    const offset = acc.length ? acc[acc.length - 1].offset + acc[acc.length - 1].dash : 0;
+    acc.push({ dash, offset, color: seg.color });
+    return acc;
+  }, []);
+  return (
+    <div className="relative flex-shrink-0" style={{ width: size, height: size }}>
+      <svg viewBox="0 0 36 36" width={size} height={size} style={{ transform: 'rotate(-90deg)' }}>
+        <circle cx="18" cy="18" r="15.915" fill="none" stroke="var(--muted)" strokeWidth="3.6" />
+        {arcs.map((arc, i) => (
+          <circle
+            key={i}
+            cx="18" cy="18" r="15.915"
+            fill="none"
+            stroke={arc.color}
+            strokeWidth="3.6"
+            strokeLinecap="round"
+            strokeDasharray={`${arc.dash} ${100 - arc.dash}`}
+            strokeDashoffset={-arc.offset}
+          />
+        ))}
+      </svg>
+      <div className="absolute inset-0 flex flex-col items-center justify-center">
+        <span className="text-[17px] font-bold leading-none" style={{ fontFamily: 'Fraunces, Georgia, serif', color: 'var(--ink)' }}>{centerTop}</span>
+        <span className="text-[8px] mt-0.5" style={{ color: 'var(--ink-3)' }}>{centerSub}</span>
+      </div>
+    </div>
+  );
+}
+
+/* ── 1 · Conversas — caixa de entrada real (lista + chat com Agente I.A) ─── */
 const inboxConvs = [
-  { av: 'JS', name: 'João Silva', msg: 'Confirmo ✅ pode fechar', tag: 'IA respondeu', tagColor: '#E8923C', unread: 2, active: true, bg: 'linear-gradient(135deg,#FFD37A,#FF7A59)' },
-  { av: 'ME', name: 'Maria Eduarda', msg: 'Sobre o pacote mensal…', tag: 'nova', tagColor: '#2F9E6E', bg: 'linear-gradient(135deg,#B7D7A0,#2F9E6E)' },
-  { av: 'CL', name: 'Carlos Lima', msg: 'Aguardando o boleto', tag: 'Financeiro', tagColor: '#5B8DEF', bg: 'linear-gradient(135deg,#C9BBF2,#6C5CE7)' },
+  { av: 'AM', name: 'Alana Mendes', sub: 'Gráfica Sol', msg: 'Orçamento de cartões…', tag: 'Suporte Técnico', tagColor: CHART.red, unread: 2, active: true, bg: 'linear-gradient(135deg,#FFD37A,#FF7A59)' },
+  { av: 'SC', name: 'Sabor & Cia', sub: 'Padaria', msg: 'Confirmar pedido…', tag: 'Comercial', tagColor: CHART.green, bg: 'linear-gradient(135deg,#B7D7A0,#2F9E6E)' },
+  { av: 'CL', name: 'Carlos Lima', sub: 'Mercado Lima', msg: 'Aguardando o boleto', tag: 'Financeiro', tagColor: CHART.blue, bg: 'linear-gradient(135deg,#C9BBF2,#6C5CE7)' },
 ];
 const inboxBubbles = [
-  { side: 'in', text: 'Vocês ainda têm o kit Gráfica Sol?' },
-  { side: 'out', text: 'Temos sim 🙂 Quer o orçamento de 400g?', ai: true },
-  { side: 'in', text: 'Manda pra 500 unidades' },
+  { side: 'in', text: 'Olá Alana! Entendi sua solicitação sobre o orçamento de cartões.', ai: true },
+  { side: 'out', text: 'Oi! Pode ser 400g, gramatura mais grossa.' },
+  { side: 'in', text: 'Para 400g o prazo de entrega é de 3 dias úteis. Confirmo?', ai: true },
 ];
 
 function ConversasMockup() {
   return (
     <div className="flex gap-3" style={{ minHeight: '296px' }}>
-      {/* Rail */}
-      <div
-        className="hidden sm:flex w-10 flex-shrink-0 flex-col items-center gap-3 rounded-lg py-3"
-        style={{ background: 'rgba(255,255,255,0.03)' }}
-      >
-        <span style={{ fontFamily: 'Fraunces, Georgia, serif', fontWeight: 700, fontSize: '15px', color: '#F5EFE4' }}>
-          Fi<span style={{ color: 'var(--coral)' }}>.</span>
-        </span>
-        {['rgba(255,122,89,0.9)', 'rgba(245,239,228,0.35)', 'rgba(245,239,228,0.35)'].map((c, i) => (
-          <span key={i} className="w-5 h-5 rounded-md" style={{ background: i === 0 ? 'rgba(255,122,89,0.2)' : 'rgba(255,255,255,0.05)', border: `1.5px solid ${c}` }} />
-        ))}
-      </div>
-
       {/* Lista de conversas */}
-      <div className="w-[44%] sm:w-[42%] flex-shrink-0 flex flex-col gap-1.5">
-        <div className="flex gap-1 text-[10px] font-semibold mb-0.5">
-          <span className="px-2 py-1 rounded" style={{ background: 'rgba(255,122,89,0.2)', color: 'var(--coral)' }}>Aguardando 4</span>
-          <span className="px-2 py-1 rounded" style={{ color: 'rgba(245,239,228,0.4)' }}>Em at. 7</span>
+      <div
+        className="w-[42%] sm:w-[40%] flex-shrink-0 flex flex-col rounded-xl border overflow-hidden"
+        style={{ background: 'var(--surface)', borderColor: 'var(--line)' }}
+      >
+        {/* Abas */}
+        <div className="flex text-[9.5px] font-semibold border-b" style={{ borderColor: 'var(--line)' }}>
+          {[['Conversas', true], ['Espera', false], ['Contatos', false]].map(([t, active]) => (
+            <span
+              key={t as string}
+              className="flex-1 text-center py-2 uppercase tracking-wide"
+              style={active
+                ? { color: 'var(--coral)', borderBottom: '2px solid var(--coral)' }
+                : { color: 'var(--ink-3)' }}
+            >
+              {t as string}
+            </span>
+          ))}
         </div>
-        {inboxConvs.map(c => (
-          <div
-            key={c.av}
-            className="flex items-start gap-2 p-2 rounded-lg"
-            style={{
-              background: c.active ? 'rgba(255,122,89,0.12)' : 'transparent',
-              borderLeft: c.active ? '2px solid var(--coral)' : '2px solid transparent',
-            }}
-          >
-            <div className="w-7 h-7 rounded-full flex items-center justify-center text-white text-[10px] font-bold flex-shrink-0" style={{ background: c.bg }}>
-              {c.av}
-            </div>
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center justify-between gap-1">
-                <span className="text-[11px] font-semibold truncate" style={{ color: '#F5EFE4' }}>{c.name}</span>
-                {c.unread && (
-                  <span className="text-[8px] font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: 'var(--coral)', color: '#fff' }}>{c.unread}</span>
-                )}
-              </div>
-              <div className="text-[10px] truncate" style={{ color: 'rgba(245,239,228,0.5)' }}>{c.msg}</div>
-              <span className="inline-block mt-1 text-[8px] font-semibold px-1.5 py-0.5 rounded-full" style={{ background: c.tagColor + '28', color: c.tagColor }}>
-                {c.tag}
-              </span>
-            </div>
+        {/* Busca */}
+        <div className="px-2 pt-2">
+          <div className="flex items-center gap-1.5 rounded-lg px-2 py-1.5 text-[10px]" style={{ background: 'var(--muted)', color: 'var(--ink-3)' }}>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round"><circle cx="11" cy="11" r="7" /><path d="M21 21l-4-4" /></svg>
+            Pesquisar por nome ou telefone
           </div>
-        ))}
+        </div>
+        <div className="flex flex-col p-1.5 gap-0.5">
+          {inboxConvs.map(c => (
+            <div
+              key={c.av}
+              className="flex items-start gap-2 p-2 rounded-lg"
+              style={{
+                background: c.active ? 'rgba(255,122,89,0.10)' : 'transparent',
+                borderLeft: c.active ? '2px solid var(--coral)' : '2px solid transparent',
+              }}
+            >
+              <div className="w-7 h-7 rounded-full flex items-center justify-center text-white text-[10px] font-bold flex-shrink-0" style={{ background: c.bg }}>
+                {c.av}
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center justify-between gap-1">
+                  <span className="text-[11px] font-semibold truncate" style={{ color: 'var(--ink)' }}>{c.name}</span>
+                  {c.unread && (
+                    <span className="text-[8px] font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: 'var(--coral)', color: '#fff' }}>{c.unread}</span>
+                  )}
+                </div>
+                <div className="text-[9.5px] truncate" style={{ color: 'var(--ink-3)' }}>{c.sub} · {c.msg}</div>
+                <span className="inline-block mt-1 text-[8px] font-semibold px-1.5 py-0.5 rounded-full" style={{ background: c.tagColor + '22', color: c.tagColor }}>
+                  {c.tag}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Chat */}
-      <div className="flex-1 min-w-0 flex flex-col rounded-lg p-2.5" style={{ background: 'rgba(255,255,255,0.03)' }}>
-        <div className="flex items-center gap-2 pb-2 mb-2 border-b" style={{ borderColor: 'rgba(255,255,255,0.06)' }}>
-          <div className="w-6 h-6 rounded-full flex items-center justify-center text-white text-[9px] font-bold" style={{ background: 'linear-gradient(135deg,#FFD37A,#FF7A59)' }}>JS</div>
-          <div className="min-w-0">
-            <div className="text-[11px] font-semibold truncate" style={{ color: '#F5EFE4' }}>João Silva</div>
-            <div className="text-[9px] flex items-center gap-1" style={{ color: 'rgba(245,239,228,0.4)' }}>
-              <span className="w-1.5 h-1.5 rounded-full" style={{ background: 'var(--green)' }} /> Vendas
+      <div className="flex-1 min-w-0 flex flex-col rounded-xl border" style={{ background: 'var(--surface)', borderColor: 'var(--line)' }}>
+        <div className="flex items-center gap-2 px-2.5 py-2 border-b" style={{ borderColor: 'var(--line)' }}>
+          <div className="w-6 h-6 rounded-full flex items-center justify-center text-white text-[9px] font-bold flex-shrink-0" style={{ background: 'linear-gradient(135deg,#FFD37A,#FF7A59)' }}>GS</div>
+          <div className="min-w-0 flex-1">
+            <div className="text-[11px] font-semibold truncate" style={{ color: 'var(--ink)' }}>Gráfica Sol · Atendimento</div>
+            <div className="text-[9px] flex items-center gap-1" style={{ color: 'var(--ink-3)' }}>
+              <span className="w-1.5 h-1.5 rounded-full" style={{ background: 'var(--green)' }} /> +55 11 9xxxx-xxxx
             </div>
           </div>
+          <span className="text-[8.5px] font-semibold px-2 py-1 rounded-md flex-shrink-0" style={{ background: 'rgba(239,68,68,0.12)', color: CHART.red }}>
+            Finalizar
+          </span>
         </div>
-        <div className="flex flex-col gap-1.5">
+        <div
+          className="flex-1 flex flex-col justify-end gap-1.5 px-2.5 py-2.5"
+          style={{ backgroundImage: 'radial-gradient(var(--muted) 1px, transparent 0)', backgroundSize: '14px 14px' }}
+        >
           {inboxBubbles.map((b, i) => (
             <div key={i} className={`flex ${b.side === 'out' ? 'justify-end' : 'justify-start'}`}>
               <div
-                className="max-w-[88%] px-2.5 py-1.5 text-[10.5px] leading-snug"
+                className="max-w-[86%] px-2.5 py-1.5 text-[10.5px] leading-snug"
                 style={{
-                  background: b.side === 'out' ? 'var(--coral)' : 'rgba(255,255,255,0.08)',
-                  color: b.side === 'out' ? '#fff' : '#F5EFE4',
+                  background: b.ai ? 'var(--green-soft)' : 'var(--muted)',
+                  color: 'var(--ink)',
+                  border: b.ai ? '1px solid rgba(47,158,110,0.25)' : '1px solid var(--line)',
                   borderRadius: '12px',
                   ...(b.side === 'out' ? { borderTopRightRadius: '3px' } : { borderTopLeftRadius: '3px' }),
                 }}
               >
                 {b.ai && (
-                  <span className="block text-[8px] font-bold mb-0.5" style={{ color: 'rgba(255,255,255,0.85)', letterSpacing: '0.06em' }}>
-                    IA · respondeu em 3s
+                  <span className="flex items-center gap-1 text-[8px] font-bold mb-0.5" style={{ color: 'var(--green)', letterSpacing: '0.04em' }}>
+                    <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.6 4.8L18 8l-4.4 1.2L12 14l-1.6-4.8L6 8z" /></svg>
+                    AGENTE I.A
                   </span>
                 )}
                 {b.text}
@@ -139,163 +207,179 @@ function ConversasMockup() {
   );
 }
 
-/* ── 2 · Filas & Tickets — barras de volume por área + tickets ──────────── */
-const queues = [
-  { label: 'Vendas', count: 7, pct: 100, color: 'var(--coral)' },
-  { label: 'Suporte', count: 3, pct: 45, color: 'var(--green)' },
-  { label: 'Financeiro', count: 1, pct: 18, color: 'var(--amber-c)' },
+/* ── 2 · Filas — Visão Geral (cards ao vivo) + Demanda por filas ─────────── */
+const liveCards = [
+  { label: 'Em Espera', value: '2', color: CHART.amber, badge: 'Live' },
+  { label: 'Em Atendimento', value: '11', color: CHART.blue, badge: 'Live' },
+  { label: 'Finalizadas', value: '117', color: CHART.green },
 ];
-const tickets = [
-  { proto: '#2841', name: 'Renato Paes', queue: 'Vendas', prio: 'Alta', prioColor: 'var(--coral)', av: 'AP', avBg: 'linear-gradient(135deg,#FFB8B0,#E85D4E)' },
-  { proto: '#2840', name: 'Bruna Castro', queue: 'Suporte', prio: 'Média', prioColor: 'var(--amber-c)', av: 'LM', avBg: 'linear-gradient(135deg,#B7D7A0,#2F9E6E)' },
+const queues = [
+  { label: 'Agente I.A', count: 117, pct: 100, color: CHART.purple },
+  { label: 'Agente Técnico', count: 92, pct: 80, color: CHART.red },
+  { label: 'Comercial', count: 44, pct: 38, color: CHART.green },
+  { label: 'Financeiro', count: 28, pct: 24, color: CHART.blue },
+  { label: 'Sem Fila', count: 12, pct: 11, color: CHART.gray },
 ];
 
 function FilasMockup() {
   return (
-    <div className="flex flex-col gap-4" style={{ minHeight: '296px' }}>
-      <div className="flex items-center justify-between">
-        <span className="text-[12px] font-semibold" style={{ color: '#F5EFE4' }}>Tickets por fila</span>
-        <span className="text-[10px] px-2 py-0.5 rounded-full" style={{ background: 'rgba(255,122,89,0.18)', color: 'var(--coral)', fontFamily: '"JetBrains Mono", monospace' }}>11 abertos</span>
-      </div>
-
-      {/* Barras de volume */}
-      <div className="flex flex-col gap-2.5">
-        {queues.map(q => (
-          <div key={q.label} className="flex items-center gap-3">
-            <span className="w-20 flex-shrink-0 text-[11px] font-medium flex items-center gap-1.5" style={{ color: 'rgba(245,239,228,0.75)' }}>
-              <span className="w-2 h-2 rounded-full" style={{ background: q.color }} />
-              {q.label}
-            </span>
-            <div className="flex-1 h-2.5 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.06)' }}>
-              <div className="h-full rounded-full" style={{ width: `${q.pct}%`, background: q.color }} />
+    <div className="flex flex-col gap-3" style={{ minHeight: '296px' }}>
+      {/* Cards ao vivo */}
+      <div className="grid grid-cols-3 gap-2">
+        {liveCards.map(c => (
+          <div key={c.label} className="rounded-xl border px-2.5 py-2.5" style={{ background: 'var(--surface)', borderColor: 'var(--line)' }}>
+            <div className="flex items-center justify-between mb-1">
+              <span className="text-[8.5px]" style={{ color: 'var(--ink-3)' }}>{c.label}</span>
+              {c.badge && <span className="text-[7px] font-bold px-1 py-0.5 rounded" style={{ background: c.color + '22', color: c.color }}>{c.badge}</span>}
             </div>
-            <span className="w-5 text-right text-[11px] font-bold" style={{ color: q.color, fontFamily: '"JetBrains Mono", monospace' }}>{q.count}</span>
+            <div className="text-[20px] font-bold leading-none" style={{ fontFamily: 'Fraunces, Georgia, serif', color: c.color }}>{c.value}</div>
           </div>
         ))}
       </div>
 
-      {/* Tickets */}
-      <div className="flex flex-col gap-2 pt-1">
-        {tickets.map(t => (
-          <div
-            key={t.proto}
-            className="flex items-center gap-3 rounded-xl px-3 py-2.5"
-            style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.06)' }}
-          >
-            <div className="w-8 h-8 rounded-full flex items-center justify-center text-white text-[10px] font-bold flex-shrink-0" style={{ background: t.avBg }}>{t.av}</div>
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-2">
-                <span className="text-[12px] font-semibold truncate" style={{ color: '#F5EFE4' }}>{t.name}</span>
-                <span className="text-[9px]" style={{ color: 'rgba(245,239,228,0.4)', fontFamily: '"JetBrains Mono", monospace' }}>{t.proto}</span>
+      {/* Demanda por filas */}
+      <div className="rounded-xl border p-3 flex-1" style={{ background: 'var(--surface)', borderColor: 'var(--line)' }}>
+        <div className="flex items-baseline justify-between mb-3">
+          <span className="text-[11px] font-semibold" style={{ color: 'var(--ink)' }}>Demanda por filas</span>
+          <span className="text-[8.5px]" style={{ color: 'var(--ink-3)', fontFamily: '"JetBrains Mono", monospace' }}>últimos 7 dias</span>
+        </div>
+        <div className="flex flex-col gap-2">
+          {queues.map(q => (
+            <div key={q.label} className="flex items-center gap-2.5">
+              <span className="w-[72px] flex-shrink-0 text-[9.5px] font-medium flex items-center gap-1.5 truncate" style={{ color: 'var(--ink-2)' }}>
+                <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: q.color }} />
+                {q.label}
+              </span>
+              <div className="flex-1 h-2 rounded-full overflow-hidden" style={{ background: 'var(--muted)' }}>
+                <div className="h-full rounded-full" style={{ width: `${q.pct}%`, background: q.color }} />
               </div>
-              <span className="text-[10px]" style={{ color: 'rgba(245,239,228,0.5)' }}>Fila {t.queue}</span>
+              <span className="w-5 text-right text-[10px] font-bold" style={{ color: q.color, fontFamily: '"JetBrains Mono", monospace' }}>{q.count}</span>
             </div>
-            <span className="text-[9px] font-bold px-2 py-1 rounded-full flex-shrink-0" style={{ background: t.prioColor + '22', color: t.prioColor }}>{t.prio}</span>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );
 }
 
-/* ── 3 · Agente de I.A — resumo gerado + stats + puxar atendimento ──────── */
+/* ── 3 · Agente de I.A — atendimento + resumo gerado + puxar ────────────── */
 function AgenteMockup() {
   return (
     <div className="flex flex-col gap-3" style={{ minHeight: '296px' }}>
-      <div className="flex items-center justify-between pb-3" style={{ borderBottom: '1px solid rgba(245,239,228,0.08)' }}>
-        <span className="text-[11px]" style={{ color: 'rgba(245,239,228,0.5)', fontFamily: '"JetBrains Mono", monospace', letterSpacing: '0.04em' }}>PROT · 2026-04812</span>
-        <span className="flex items-center gap-1.5 text-[11px] font-semibold" style={{ color: 'var(--amber-c)' }}>
-          <span className="w-1.5 h-1.5 rounded-full" style={{ background: 'var(--amber-c)', boxShadow: '0 0 0 3px rgba(232,146,60,0.2)' }} />
+      <div className="flex items-center justify-between rounded-xl border px-3 py-2" style={{ background: 'var(--surface)', borderColor: 'var(--line)' }}>
+        <span className="text-[10px]" style={{ color: 'var(--ink-3)', fontFamily: '"JetBrains Mono", monospace', letterSpacing: '0.04em' }}>PROT · 2026-04812</span>
+        <span className="flex items-center gap-1.5 text-[10px] font-semibold" style={{ color: CHART.amber }}>
+          <span className="w-1.5 h-1.5 rounded-full" style={{ background: CHART.amber, boxShadow: '0 0 0 3px rgba(232,146,60,0.18)' }} />
           Transferido para humano
         </span>
       </div>
 
-      <div className="rounded-lg p-4 flex flex-col gap-2" style={{ background: 'rgba(232,146,60,0.08)', border: '1px solid rgba(232,146,60,0.2)' }}>
-        <span className="text-[10px] font-bold uppercase" style={{ color: 'var(--amber-c)', letterSpacing: '0.1em' }}>Resumo gerado pelo Agente I.A</span>
-        <p className="text-[12.5px] leading-relaxed" style={{ color: 'rgba(245,239,228,0.85)' }}>
-          <strong style={{ color: '#F5EFE4' }}>Ana Beatriz</strong> perguntou sobre entrega para{' '}
-          <strong style={{ color: '#F5EFE4' }}>Curitiba</strong>. Confirmei cobertura, frete de{' '}
-          <strong style={{ color: '#F5EFE4' }}>R$ 14,90</strong> e prazo de 2–3 dias úteis. Cliente{' '}
-          <strong style={{ color: '#F5EFE4' }}>aceitou prosseguir</strong> e quer finalizar o pedido.
+      {/* Mini chat: agente I.A */}
+      <div className="rounded-xl border p-2.5 flex flex-col gap-1.5" style={{ background: 'var(--surface)', borderColor: 'var(--line)' }}>
+        <div className="flex justify-start">
+          <div className="max-w-[88%] px-2.5 py-1.5 text-[10px] leading-snug" style={{ background: 'var(--green-soft)', border: '1px solid rgba(47,158,110,0.25)', borderRadius: '12px', borderTopLeftRadius: '3px', color: 'var(--ink)' }}>
+            <span className="flex items-center gap-1 text-[8px] font-bold mb-0.5" style={{ color: 'var(--green)' }}>
+              <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.6 4.8L18 8l-4.4 1.2L12 14l-1.6-4.8L6 8z" /></svg>
+              AGENTE I.A · 3s
+            </span>
+            Confirmo cobertura para Curitiba, frete de R$ 14,90 e prazo de 2–3 dias úteis 🙂
+          </div>
+        </div>
+        <div className="flex justify-end">
+          <div className="max-w-[80%] px-2.5 py-1.5 text-[10px] leading-snug" style={{ background: 'var(--muted)', border: '1px solid var(--line)', borderRadius: '12px', borderTopRightRadius: '3px', color: 'var(--ink)' }}>
+            Perfeito, quero finalizar o pedido!
+          </div>
+        </div>
+      </div>
+
+      {/* Resumo gerado pela I.A */}
+      <div className="rounded-xl p-3 flex flex-col gap-1.5" style={{ background: 'rgba(232,146,60,0.08)', border: '1px solid rgba(232,146,60,0.25)' }}>
+        <span className="text-[9px] font-bold uppercase" style={{ color: CHART.amber, letterSpacing: '0.08em' }}>Resumo gerado pelo Agente I.A</span>
+        <p className="text-[11px] leading-relaxed" style={{ color: 'var(--ink-2)' }}>
+          <strong style={{ color: 'var(--ink)' }}>Ana Beatriz</strong> quer entrega para <strong style={{ color: 'var(--ink)' }}>Curitiba</strong>. Frete e prazo confirmados, cliente <strong style={{ color: 'var(--ink)' }}>aceitou prosseguir</strong>.
         </p>
       </div>
 
-      <div className="grid grid-cols-3 gap-3 pt-2" style={{ borderTop: '1px solid rgba(245,239,228,0.08)' }}>
+      <div className="grid grid-cols-3 gap-2">
         {[
           { label: 'Duração', value: '2m 14s' },
           { label: 'Mensagens', value: '8' },
           { label: 'Próx. fila', value: 'Comercial' },
         ].map(m => (
-          <div key={m.label}>
-            <span className="text-[9px] uppercase block mb-1" style={{ color: 'rgba(245,239,228,0.4)', letterSpacing: '0.06em', fontFamily: '"JetBrains Mono", monospace' }}>{m.label}</span>
-            <span className="text-[15px] font-semibold" style={{ fontFamily: 'Fraunces, Georgia, serif', color: '#F5EFE4' }}>{m.value}</span>
+          <div key={m.label} className="rounded-lg border px-2 py-1.5" style={{ background: 'var(--surface)', borderColor: 'var(--line)' }}>
+            <span className="text-[8px] uppercase block" style={{ color: 'var(--ink-3)', letterSpacing: '0.05em' }}>{m.label}</span>
+            <span className="text-[12px] font-semibold" style={{ fontFamily: 'Fraunces, Georgia, serif', color: 'var(--ink)' }}>{m.value}</span>
           </div>
         ))}
       </div>
 
-      <div className="w-full py-2.5 rounded-xl text-[13px] font-semibold text-white text-center mt-1" style={{ background: 'var(--coral)' }}>
+      <div className="w-full py-2 rounded-xl text-[12px] font-semibold text-white text-center" style={{ background: 'var(--coral)' }}>
         Puxar atendimento →
       </div>
     </div>
   );
 }
 
-/* ── 4 · Métricas & Relatórios — KPIs + heatmap de picos ────────────────── */
+/* ── 4 · Métricas — Visão Geral (KPIs + tendência + distribuição) ───────── */
 const kpis = [
-  { l: 'Conversas hoje', v: '77' },
-  { l: 'Tempo médio', v: '1m43s' },
-  { l: 'Resolvidas IA', v: '68%' },
-  { l: 'CSAT', v: '4.8' },
+  { l: 'Total de Conversas', v: '219' },
+  { l: 'Taxa de Finalização', v: '53%' },
+  { l: 'Primeira Resposta', v: '25m58s' },
+  { l: 'Tempo de Resolução', v: '4h57m' },
 ];
-const heatmap = [
-  [0, 0, 1, 2, 3, 4, 4, 3, 2, 1],
-  [0, 1, 2, 3, 4, 4, 4, 3, 2, 1],
-  [0, 1, 2, 4, 4, 4, 4, 3, 2, 1],
-  [0, 1, 2, 3, 4, 4, 3, 3, 2, 1],
-  [0, 0, 1, 2, 3, 3, 3, 2, 1, 1],
-  [0, 0, 0, 1, 1, 2, 1, 1, 0, 0],
-  [0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
-];
-const heatDays = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'];
-const heatColors = ['rgba(255,255,255,0.06)', 'rgba(255,122,89,0.25)', 'rgba(255,122,89,0.45)', 'rgba(255,122,89,0.7)', 'rgba(255,122,89,0.95)'];
 
 function MetricasMockup() {
   return (
-    <div className="flex flex-col gap-4" style={{ minHeight: '296px' }}>
+    <div className="flex flex-col gap-3" style={{ minHeight: '296px' }}>
       {/* KPIs */}
       <div className="grid grid-cols-4 gap-2">
         {kpis.map(k => (
-          <div key={k.l} className="rounded-lg px-2 py-2.5 text-center" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.06)' }}>
-            <div className="text-[16px] font-bold leading-none mb-1" style={{ fontFamily: 'Fraunces, Georgia, serif', color: '#F5EFE4' }}>{k.v}</div>
-            <div className="text-[8.5px] leading-tight" style={{ color: 'rgba(245,239,228,0.45)' }}>{k.l}</div>
+          <div key={k.l} className="rounded-xl border px-2 py-2.5 text-center" style={{ background: 'var(--surface)', borderColor: 'var(--line)' }}>
+            <div className="text-[15px] font-bold leading-none mb-1" style={{ fontFamily: 'Fraunces, Georgia, serif', color: 'var(--ink)' }}>{k.v}</div>
+            <div className="text-[8px] leading-tight" style={{ color: 'var(--ink-3)' }}>{k.l}</div>
           </div>
         ))}
       </div>
 
-      {/* Heatmap */}
-      <div className="rounded-lg p-3 flex-1" style={{ background: 'rgba(255,255,255,0.03)' }}>
-        <div className="flex items-baseline justify-between mb-2.5">
-          <span className="text-[11px] font-semibold" style={{ color: '#F5EFE4' }}>Picos de atendimento</span>
-          <span className="text-[9px]" style={{ color: 'rgba(245,239,228,0.4)', fontFamily: '"JetBrains Mono", monospace' }}>últimos 30 dias</span>
-        </div>
-        <div style={{ display: 'grid', gridTemplateColumns: '26px repeat(10, 1fr)', gap: '3px' }}>
-          {heatmap.map((row, ri) => (
-            <div key={ri} style={{ display: 'contents' }}>
-              <span className="flex items-center justify-end pr-1 text-[8px] uppercase" style={{ color: 'rgba(245,239,228,0.4)', fontFamily: '"JetBrains Mono", monospace' }}>
-                {heatDays[ri]}
-              </span>
-              {row.map((val, ci) => (
-                <span key={ci} className="rounded-sm" style={{ aspectRatio: '1', background: heatColors[val] }} />
-              ))}
-            </div>
-          ))}
-        </div>
-        <div className="flex items-center gap-1.5 mt-2.5 text-[9px]" style={{ color: 'rgba(245,239,228,0.4)' }}>
-          <span>menos</span>
-          <div className="flex gap-0.5">
-            {heatColors.map((c, i) => <span key={i} className="w-2.5 h-2.5 rounded-sm" style={{ background: c }} />)}
+      {/* Tendência + distribuição */}
+      <div className="grid grid-cols-2 gap-2 flex-1">
+        {/* Tendência (linha) */}
+        <div className="rounded-xl border p-3 flex flex-col" style={{ background: 'var(--surface)', borderColor: 'var(--line)' }}>
+          <span className="text-[10px] font-semibold mb-2" style={{ color: 'var(--ink)' }}>Tendência de conversas</span>
+          <svg viewBox="0 0 100 48" preserveAspectRatio="none" className="flex-1 w-full">
+            <defs>
+              <linearGradient id="trend-fill" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stopColor={CHART.blue} stopOpacity="0.25" />
+                <stop offset="1" stopColor={CHART.blue} stopOpacity="0" />
+              </linearGradient>
+            </defs>
+            <polygon points="0,40 16,39 33,38 50,36 66,30 83,16 100,4 100,48 0,48" fill="url(#trend-fill)" />
+            <polyline points="0,40 16,39 33,38 50,36 66,30 83,16 100,4" fill="none" stroke={CHART.blue} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            <polyline points="0,44 16,43 33,43 50,42 66,40 83,33 100,26" fill="none" stroke={CHART.green} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" opacity="0.8" />
+          </svg>
+          <div className="flex gap-3 mt-1.5 text-[8px]" style={{ color: 'var(--ink-3)' }}>
+            <span className="flex items-center gap-1"><span className="w-2 h-[2px]" style={{ background: CHART.blue }} />Total</span>
+            <span className="flex items-center gap-1"><span className="w-2 h-[2px]" style={{ background: CHART.green }} />Finalizadas</span>
           </div>
-          <span>mais</span>
+        </div>
+
+        {/* Distribuição (donut) */}
+        <div className="rounded-xl border p-3 flex flex-col items-center justify-center gap-2" style={{ background: 'var(--surface)', borderColor: 'var(--line)' }}>
+          <span className="text-[10px] font-semibold self-start" style={{ color: 'var(--ink)' }}>Distribuição por status</span>
+          <Donut
+            segments={[
+              { value: 117, color: CHART.green },
+              { value: 11, color: CHART.blue },
+              { value: 2, color: CHART.amber },
+            ]}
+            centerTop="130"
+            centerSub="conversas"
+          />
+          <div className="flex flex-col gap-0.5 self-start text-[8px]" style={{ color: 'var(--ink-3)' }}>
+            <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full" style={{ background: CHART.green }} />Finalizadas 117</span>
+            <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full" style={{ background: CHART.blue }} />Em atend. 11</span>
+            <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full" style={{ background: CHART.amber }} />Aguardando 2</span>
+          </div>
         </div>
       </div>
     </div>
@@ -334,9 +418,9 @@ const rows: Row[] = [
     eyebrow: 'Filas & Tickets',
     titlePre: 'Cada cliente na fila certa, ',
     titleAccent: 'com responsável.',
-    desc: 'Distribua os atendimentos por área. Cada conversa vira um ticket com prioridade, dono e protocolo — ninguém fica esperando sem resposta.',
+    desc: 'Distribua os atendimentos por área. Cada conversa vira um ticket com prioridade, dono e protocolo — e a visão geral mostra a demanda de cada fila em tempo real.',
     bullets: [
-      { icon: Users, text: 'Filas por departamento: Vendas, Suporte, Financeiro.' },
+      { icon: Users, text: 'Filas por departamento: Comercial, Suporte, Financeiro.' },
       { icon: Repeat, text: 'Transferência de tickets em um clique, sem perder o histórico.' },
     ],
     link: 'Conhecer as filas',
@@ -358,10 +442,10 @@ const rows: Row[] = [
     eyebrow: 'Métricas & Relatórios',
     titlePre: 'Dados pra decidir, ',
     titleAccent: 'não pra colecionar.',
-    desc: 'Acompanhe volume, tempo de resposta e desempenho por atendente em tempo real. O heatmap mostra seus picos para você escalar a equipe com dado, não no achismo.',
+    desc: 'Acompanhe volume, tempo de resposta e desempenho por atendente em tempo real. A visão geral reúne KPIs, tendência e distribuição para você escalar a equipe com dado, não no achismo.',
     bullets: [
-      { icon: Activity, text: 'KPIs ao vivo: conversas, tempo médio e resolvidas pela IA.' },
-      { icon: Flame, text: 'Heatmap de picos e relatórios exportáveis em PDF e Excel.' },
+      { icon: Activity, text: 'KPIs ao vivo: conversas, tempo de resposta e taxa de finalização.' },
+      { icon: Flame, text: 'Tendências e relatórios exportáveis em PDF e Excel.' },
     ],
     link: 'Ver os relatórios',
     mockup: MetricasMockup,
@@ -370,9 +454,9 @@ const rows: Row[] = [
 
 const sectionName: Record<string, string> = {
   Conversas: 'Conversas',
-  'Filas & Tickets': 'Filas',
-  'Agente de I.A': 'Atendimentos',
-  'Métricas & Relatórios': 'Relatórios',
+  'Filas & Tickets': 'Visão Geral',
+  'Agente de I.A': 'Atendimento',
+  'Métricas & Relatórios': 'Dashboard',
 };
 
 function FeatureRow({ row, index }: { row: Row; index: number }) {
