@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { ArrowRight, Play } from 'lucide-react';
 import { trackContatoConversion } from '../gtag';
+import MetaBadge from './MetaBadge';
 
 const bubbles = [
   { side: 'in',  text: 'Olá! Vocês ainda têm o kit Gráfica Sol?', time: '14:02', delay: 0.1 },
@@ -331,7 +332,7 @@ export default function Hero() {
             </div>
 
             {/* Trust row */}
-            <div className="flex flex-wrap gap-4 mb-10">
+            <div className="flex flex-wrap gap-4 mb-6">
               {['Configure em 5 minutos', 'Sem instalar nada', 'Cancele quando quiser'].map(t => (
                 <span key={t} className="inline-flex items-center gap-1.5 text-sm font-medium" style={{ color: 'var(--ink-2)' }}>
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--coral)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -340,6 +341,11 @@ export default function Hero() {
                   {t}
                 </span>
               ))}
+            </div>
+
+            {/* Selo API oficial da Meta */}
+            <div className="mb-10">
+              <MetaBadge />
             </div>
 
             {/* Hero stats */}
