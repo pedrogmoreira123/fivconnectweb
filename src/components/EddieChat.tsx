@@ -43,7 +43,7 @@ function renderInline(text: string, keyPrefix: string): ReactNode[] {
         <code
           key={key}
           style={{
-            background: 'rgba(255,255,255,0.12)',
+            background: 'rgba(26,24,22,0.06)',
             borderRadius: '4px',
             padding: '1px 5px',
             fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace',
@@ -295,7 +295,7 @@ export default function EddieChat() {
                   className={`max-w-[80%] px-3.5 py-2.5 rounded-2xl text-sm leading-relaxed ${msg.role === 'user' ? 'whitespace-pre-wrap' : ''}`}
                   style={msg.role === 'user'
                     ? { background: 'var(--coral)', color: '#fff', borderBottomRightRadius: '4px' }
-                    : { background: 'var(--graphite)', color: '#F5EFE4', border: '1px solid var(--graphite-3)', borderBottomLeftRadius: '4px' }
+                    : { background: '#FFFFFF', color: 'var(--ink)', border: '1px solid var(--line)', borderBottomLeftRadius: '4px' }
                   }
                 >
                   {msg.role === 'user' ? msg.content : renderMarkdown(msg.content)}
