@@ -1,0 +1,74 @@
+name: Deploy Production
+
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Resolve deploy sha
+        id: resolve-sha
+        run: echo "deploy_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+      - name: Configure SSH
+        env:
+          VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+          VPS_HOST_KEY: ${{ secrets.VPS_HOST_KEY }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$VPS_SSH_KEY" | sed 's/\r$//' > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          printf '%s\n' "$VPS_HOST_KEY" >> ~/.ssh/known_hosts
+
+      - name: Verify VPS connection
+        env:
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_PORT: ${{ secrets.VPS_PORT }}
+          VPS_USERNAME: ${{ secrets.VPS_USERNAME }}
+          VPS_APP_DIR: ${{ secrets.VPS_APP_DIR }}
+        run: |
+          ssh -i ~/.ssh/id_ed25519 -p "${VPS_PORT:-22}" -o BatchMode=yes "${VPS_USERNAME}@${VPS_HOST}" \
+            "echo '[ssh] connected'; whoami; test -d '${VPS_APP_DIR}' && echo '[ssh] app dir ok' || (echo '[ssh] app dir missing'; exit 1)"
+
+      - name: Deploy on VPS
+        env:
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_PORT: ${{ secrets.VPS_PORT }}
+          VPS_USERNAME: ${{ secrets.VPS_USERNAME }}
+          VPS_APP_DIR: ${{ secrets.VPS_APP_DIR }}
+          DEPLOY_SHA: ${{ steps.resolve-sha.outputs.deploy_sha }}
+        run: |
+          ssh -T -i ~/.ssh/id_ed25519 -p "${VPS_PORT:-22}" "${VPS_USERNAME}@${VPS_HOST}" \
+            "export APP_DIR='${VPS_APP_DIR}'; bash -s -- '${DEPLOY_SHA}'" < scripts/deploy-vps.sh
+
+      - name: Deployment summary
+        if: always()
+        env:
+          DEPLOY_STATUS: ${{ job.status }}
+        run: |
+          {
+            if [[ "$DEPLOY_STATUS" == "success" ]]; then
+              echo "## Deploy de Producao (fivconnectweb) — OK"
+            else
+              echo "## Deploy de Producao (fivconnectweb) — FALHOU"
+            fi
+            echo ""
+            echo "| Campo | Valor |"
+            echo "|---|---|"
+            echo "| Status | $DEPLOY_STATUS |"
+            echo "| Commit | \`${{ steps.resolve-sha.outputs.deploy_sha }}\` |"
+            echo "| Acionado por | @${{ github.actor }} |"
+          } >> "$GITHUB_STEP_SUMMARY"
