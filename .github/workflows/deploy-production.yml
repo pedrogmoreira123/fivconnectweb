@@ -40,6 +40,10 @@ jobs:
           VPS_USERNAME: ${{ secrets.VPS_USERNAME }}
           VPS_APP_DIR: ${{ secrets.VPS_APP_DIR }}
         run: |
+          # Remove \r/espacos colados por engano nos secrets (host/user/porta nao tem espaco legitimo)
+          VPS_HOST="$(printf '%s' "$VPS_HOST" | tr -d '[:space:]')"
+          VPS_USERNAME="$(printf '%s' "$VPS_USERNAME" | tr -d '[:space:]')"
+          VPS_PORT="$(printf '%s' "$VPS_PORT" | tr -d '[:space:]')"
           ssh -i ~/.ssh/id_ed25519 -p "${VPS_PORT:-22}" -o BatchMode=yes "${VPS_USERNAME}@${VPS_HOST}" \
             "echo '[ssh] connected'; whoami; test -d '${VPS_APP_DIR}' && echo '[ssh] app dir ok' || (echo '[ssh] app dir missing'; exit 1)"
 
@@ -51,6 +55,9 @@ jobs:
           VPS_APP_DIR: ${{ secrets.VPS_APP_DIR }}
           DEPLOY_SHA: ${{ steps.resolve-sha.outputs.deploy_sha }}
         run: |
+          VPS_HOST="$(printf '%s' "$VPS_HOST" | tr -d '[:space:]')"
+          VPS_USERNAME="$(printf '%s' "$VPS_USERNAME" | tr -d '[:space:]')"
+          VPS_PORT="$(printf '%s' "$VPS_PORT" | tr -d '[:space:]')"
           ssh -T -i ~/.ssh/id_ed25519 -p "${VPS_PORT:-22}" "${VPS_USERNAME}@${VPS_HOST}" \
             "export APP_DIR='${VPS_APP_DIR}'; bash -s -- '${DEPLOY_SHA}'" < scripts/deploy-vps.sh
 
