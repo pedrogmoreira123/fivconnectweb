@@ -37,7 +37,7 @@ export default function BeforeAfter() {
         </div>
 
         {/* Cards grid */}
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Before card */}
           <div
             className={`rounded-2xl p-8 border transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}

@@ -5,24 +5,24 @@ const devices = ['iOS', 'Android', 'Windows', 'macOS', 'Web'];
 const personas = [
   {
     tag: 'E-commerce',
-    title: 'Loja com 2k atendimentos/mês.',
-    desc: 'Antes: 3 celulares, equipe se perdendo. Hoje: 1 número, 4 filas, I.A absorvendo 60% da dúvida pré-venda.',
-    metric: '−68%',
-    metricLabel: 'tempo médio de espera',
+    title: 'Pré-venda que não espera.',
+    desc: 'Dúvida de produto, frete e prazo chegando em volume? O chatbot faz a triagem, a I.A responde na hora e a equipe fecha as vendas nas filas certas.',
+    metric: '1 nº',
+    metricLabel: 'para toda a operação',
     metricColor: 'var(--coral)',
   },
   {
     tag: 'Escritório',
-    title: 'Contabilidade com 14 clientes ativos.',
-    desc: 'Cada cliente sabe pra quem falar. Filas por área, protocolos por demanda, histórico salvo. Equipe parou de "perder" cobrança.',
+    title: 'Demandas sob controle.',
+    desc: 'Cada cliente sabe com quem falar: filas por área, chamado com protocolo e prazo para cada demanda, histórico completo salvo. Nada se perde.',
     metric: '100%',
-    metricLabel: 'demandas com protocolo',
+    metricLabel: 'das demandas com protocolo',
     metricColor: 'var(--green)',
   },
   {
     tag: 'Serviços',
-    title: 'Prestador com plantão 24h.',
-    desc: 'Fora do horário comercial, I.A faz o primeiro filtro, agenda, ou aciona plantão. Time dorme, plataforma trabalha.',
+    title: 'Plantão sem madrugada.',
+    desc: 'Fora do horário comercial, a I.A faz o primeiro filtro, orienta ou aciona o plantão. O time dorme, a plataforma trabalha.',
     metric: '24/7',
     metricLabel: 'primeiro contato garantido',
     metricColor: 'var(--amber-c)',
@@ -65,7 +65,7 @@ export default function UseCases() {
         </div>
 
         {/* Persona cards */}
-        <div className="grid sm:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {personas.map((p, i) => (
             <div
               key={p.tag}
@@ -80,7 +80,7 @@ export default function UseCases() {
                 className="text-[11px] font-bold uppercase tracking-widest mb-4"
                 style={{ color: 'var(--coral)', letterSpacing: '0.1em' }}
               >
-                Caso {String(i + 1).padStart(2, '0')} · {p.tag}
+                Cenário {String(i + 1).padStart(2, '0')} · {p.tag}
               </span>
               <h3
                 className="text-xl mb-3"

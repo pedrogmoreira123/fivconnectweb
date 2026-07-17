@@ -3,15 +3,16 @@ import { trackContatoConversion } from '../gtag';
 
 const footerLinks = {
   Produto: [
-    { label: 'Funcionalidades', href: '#funcionalidades' },
-    { label: 'Ver a plataforma', href: '#ver-plataforma' },
-    { label: 'Planos e Preços', href: '#planos' },
-    { label: 'FAQ', href: '#faq' },
+    { label: 'Funcionalidades', href: '/funcionalidades' },
+    { label: 'Planos e Preços', href: '/planos' },
+    { label: 'Novidades', href: '/novidades' },
+    { label: 'Ver a plataforma', href: '/#ver-plataforma' },
   ],
-  Suporte: [
+  Empresa: [
+    { label: 'Sobre', href: '/sobre' },
     { label: 'Contato', href: '/contato' },
     { label: 'Falar com especialista', href: 'https://wa.me/5511944745067' },
-    { label: 'Perguntas frequentes', href: '#faq' },
+    { label: 'Perguntas frequentes', href: '/#faq' },
   ],
 };
 

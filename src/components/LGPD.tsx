@@ -1,6 +1,3 @@
-import { ArrowLeft } from 'lucide-react';
-import { navigate } from '../hooks/useRoute';
-import { useTheme } from '../hooks/useTheme';
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -20,7 +17,7 @@ function Table({ headers, rows }: { headers: string[]; rows: string[][] }) {
         <thead>
           <tr style={{ background: 'var(--cream-2)' }}>
             {headers.map(h => (
-              <th key={h} className="text-left px-4 py-3 font-semibold text-xs uppercase tracking-wide" style={{ color: 'var(--ink-3)', borderBottom: '1px solid var(--line-2)' }}>
+              <th key={h} className="text-left px-4 py-3 font-semibold text-xs uppercase tracking-wide" style={{ color: 'var(--ink)', borderBottom: '1px solid var(--line-2)' }}>
                 {h}
               </th>
             ))}
@@ -54,35 +51,10 @@ function Badge({ children }: { children: React.ReactNode }) {
 }
 
 export default function LGPD() {
-  const { theme } = useTheme();
-  const logoSrc = theme === 'dark' ? '/logo-branca.svg' : '/logo-preta.svg';
-
   return (
     <div className="min-h-screen transition-colors duration-300" style={{ background: 'var(--cream)', color: 'var(--ink)' }}>
-      {/* Header */}
-      <header
-        className="border-b sticky top-0 z-50 backdrop-blur-md"
-        style={{ backgroundColor: 'color-mix(in srgb, var(--cream) 90%, transparent)', borderColor: 'var(--line)' }}
-      >
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <a href="/" onClick={(e) => { e.preventDefault(); navigate('/'); }}>
-            <img src={logoSrc} alt="Fi.V Connect" className="h-10 w-auto" />
-          </a>
-          <button
-            onClick={() => navigate('/')}
-            className="inline-flex items-center gap-2 text-sm font-medium transition-colors"
-            style={{ color: 'var(--ink-2)' }}
-            onMouseEnter={e => (e.currentTarget.style.color = 'var(--coral)')}
-            onMouseLeave={e => (e.currentTarget.style.color = 'var(--ink-2)')}
-          >
-            <ArrowLeft size={16} />
-            Voltar ao site
-          </button>
-        </div>
-      </header>
-
       {/* Content */}
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16">
         {/* Title */}
         <div className="mb-12">
           <span
@@ -95,7 +67,7 @@ export default function LGPD() {
             Política de Adequação à LGPD
           </h1>
           <p className="text-sm" style={{ color: 'var(--ink-3)' }}>
-            Última atualização: <strong>Maio de 2026</strong> · Vigência: Lei Federal nº 13.709/2018
+            Última atualização: <strong>5 de maio de 2026</strong> · Vigência: Lei Federal nº 13.709/2018
           </p>
         </div>
 
@@ -105,8 +77,8 @@ export default function LGPD() {
         </p>
 
         <Section title="1. Identificação do Controlador e do Encarregado">
-          <p><strong>Controlador:</strong> Fi.V Connect LTDA · CNPJ: 66.624.400/0001-86</p>
-          <p><strong>Endereço:</strong> [endereço completo]</p>
+          <p><strong>Controlador:</strong> F I. V CONNECT LTDA · CNPJ: 66.624.400/0001-86</p>
+          <p><strong>Endereço:</strong> Rua Gaspar de Souza, 153 — São Bernardo do Campo/SP</p>
           <p><strong>Encarregado (DPO):</strong> [nome do encarregado] · <a href="mailto:dpo@fivconnect.net" style={{ color: 'var(--coral)' }}>dpo@fivconnect.net</a></p>
           <p className="text-xs mt-2" style={{ color: 'var(--ink-3)' }}>
             O encarregado é o canal oficial para solicitações de titulares e comunicação com a ANPD.
@@ -200,11 +172,11 @@ export default function LGPD() {
           <Table
             headers={['Categoria de dado', 'Período de retenção']}
             rows={[
-              ['Dados de conta (operadores)', 'Enquanto a conta estiver ativa + 5 anos após encerramento do contrato'],
+              ['Dados de conta (operadores)', 'Enquanto a conta estiver ativa + 90 dias após o cancelamento (reativação/exportação)'],
               ['Mensagens e histórico de conversas', 'Enquanto a empresa contratante mantiver o serviço ativo'],
               ['Arquivos de mídia', 'Enquanto a empresa contratante mantiver o serviço ativo'],
               ['Logs de auditoria e acesso', '5 anos (cumprimento de obrigação legal)'],
-              ['Dados de faturamento e notas fiscais', '10 anos (obrigação tributária — art. 195 do CTN)'],
+              ['Dados de faturamento e notas fiscais', '5 anos (obrigação tributária — Código Tributário Nacional)'],
               ['Tokens de sessão', '30 dias de inatividade ou ao logout'],
             ]}
           />
@@ -213,7 +185,7 @@ export default function LGPD() {
 
         <Section title="7. Segurança dos Dados">
           <p>Adotamos medidas técnicas e organizacionais adequadas para proteger os dados pessoais contra acesso não autorizado, perda, alteração ou divulgação indevida:</p>
-          <div className="grid sm:grid-cols-2 gap-3 mt-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3">
             {[
               { icon: '🔐', title: 'Autenticação segura', desc: 'Senhas armazenadas com hash bcrypt. Tokens JWT com expiração. Sessões invalidadas no logout.' },
               { icon: '🔒', title: 'Transporte criptografado', desc: 'Toda comunicação via HTTPS/TLS. WebSocket seguro (WSS). Certificados gerenciados.' },
@@ -336,7 +308,7 @@ export default function LGPD() {
         </div>
 
         <p className="text-xs text-center mt-8" style={{ color: 'var(--ink-3)' }}>
-          Fi.V Connect LTDA · CNPJ: 66.624.400/0001-86 · Documento válido em todo território nacional
+          F I. V CONNECT LTDA · CNPJ: 66.624.400/0001-86 · Documento válido em todo território nacional
         </p>
       </main>
     </div>

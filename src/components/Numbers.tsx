@@ -1,10 +1,10 @@
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 const numbers = [
-  { v: '3', u: 's', l: 'tempo médio de resposta da IA — cliente não espera.' },
-  { v: '68', u: '%', l: 'das conversas resolvidas sem intervenção humana.' },
+  { v: '1', u: ' número', l: 'de WhatsApp para a equipe inteira, com filas e responsáveis.' },
+  { v: '24', u: '/7', l: 'de atendimento com o agente de I.A — inclusive fora do expediente.' },
   { v: '5', u: 'min', l: 'do cadastro ao primeiro atendimento rodando.' },
-  { v: '0', u: '', l: 'mensagens perdidas — tudo vira ticket na fila.' },
+  { v: '0', u: '', l: 'mensagens perdidas — tudo vira atendimento com histórico.' },
 ];
 
 export default function Numbers() {

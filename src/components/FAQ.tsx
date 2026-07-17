@@ -16,7 +16,7 @@ const faqs = [
   },
   {
     question: 'Meus dados e os dos meus clientes ficam seguros?',
-    answer: 'Sim. Toda comunicação usa criptografia AES-256 (padrão bancário) e nossa infraestrutura é 100% brasileira, dentro da LGPD. Você tem controle total sobre quem da sua equipe vê o quê.',
+    answer: 'Sim. Os dados são protegidos com criptografia AES-256 (padrão bancário), há registro de auditoria das ações e a plataforma segue a LGPD. Você tem controle total sobre quem da sua equipe vê o quê.',
   },
   {
     question: 'E se eu não gostar? Posso cancelar?',

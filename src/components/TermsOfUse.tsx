@@ -1,12 +1,10 @@
-import { ArrowLeft } from 'lucide-react';
 import { navigate } from '../hooks/useRoute';
-import { useTheme } from '../hooks/useTheme';
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="mb-10">
-      <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-3">{title}</h2>
-      <div className="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3 text-sm">
+      <h2 className="text-xl font-bold text-ink mb-3">{title}</h2>
+      <div className="text-ink-2 leading-relaxed space-y-3 text-sm">
         {children}
       </div>
     </div>
@@ -14,44 +12,25 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 }
 
 export default function TermsOfUse() {
-  const { theme } = useTheme();
-  const logoSrc = theme === 'dark' ? '/logo-branca.svg' : '/logo-preta.svg';
-
   return (
-    <div className="min-h-screen bg-cream-50 dark:bg-[hsl(25,8%,13%)] transition-colors duration-300">
-      {/* Header */}
-      <header className="border-b border-gray-200 dark:border-white/10 bg-cream-50/90 dark:bg-[hsl(25,8%,13%)]/90 backdrop-blur-md sticky top-0 z-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <a href="/" onClick={(e) => { e.preventDefault(); navigate('/'); }}>
-            <img src={logoSrc} alt="Fi.V Connect" className="h-10 w-auto" />
-          </a>
-          <button
-            onClick={() => navigate('/')}
-            className="inline-flex items-center gap-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 transition-colors"
-          >
-            <ArrowLeft size={16} />
-            Voltar ao site
-          </button>
-        </div>
-      </header>
-
+    <div className="min-h-screen bg-cream transition-colors duration-300">
       {/* Content */}
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16">
         {/* Title */}
         <div className="mb-12">
-          <span className="inline-block px-3 py-1 rounded-full bg-orange-100 dark:bg-orange-900/40 text-orange-700 dark:text-orange-300 text-xs font-semibold tracking-wider mb-4">
+          <span className="inline-block px-3 py-1 rounded-full bg-coral-soft text-coral text-xs font-semibold tracking-wider mb-4">
             LEGAL
           </span>
-          <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-3">
+          <h1 className="text-3xl sm:text-4xl font-bold text-ink mb-3">
             Termos de Uso
           </h1>
-          <p className="text-sm text-gray-500 dark:text-gray-400">
-            Última atualização: <strong>a preencher</strong>
+          <p className="text-sm text-ink-2">
+            Última atualização: <strong>5 de maio de 2026</strong>
           </p>
         </div>
 
         {/* Intro */}
-        <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-10 text-sm">
+        <p className="text-ink-2 leading-relaxed mb-10 text-sm">
           Estes Termos de Uso ("Termos") regulam o acesso e uso da plataforma Fi.V Connect,
           operada pela Fi.V Connect LTDA ("Fi.V Connect", "nós"). Ao criar uma conta ou utilizar
           nossos serviços, você ("Usuário") concorda integralmente com estes Termos. Caso não
@@ -122,7 +101,12 @@ export default function TermsOfUse() {
             <li>Mantém o acesso ativo até o fim do período contratado.</li>
           </ul>
           <p>
-            Política de reembolso: [a preencher conforme decisão interna].
+            O CONTRATANTE poderá solicitar o reembolso integral do valor pago no prazo de 30 (trinta)
+            dias corridos contados da primeira contratação do plano. O pedido deve ser enviado
+            para <a href="mailto:suporte@fivconnect.net" className="text-coral hover:underline">suporte@fivconnect.net</a>.
+            Após esse prazo, ou nas renovações subsequentes, não haverá reembolso de valores já pagos
+            referentes ao período em curso; o cancelamento produz efeitos ao fim do ciclo de cobrança
+            vigente, encerrando as renovações seguintes.
           </p>
         </Section>
 
@@ -178,7 +162,7 @@ export default function TermsOfUse() {
         <Section title="10. Legislação Aplicável e Foro">
           <p>
             Estes Termos são regidos pelas leis da República Federativa do Brasil. Fica eleito
-            o foro da comarca de [a preencher — cidade/estado] para dirimir quaisquer
+            o Foro da Comarca de São Bernardo do Campo/SP para dirimir quaisquer
             controvérsias decorrentes destes Termos, com renúncia expressa a qualquer outro,
             por mais privilegiado que seja.
           </p>
@@ -189,12 +173,12 @@ export default function TermsOfUse() {
             Dúvidas, reclamações ou solicitações relacionadas a estes Termos:
           </p>
           <p>
-            <strong className="text-gray-800 dark:text-gray-100">E-mail:</strong>{' '}
-            <a href="mailto:contato@fivconnect.net" className="text-orange-500 hover:underline">
+            <strong className="text-ink">E-mail:</strong>{' '}
+            <a href="mailto:contato@fivconnect.net" className="text-coral hover:underline">
               contato@fivconnect.net
             </a><br />
-            <strong className="text-gray-800 dark:text-gray-100">WhatsApp:</strong>{' '}
-            <a href="https://wa.me/5511944745067" className="text-orange-500 hover:underline">
+            <strong className="text-ink">WhatsApp:</strong>{' '}
+            <a href="https://wa.me/5511944745067" className="text-coral hover:underline">
               +55 11 94474-5067
             </a>
           </p>
@@ -202,14 +186,14 @@ export default function TermsOfUse() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-gray-200 dark:border-white/10 py-8">
+      <footer className="border-t border-line py-8">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-gray-500 dark:text-gray-400">
+          <p className="text-xs text-ink-2">
             © 2026 Fi.V Connect — Fi.V Connect LTDA. Todos os direitos reservados.
           </p>
           <button
             onClick={() => navigate('/')}
-            className="text-xs text-orange-500 hover:underline font-medium"
+            className="text-xs text-coral hover:underline font-medium"
           >
             Voltar ao site
           </button>
