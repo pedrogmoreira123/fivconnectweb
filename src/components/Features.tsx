@@ -1,8 +1,10 @@
 import type { ReactNode, ReactElement, ComponentType, CSSProperties } from 'react';
 import {
   Inbox, History, Users, Repeat, Clock, FileText, Activity, Flame, ArrowRight,
+  GitBranch, Webhook, Mail, Timer,
 } from 'lucide-react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
+import Link from './ui/Link';
 
 /* ── Paleta dos gráficos (espelha o produto real) ───────────────────────── */
 const CHART = {
@@ -386,6 +388,134 @@ function MetricasMockup() {
   );
 }
 
+/* ── 5 · Chatbot — Flow Builder (canvas com nós conectados) ─────────────── */
+function FlowNode({ x, y, w, color, label, sub }: { x: number; y: number; w: number; color: string; label: string; sub?: string }) {
+  return (
+    <div
+      className="absolute rounded-lg border px-2 py-1.5 shadow-sm"
+      style={{ left: `${x}%`, top: y, width: w, background: 'var(--surface)', borderColor: 'var(--line-2)' }}
+    >
+      <div className="flex items-center gap-1.5">
+        <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: color }} />
+        <span className="text-[9px] font-bold truncate" style={{ color: 'var(--ink)' }}>{label}</span>
+      </div>
+      {sub && <div className="text-[8px] mt-0.5 leading-tight truncate" style={{ color: 'var(--ink-3)' }}>{sub}</div>}
+    </div>
+  );
+}
+
+function FlowMockup() {
+  return (
+    <div className="flex flex-col gap-3" style={{ minHeight: '296px' }}>
+      {/* Barra do editor */}
+      <div className="flex items-center justify-between rounded-xl border px-3 py-2" style={{ background: 'var(--surface)', borderColor: 'var(--line)' }}>
+        <span className="text-[10px] font-semibold flex items-center gap-1.5" style={{ color: 'var(--ink)' }}>
+          <GitBranch size={11} style={{ color: 'var(--coral)' }} />
+          Fluxo · Triagem de atendimento
+        </span>
+        <span className="text-[8.5px] font-bold px-2 py-0.5 rounded-full" style={{ background: 'var(--green-soft)', color: 'var(--green)' }}>ATIVO</span>
+      </div>
+
+      {/* Canvas */}
+      <div
+        className="relative flex-1 rounded-xl border overflow-hidden"
+        style={{
+          background: 'var(--surface)',
+          borderColor: 'var(--line)',
+          backgroundImage: 'radial-gradient(var(--muted) 1px, transparent 0)',
+          backgroundSize: '14px 14px',
+          minHeight: 230,
+        }}
+      >
+        {/* Conexões */}
+        <svg className="absolute inset-0 w-full h-full">
+          <line x1="22%" y1="40" x2="30%" y2="66" stroke="var(--line-2)" strokeWidth="1.5" />
+          <line x1="62%" y1="66" x2="66%" y2="32" stroke="var(--line-2)" strokeWidth="1.5" />
+          <line x1="62%" y1="74" x2="66%" y2="110" stroke="var(--line-2)" strokeWidth="1.5" />
+          <line x1="62%" y1="80" x2="66%" y2="188" stroke="var(--line-2)" strokeWidth="1.5" />
+        </svg>
+        <FlowNode x={4} y={22} w={108} color={CHART.green} label="Início" sub="Nova conversa" />
+        <FlowNode x={30} y={50} w={128} color={CHART.blue} label="Menu de opções" sub="1 Comercial · 2 Suporte · 3 Boleto" />
+        <FlowNode x={66} y={14} w={112} color={CHART.purple} label="Fila Comercial" sub="Transferir conversa" />
+        <FlowNode x={66} y={94} w={112} color={CHART.amber} label="Agente de I.A" sub="Suporte 24/7" />
+        <FlowNode x={66} y={174} w={112} color={CHART.red} label="Webhook" sub="Buscar 2ª via no ERP" />
+      </div>
+
+      {/* Paleta de nós */}
+      <div className="flex gap-1.5 flex-wrap">
+        {['Mensagem', 'Pergunta', 'Condição', 'Transferir', 'I.A', 'Webhook'].map(n => (
+          <span key={n} className="text-[8.5px] font-semibold px-2 py-1 rounded-md border" style={{ color: 'var(--ink-2)', borderColor: 'var(--line-2)', background: 'var(--surface)' }}>
+            + {n}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ── 6 · Chamados — protocolo, prioridade e timeline por e-mail ─────────── */
+function ChamadosMockup() {
+  return (
+    <div className="flex flex-col gap-3" style={{ minHeight: '296px' }}>
+      {/* Cabeçalho do chamado */}
+      <div className="rounded-xl border p-3" style={{ background: 'var(--surface)', borderColor: 'var(--line)' }}>
+        <div className="flex items-center justify-between gap-2 mb-1.5">
+          <span className="text-[10px]" style={{ color: 'var(--ink-3)', fontFamily: '"JetBrains Mono", monospace', letterSpacing: '0.04em' }}>
+            CHAMADO · #2026-0187
+          </span>
+          <span className="text-[8.5px] font-bold px-2 py-0.5 rounded-full" style={{ background: 'rgba(239,68,68,0.12)', color: CHART.red }}>
+            PRIORIDADE ALTA
+          </span>
+        </div>
+        <div className="text-[12px] font-semibold mb-1" style={{ color: 'var(--ink)' }}>
+          Erro na emissão de relatório mensal
+        </div>
+        <div className="flex items-center gap-3 text-[8.5px]" style={{ color: 'var(--ink-3)' }}>
+          <span className="flex items-center gap-1"><Users size={9} /> Resp.: Marina</span>
+          <span className="flex items-center gap-1"><Timer size={9} /> Prazo: hoje, 18h</span>
+          <span className="flex items-center gap-1" style={{ color: CHART.amber }}>
+            <span className="w-1.5 h-1.5 rounded-full" style={{ background: CHART.amber }} /> Em andamento
+          </span>
+        </div>
+      </div>
+
+      {/* Timeline */}
+      <div className="rounded-xl border p-3 flex-1 flex flex-col gap-0" style={{ background: 'var(--surface)', borderColor: 'var(--line)' }}>
+        <span className="text-[9px] font-bold uppercase mb-2.5" style={{ color: 'var(--ink-3)', letterSpacing: '0.08em' }}>Linha do tempo</span>
+        {[
+          { color: CHART.blue, title: 'Chamado aberto a partir da conversa', meta: '09:12 · WhatsApp', last: false },
+          { color: CHART.amber, title: 'Nota interna: verificar exportação XLSX', meta: '09:40 · Marina', last: false },
+          { color: CHART.green, title: 'Resposta enviada ao cliente', meta: '10:05 · por e-mail', mail: true, last: false },
+          { color: CHART.purple, title: 'Cliente respondeu por e-mail', meta: '11:32 · entrou direto na timeline', mail: true, last: true },
+        ].map(ev => (
+          <div key={ev.title} className="flex gap-2.5">
+            <div className="flex flex-col items-center">
+              <span className="w-2 h-2 rounded-full flex-shrink-0 mt-1" style={{ background: ev.color }} />
+              {!ev.last && <span className="w-px flex-1 my-0.5" style={{ background: 'var(--line-2)' }} />}
+            </div>
+            <div className={ev.last ? 'pb-0' : 'pb-3'}>
+              <div className="text-[10.5px] font-medium flex items-center gap-1.5" style={{ color: 'var(--ink)' }}>
+                {ev.title}
+                {ev.mail && <Mail size={10} style={{ color: 'var(--ink-3)' }} />}
+              </div>
+              <div className="text-[8.5px]" style={{ color: 'var(--ink-3)' }}>{ev.meta}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="grid grid-cols-2 gap-2">
+        <div className="py-2 rounded-xl text-[11px] font-semibold text-center border" style={{ color: 'var(--ink)', borderColor: 'var(--line-2)', background: 'var(--surface)' }}>
+          Nota interna
+        </div>
+        <div className="py-2 rounded-xl text-[11px] font-semibold text-white text-center" style={{ background: 'var(--coral)' }}>
+          Responder por e-mail
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ── Conteúdo das 4 linhas ──────────────────────────────────────────────── */
 type Bullet = { icon: ComponentType<{ size?: number; style?: CSSProperties }>; text: string };
 type Row = {
@@ -397,6 +527,7 @@ type Row = {
   desc: string;
   bullets: [Bullet, Bullet];
   link: string;
+  href: string;
   mockup: () => ReactElement;
 };
 
@@ -411,7 +542,8 @@ const rows: Row[] = [
       { icon: Inbox, text: 'Caixa de entrada compartilhada: vários atendentes, um número só.' },
       { icon: History, text: 'Histórico e contexto do cliente sempre à mão, sem trocar de aba.' },
     ],
-    link: 'Ver a caixa de entrada',
+    link: 'Ver conversas em detalhe',
+    href: '/funcionalidades#conversas',
     mockup: ConversasMockup,
   },
   {
@@ -423,8 +555,22 @@ const rows: Row[] = [
       { icon: Users, text: 'Filas por departamento: Comercial, Suporte, Financeiro.' },
       { icon: Repeat, text: 'Transferência de tickets em um clique, sem perder o histórico.' },
     ],
-    link: 'Conhecer as filas',
+    link: 'Ver filas em detalhe',
+    href: '/funcionalidades#filas',
     mockup: FilasMockup,
+  },
+  {
+    eyebrow: 'Chatbot · Flow Builder',
+    titlePre: 'Fluxos de atendimento ',
+    titleAccent: 'sem escrever código.',
+    desc: 'Desenhe o roteiro do atendimento em um editor visual: menus, condições, transferências e integrações. O robô resolve o repetitivo — e sabe a hora de chamar um humano.',
+    bullets: [
+      { icon: GitBranch, text: 'Editor visual de fluxos: arraste nós, conecte caminhos, publique.' },
+      { icon: Webhook, text: 'Webhooks e nós de I.A dentro do fluxo — triagem inteligente de verdade.' },
+    ],
+    link: 'Ver o chatbot em detalhe',
+    href: '/funcionalidades#chatbot',
+    mockup: FlowMockup,
   },
   {
     eyebrow: 'Agente de I.A',
@@ -435,8 +581,22 @@ const rows: Row[] = [
       { icon: Clock, text: 'Responde fora do horário e escala pro humano quando precisa.' },
       { icon: FileText, text: 'Resumo automático do atendimento — o time assume sem reler tudo.' },
     ],
-    link: 'Ver o agente em ação',
+    link: 'Ver a I.A em detalhe',
+    href: '/funcionalidades#ia',
     mockup: AgenteMockup,
+  },
+  {
+    eyebrow: 'Chamados',
+    titlePre: 'Demandas com ',
+    titleAccent: 'protocolo, prazo e dono.',
+    desc: 'Quando a conversa vira uma demanda, ela vira um chamado: protocolo, prioridade, responsável e prazo. O cliente acompanha por e-mail — e a resposta dele entra direto na linha do tempo.',
+    bullets: [
+      { icon: Mail, text: 'E-mail bidirecional: respostas do cliente entram na timeline do chamado.' },
+      { icon: Timer, text: 'Prioridade, responsável e prazo — nada se perde no meio do caminho.' },
+    ],
+    link: 'Ver chamados em detalhe',
+    href: '/funcionalidades#chamados',
+    mockup: ChamadosMockup,
   },
   {
     eyebrow: 'Métricas & Relatórios',
@@ -447,7 +607,8 @@ const rows: Row[] = [
       { icon: Activity, text: 'KPIs ao vivo: conversas, tempo de resposta e taxa de finalização.' },
       { icon: Flame, text: 'Tendências e relatórios exportáveis em PDF e Excel.' },
     ],
-    link: 'Ver os relatórios',
+    link: 'Ver relatórios em detalhe',
+    href: '/funcionalidades#relatorios',
     mockup: MetricasMockup,
   },
 ];
@@ -455,7 +616,9 @@ const rows: Row[] = [
 const sectionName: Record<string, string> = {
   Conversas: 'Conversas',
   'Filas & Tickets': 'Visão Geral',
+  'Chatbot · Flow Builder': 'Chatbot',
   'Agente de I.A': 'Atendimento',
+  Chamados: 'Chamados',
   'Métricas & Relatórios': 'Dashboard',
 };
 
@@ -468,7 +631,7 @@ function FeatureRow({ row, index }: { row: Row; index: number }) {
     <div
       ref={ref}
       id={row.id}
-      className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center scroll-mt-28"
+      className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center scroll-mt-28"
     >
       {/* Texto */}
       <div
@@ -504,14 +667,14 @@ function FeatureRow({ row, index }: { row: Row; index: number }) {
           })}
         </ul>
 
-        <a
-          href="https://app.fivconnect.net/cadastro"
+        <Link
+          href={row.href}
           className="group inline-flex items-center gap-1.5 text-[15px] font-semibold transition-colors"
           style={{ color: 'var(--coral)' }}
         >
           <span className="border-b border-transparent group-hover:border-current transition-colors">{row.link}</span>
           <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
-        </a>
+        </Link>
       </div>
 
       {/* Mockup */}
@@ -537,7 +700,7 @@ export default function Features() {
           ref={ref}
           className={`text-center max-w-2xl mx-auto mb-20 sm:mb-24 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-7'}`}
         >
-          <span className="eyebrow mb-5 block">Funcionalidades</span>
+          <span className="eyebrow mb-5 block">Módulos</span>
           <h2
             className="text-4xl sm:text-5xl mb-5"
             style={{ fontFamily: 'Fraunces, Georgia, serif', fontWeight: 600, color: 'var(--ink)' }}
@@ -546,7 +709,9 @@ export default function Features() {
             <span style={{ color: 'var(--amber-c)', fontStyle: 'italic', fontWeight: 500 }}>nada que você não precisa.</span>
           </h2>
           <p className="text-lg" style={{ color: 'var(--ink-2)' }}>
-            Quatro frentes, uma plataforma. Conversas, filas, IA e métricas — pensadas para PMEs crescerem sem perder a qualidade no atendimento.
+            Seis módulos, uma plataforma. Conversas, filas, chatbot, I.A, chamados e métricas — pensados
+            para PMEs crescerem sem perder a qualidade no atendimento. Cada um detalhado na página de{' '}
+            <Link href="/funcionalidades" className="font-semibold hover:underline" style={{ color: 'var(--coral)' }}>funcionalidades</Link>.
           </p>
         </div>
 

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { ArrowRight, Play } from 'lucide-react';
 import { trackContatoConversion } from '../gtag';
 import MetaBadge from './MetaBadge';
+import Link from './ui/Link';
 
 const bubbles = [
   { side: 'in',  text: 'Olá! Vocês ainda têm o kit Gráfica Sol?', time: '14:02', delay: 0.1 },
@@ -282,7 +283,7 @@ export default function Hero() {
       </div>
 
       <div className="relative max-w-[1200px] mx-auto px-7 pb-20 lg:pb-28 pt-6 w-full">
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
 
           {/* Left: Copy */}
           <div className={`transition-all duration-700 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
@@ -331,6 +332,32 @@ export default function Hero() {
               </a>
             </div>
 
+            {/* Módulos da plataforma */}
+            <div className="flex flex-wrap items-center gap-1.5 mb-6">
+              <span className="text-[11px] font-semibold uppercase mr-1" style={{ color: 'var(--ink-3)', letterSpacing: '0.1em' }}>
+                Na plataforma
+              </span>
+              {[
+                { label: 'Conversas', href: '/funcionalidades#conversas' },
+                { label: 'Filas', href: '/funcionalidades#filas' },
+                { label: 'Chatbot', href: '/funcionalidades#chatbot' },
+                { label: 'Agente de I.A', href: '/funcionalidades#ia' },
+                { label: 'Chamados', href: '/funcionalidades#chamados' },
+                { label: 'Relatórios', href: '/funcionalidades#relatorios' },
+              ].map(m => (
+                <Link
+                  key={m.label}
+                  href={m.href}
+                  className="px-2.5 py-1 rounded-full text-[12px] font-semibold border transition-colors"
+                  style={{ color: 'var(--ink-2)', borderColor: 'var(--line-2)' }}
+                  onMouseEnter={e => { e.currentTarget.style.background = 'var(--coral-soft)'; e.currentTarget.style.color = 'var(--coral-700)'; e.currentTarget.style.borderColor = 'transparent'; }}
+                  onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--ink-2)'; e.currentTarget.style.borderColor = 'var(--line-2)'; }}
+                >
+                  {m.label}
+                </Link>
+              ))}
+            </div>
+
             {/* Trust row */}
             <div className="flex flex-wrap gap-4 mb-6">
               {['Configure em 5 minutos', 'Sem instalar nada', 'Cancele quando quiser'].map(t => (
@@ -350,7 +377,7 @@ export default function Hero() {
 
             {/* Hero stats */}
             <div
-              className="flex gap-8 pt-7 border-t"
+              className="flex flex-wrap gap-x-8 gap-y-4 pt-7 border-t"
               style={{ borderColor: 'var(--line)' }}
             >
               {heroStats.map(s => (

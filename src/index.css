@@ -20,7 +20,7 @@
   --graphite-3: #3D3630;
   --ink: #1A1816;
   --ink-2: #4A433C;
-  --ink-3: #7A7169;
+  --ink-3: #6E665E; /* ≥AA (5.28:1) sobre cream */
   --cream: #FAF7F2;
   --cream-2: #F3EDE3;
   --cream-3: #EADFCE;
@@ -78,12 +78,6 @@
   h4, h5, h6 {
     font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
     letter-spacing: -0.01em;
-  }
-
-  @media (hover: hover) and (pointer: fine) {
-    body, a, button, [role="button"] {
-      cursor: none;
-    }
   }
 }
 
@@ -154,6 +148,14 @@
 }
 
 @layer utilities {
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
   .text-gradient {
     @apply bg-clip-text text-transparent;
     background-image: linear-gradient(135deg, #FF7A59, #E8923C);

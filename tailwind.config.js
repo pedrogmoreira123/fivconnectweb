@@ -7,47 +7,55 @@ export default {
   ],
   theme: {
     extend: {
+      // Paleta mapeada para as CSS variables de src/index.css — classes
+      // acompanham o dark mode automaticamente (as variáveis invertem em .dark).
       colors: {
-        // Design system from Fi.V Connect design
         coral: {
-          DEFAULT: '#FF7A59',
-          600: '#F26444',
-          700: '#D9502F',
+          DEFAULT: 'var(--coral)',
+          600: 'var(--coral-600)',
+          700: 'var(--coral-700)',
+          soft: 'var(--coral-soft)',
         },
         amber: {
-          soft: '#F4B880',
+          DEFAULT: 'var(--amber-c)',
+          soft: 'var(--amber-soft)',
         },
         ink: {
-          DEFAULT: '#1A1816',
-          2: '#4A433C',
-          3: '#7A7169',
+          DEFAULT: 'var(--ink)',
+          2: 'var(--ink-2)',
+          3: 'var(--ink-3)',
         },
         cream: {
-          DEFAULT: '#FAF7F2',
-          2: '#F3EDE3',
-          3: '#EADFCE',
-          // legacy
-          50: '#FAF7F2',
-          100: '#F3EDE3',
-          200: '#EADFCE',
+          DEFAULT: 'var(--cream)',
+          2: 'var(--cream-2)',
+          3: 'var(--cream-3)',
         },
         graphite: {
-          DEFAULT: '#1A1816',
-          2: '#2A2520',
-          3: '#3D3630',
+          DEFAULT: 'var(--graphite)',
+          2: 'var(--graphite-2)',
+          3: 'var(--graphite-3)',
         },
-        // Keep orange for backwards compat
-        primary: {
-          DEFAULT: '#FF7A59',
-          dark: '#F26444',
-          foreground: '#ffffff',
+        line: {
+          DEFAULT: 'var(--line)',
+          2: 'var(--line-2)',
         },
+        green: {
+          DEFAULT: 'var(--green)',
+          soft: 'var(--green-soft)',
+        },
+        purple: 'var(--purple)',
         surface: {
+          DEFAULT: 'var(--surface)',
           dark: '#14110F',
           'dark-alt': '#1E1A16',
           'dark-card': '#2A241F',
           'dark-elevated': '#332D26',
           'dark-deep': '#0D0B09',
+        },
+        primary: {
+          DEFAULT: 'var(--coral)',
+          dark: 'var(--coral-600)',
+          foreground: '#ffffff',
         },
       },
       fontFamily: {
@@ -55,6 +63,9 @@ export default {
         display: ['Fraunces', 'Georgia', 'serif'],
         body: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+      },
+      maxWidth: {
+        container: '1200px',
       },
       animation: {
         'fade-in-up': 'fadeInUp 0.6s ease-out forwards',

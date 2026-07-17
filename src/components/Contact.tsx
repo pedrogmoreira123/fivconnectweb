@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { ArrowLeft, Send, CheckCircle, AlertCircle } from 'lucide-react';
-import { navigate } from '../hooks/useRoute';
+import { Send, CheckCircle, AlertCircle } from 'lucide-react';
 import { trackContatoConversion } from '../gtag';
 
 interface FormState {
@@ -77,49 +76,9 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen" style={{ background: 'var(--cream)', color: 'var(--ink)' }}>
-      {/* Header */}
-      <header
-        className="sticky top-0 z-50 backdrop-blur-md border-b"
-        style={{ backgroundColor: 'color-mix(in srgb, var(--cream) 88%, transparent)', borderColor: 'var(--line)' }}
-      >
-        <div className="max-w-[1200px] mx-auto px-7 py-4 flex items-center gap-4">
-          <button
-            onClick={() => navigate('/')}
-            className="flex items-center gap-2 text-sm font-medium transition-colors"
-            style={{ color: 'var(--ink-2)' }}
-            onMouseEnter={e => (e.currentTarget.style.color = 'var(--ink)')}
-            onMouseLeave={e => (e.currentTarget.style.color = 'var(--ink-2)')}
-          >
-            <ArrowLeft size={16} />
-            Voltar
-          </button>
-          <span style={{ color: 'var(--line-2)' }}>|</span>
-          <a
-            href="/"
-            style={{ fontFamily: 'Fraunces, Georgia, serif', fontWeight: 700, fontSize: '20px', letterSpacing: '-0.02em', color: 'var(--ink)' }}
-          >
-            Fi<span style={{ color: 'var(--coral)' }}>.</span>V
-            <span
-              className="ml-2.5 pl-2.5"
-              style={{
-                fontFamily: 'Plus Jakarta Sans, system-ui, sans-serif',
-                fontSize: '10px',
-                fontWeight: 600,
-                letterSpacing: '0.14em',
-                textTransform: 'uppercase',
-                color: 'var(--ink-3)',
-                borderLeft: '1px solid var(--line-2)',
-              }}
-            >
-              Connect
-            </span>
-          </a>
-        </div>
-      </header>
-
       {/* Main */}
-      <main className="max-w-[1100px] mx-auto px-7 py-16 lg:py-24">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+      <main className="max-w-[1100px] mx-auto px-7 pt-32 pb-16 lg:pt-36 lg:pb-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
           {/* Left — copy */}
           <div>

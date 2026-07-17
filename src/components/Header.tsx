@@ -1,19 +1,21 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, Sun, Moon } from 'lucide-react';
 import { useTheme } from '../hooks/useTheme';
+import { useRoute } from '../hooks/useRoute';
+import Link from './ui/Link';
 
 const navLinks = [
-  { label: 'Como funciona', href: '#como-funciona' },
-  { label: 'Funcionalidades', href: '#funcionalidades' },
-  { label: 'Ver a plataforma', href: '#ver-plataforma' },
-  { label: 'Planos', href: '#planos' },
-  { label: 'FAQ', href: '#faq' },
+  { label: 'Funcionalidades', href: '/funcionalidades' },
+  { label: 'Planos', href: '/planos' },
+  { label: 'Novidades', href: '/novidades' },
+  { label: 'Sobre', href: '/sobre' },
+  { label: 'Contato', href: '/contato' },
 ];
 
 function Logo() {
   return (
-    <a
-      href="#"
+    <Link
+      href="/"
       className="flex items-center gap-0"
       style={{ fontFamily: 'Fraunces, Georgia, serif', fontWeight: 700, fontSize: '22px', letterSpacing: '-0.02em' }}
     >
@@ -34,12 +36,13 @@ function Logo() {
       >
         Connect
       </span>
-    </a>
+    </Link>
   );
 }
 
 export default function Header() {
   const { theme, toggle } = useTheme();
+  const path = useRoute();
   const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -52,33 +55,37 @@ export default function Header() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
+        isScrolled || menuOpen
           ? 'backdrop-blur-md border-b shadow-sm'
           : 'bg-transparent'
       }`}
-      style={isScrolled ? {
+      style={isScrolled || menuOpen ? {
         backgroundColor: 'color-mix(in srgb, var(--cream) 88%, transparent)',
         borderColor: 'var(--line)',
       } : {}}
     >
-      <div className="max-w-[1200px] mx-auto px-7">
+      <div className="max-w-container mx-auto px-7">
         <div className="flex items-center gap-10 py-4">
           <Logo />
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-7">
-            {navLinks.map(link => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-sm font-medium transition-colors"
-                style={{ color: 'var(--ink-2)' }}
-                onMouseEnter={e => (e.currentTarget.style.color = 'var(--ink)')}
-                onMouseLeave={e => (e.currentTarget.style.color = 'var(--ink-2)')}
-              >
-                {link.label}
-              </a>
-            ))}
+            {navLinks.map(link => {
+              const active = path === link.href;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  aria-current={active ? 'page' : undefined}
+                  className="text-sm font-medium transition-colors"
+                  style={{ color: active ? 'var(--coral-700)' : 'var(--ink-2)' }}
+                  onMouseEnter={e => { if (!active) e.currentTarget.style.color = 'var(--ink)'; }}
+                  onMouseLeave={e => { if (!active) e.currentTarget.style.color = 'var(--ink-2)'; }}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </nav>
 
           {/* Actions */}
@@ -118,7 +125,7 @@ export default function Header() {
             <button onClick={toggle} aria-label="Alternar tema" className="p-2 rounded-lg" style={{ color: 'var(--ink-3)' }}>
               {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
             </button>
-            <button onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu" className="p-2 rounded-lg" style={{ color: 'var(--ink-3)' }}>
+            <button onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu" aria-expanded={menuOpen} className="p-2 rounded-lg" style={{ color: 'var(--ink-3)' }}>
               {menuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>
@@ -132,15 +139,15 @@ export default function Header() {
           style={{ backgroundColor: 'var(--cream)', borderColor: 'var(--line)' }}
         >
           {navLinks.map(link => (
-            <a
+            <Link
               key={link.href}
               href={link.href}
               onClick={() => setMenuOpen(false)}
               className="block py-2 px-3 rounded-lg text-sm font-medium"
-              style={{ color: 'var(--ink-2)' }}
+              style={{ color: path === link.href ? 'var(--coral-700)' : 'var(--ink-2)' }}
             >
               {link.label}
-            </a>
+            </Link>
           ))}
           <div className="pt-2 flex flex-col gap-2">
             <a

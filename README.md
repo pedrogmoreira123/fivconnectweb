@@ -1,73 +1,42 @@
-# React + TypeScript + Vite
+# fivconnectweb
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Site institucional e de vendas do **Fi.V Connect** (plataforma de atendimento via WhatsApp para PMEs) — https://fivconnect.net
 
-Currently, two official plugins are available:
+## Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **React 19** + TypeScript + **Vite 8**
+- **Tailwind CSS 3.4** (dark mode por classe) + tokens em CSS variables (`src/index.css`)
+- Roteamento próprio via History API (`src/hooks/useRoute.ts`) — o Nginx faz fallback SPA (`try_files → index.html`)
+- Analytics: Google Tag Manager + Google Ads (`src/gtag.ts`)
 
-## React Compiler
+## Identidade visual
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Cores: coral `#FF7A59`, âmbar `#E8923C`, ink `#1A1816`, cream `#FAF7F2` (tokens completos em `src/index.css` e `tailwind.config.js`)
+- Tipografia (Google Fonts, carregadas no `index.html`): **Fraunces** (títulos, itálico de destaque), **Plus Jakarta Sans** (corpo), **JetBrains Mono** (técnico)
 
-## Expanding the ESLint configuration
+## Estrutura
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+src/
+├── App.tsx            # Rotas (switch por pathname) e composição da home
+├── components/        # Seções da home + páginas (legais, contato)
+├── hooks/             # useRoute (navegação), useTheme (dark mode), useScrollAnimation
+├── gtag.ts            # Conversões Google Ads
+└── index.css          # Tokens de design (CSS variables, light/dark)
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Integrações com o app (`app.fivconnect.net`): formulário de contato (`/api/public/contact`), chatbot Eddie (`/api/public/eddie-chat`), CTAs de cadastro (`/cadastro`).
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Desenvolvimento
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev       # servidor local Vite
+npm run build     # tsc -b && vite build → dist/
+npm run lint
+npm run preview
 ```
+
+## Deploy
+
+Estático via Nginx na VPS. `scripts/deploy-vps.sh` (chamado pelo GitHub Actions no push em `main`) faz `git reset --hard origin/main`, `npm ci` e `npm run build`. A working tree da VPS precisa estar limpa.

@@ -27,7 +27,7 @@ export default function TrustSection() {
 
         {/* Credential cards */}
         <div
-          className={`grid md:grid-cols-2 gap-5 mb-14 max-w-2xl mx-auto transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+          className={`grid grid-cols-1 md:grid-cols-2 gap-5 mb-14 max-w-2xl mx-auto transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
           style={{ transitionDelay: '100ms' }}
         >
           {[
@@ -74,6 +74,9 @@ export default function TrustSection() {
               <img
                 src="/foto-fundador.jpg"
                 alt="Pedro Gabriel — Fundador do Fi.V Connect"
+                width={80}
+                height={80}
+                loading="lazy"
                 className="w-20 h-20 rounded-full object-cover object-top"
                 style={{ border: '2px solid rgba(255,122,89,0.3)' }}
               />

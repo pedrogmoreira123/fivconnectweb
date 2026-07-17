@@ -15,4 +15,11 @@ export function useRoute() {
 export function navigate(to: string) {
   window.history.pushState({}, '', to);
   window.dispatchEvent(new PopStateEvent('popstate'));
+  // Âncora na mesma página: o path não muda, então o scroll é feito aqui.
+  // (Entre páginas o efeito de rota do App cuida, após o render do destino.)
+  const hashIndex = to.indexOf('#');
+  if (hashIndex >= 0) {
+    const hash = to.slice(hashIndex);
+    requestAnimationFrame(() => document.querySelector(hash)?.scrollIntoView({ behavior: 'smooth' }));
+  }
 }

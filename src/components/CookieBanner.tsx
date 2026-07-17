@@ -57,24 +57,24 @@ export default function CookieBanner() {
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-[9990] p-4 sm:p-6">
-      <div className="max-w-3xl mx-auto bg-white dark:bg-[hsl(25,8%,17%)] rounded-2xl shadow-2xl border border-gray-200 dark:border-white/10 overflow-hidden">
+      <div className="max-w-3xl mx-auto bg-surface rounded-2xl shadow-2xl border border-line overflow-hidden">
         {/* Main row */}
         <div className="p-5 sm:p-6">
           <div className="flex items-start gap-4">
-            <div className="flex-shrink-0 w-9 h-9 rounded-xl bg-orange-100 dark:bg-orange-900/40 flex items-center justify-center">
-              <Cookie size={18} className="text-orange-500 dark:text-orange-400" />
+            <div className="flex-shrink-0 w-9 h-9 rounded-xl bg-coral-soft flex items-center justify-center">
+              <Cookie size={18} className="text-coral" />
             </div>
 
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-semibold text-gray-900 dark:text-white mb-1">
+              <p className="text-sm font-semibold text-ink mb-1">
                 Utilizamos cookies
               </p>
-              <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
+              <p className="text-xs text-ink-2 leading-relaxed">
                 Usamos cookies essenciais para o funcionamento do site e opcionais para melhorar
                 sua experiência e analisar o tráfego. Veja nossa{' '}
                 <button
                   onClick={() => { setVisible(false); navigate('/politica-de-privacidade#cookies'); }}
-                  className="text-orange-500 dark:text-orange-400 hover:underline font-medium"
+                  className="text-coral hover:underline font-medium"
                 >
                   Política de Privacidade
                 </button>
@@ -85,7 +85,7 @@ export default function CookieBanner() {
             <button
               onClick={rejectOptional}
               aria-label="Fechar e rejeitar opcionais"
-              className="flex-shrink-0 p-1 rounded-lg text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-white/10 transition-colors"
+              className="flex-shrink-0 p-1 rounded-lg text-ink-3 hover:text-ink hover:bg-cream-2 transition-colors"
             >
               <X size={16} />
             </button>
@@ -95,19 +95,19 @@ export default function CookieBanner() {
           <div className="mt-4 flex flex-wrap items-center gap-2">
             <button
               onClick={acceptAll}
-              className="px-4 py-2 rounded-lg bg-orange-500 text-white text-xs font-semibold hover:bg-orange-600 transition-colors shadow-sm"
+              className="px-4 py-2 rounded-lg bg-coral text-white text-xs font-semibold hover:bg-coral-600 transition-colors shadow-sm"
             >
               Aceitar todos
             </button>
             <button
               onClick={rejectOptional}
-              className="px-4 py-2 rounded-lg border border-gray-200 dark:border-white/15 text-gray-700 dark:text-gray-300 text-xs font-semibold hover:bg-gray-50 dark:hover:bg-white/5 transition-colors"
+              className="px-4 py-2 rounded-lg border border-line-2 text-ink text-xs font-semibold hover:bg-cream-2 transition-colors"
             >
               Rejeitar opcionais
             </button>
             <button
               onClick={() => setExpanded(!expanded)}
-              className="inline-flex items-center gap-1 px-4 py-2 rounded-lg text-gray-500 dark:text-gray-400 text-xs font-medium hover:bg-gray-50 dark:hover:bg-white/5 transition-colors ml-auto"
+              className="inline-flex items-center gap-1 px-4 py-2 rounded-lg text-ink-2 text-xs font-medium hover:bg-cream-2 transition-colors ml-auto"
             >
               Personalizar
               {expanded ? <ChevronUp size={13} /> : <ChevronDown size={13} />}
@@ -117,18 +117,18 @@ export default function CookieBanner() {
 
         {/* Expanded preferences */}
         {expanded && (
-          <div className="border-t border-gray-100 dark:border-white/10 px-5 sm:px-6 pb-5 pt-4 space-y-4">
+          <div className="border-t border-line px-5 sm:px-6 pb-5 pt-4 space-y-4">
             {/* Essential */}
             <div className="flex items-start justify-between gap-4">
               <div>
-                <p className="text-xs font-semibold text-gray-900 dark:text-white mb-0.5">
-                  Essenciais <span className="text-[10px] font-normal text-gray-400">(sempre ativos)</span>
+                <p className="text-xs font-semibold text-ink mb-0.5">
+                  Essenciais <span className="text-[10px] font-normal text-ink-3">(sempre ativos)</span>
                 </p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">
+                <p className="text-xs text-ink-2">
                   Necessários para login, sessão e funcionamento básico da plataforma.
                 </p>
               </div>
-              <div className="flex-shrink-0 w-9 h-5 rounded-full bg-orange-500 flex items-center justify-end px-0.5 opacity-50 cursor-not-allowed">
+              <div className="flex-shrink-0 w-9 h-5 rounded-full bg-coral flex items-center justify-end px-0.5 opacity-50 cursor-not-allowed">
                 <div className="w-4 h-4 rounded-full bg-white shadow-sm" />
               </div>
             </div>
@@ -136,8 +136,8 @@ export default function CookieBanner() {
             {/* Analytics */}
             <div className="flex items-start justify-between gap-4">
               <div>
-                <p className="text-xs font-semibold text-gray-900 dark:text-white mb-0.5">Analíticos</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">
+                <p className="text-xs font-semibold text-ink mb-0.5">Analíticos</p>
+                <p className="text-xs text-ink-2">
                   Nos ajudam a entender como o site é usado (Google Analytics, etc.).
                 </p>
               </div>
@@ -146,7 +146,7 @@ export default function CookieBanner() {
                 aria-checked={analytics}
                 role="switch"
                 className={`flex-shrink-0 w-9 h-5 rounded-full transition-colors flex items-center px-0.5 ${
-                  analytics ? 'bg-orange-500 justify-end' : 'bg-gray-300 dark:bg-gray-600 justify-start'
+                  analytics ? 'bg-coral justify-end' : 'bg-cream-3 justify-start'
                 }`}
               >
                 <div className="w-4 h-4 rounded-full bg-white shadow-sm" />
@@ -156,8 +156,8 @@ export default function CookieBanner() {
             {/* Functional */}
             <div className="flex items-start justify-between gap-4">
               <div>
-                <p className="text-xs font-semibold text-gray-900 dark:text-white mb-0.5">Funcionais</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">
+                <p className="text-xs font-semibold text-ink mb-0.5">Funcionais</p>
+                <p className="text-xs text-ink-2">
                   Lembram preferências como tema e idioma para melhorar sua experiência.
                 </p>
               </div>
@@ -166,7 +166,7 @@ export default function CookieBanner() {
                 aria-checked={functional}
                 role="switch"
                 className={`flex-shrink-0 w-9 h-5 rounded-full transition-colors flex items-center px-0.5 ${
-                  functional ? 'bg-orange-500 justify-end' : 'bg-gray-300 dark:bg-gray-600 justify-start'
+                  functional ? 'bg-coral justify-end' : 'bg-cream-3 justify-start'
                 }`}
               >
                 <div className="w-4 h-4 rounded-full bg-white shadow-sm" />
@@ -175,7 +175,7 @@ export default function CookieBanner() {
 
             <button
               onClick={saveCustom}
-              className="w-full mt-2 px-4 py-2.5 rounded-lg bg-orange-500 text-white text-xs font-semibold hover:bg-orange-600 transition-colors"
+              className="w-full mt-2 px-4 py-2.5 rounded-lg bg-coral text-white text-xs font-semibold hover:bg-coral-600 transition-colors"
             >
               Salvar preferências
             </button>

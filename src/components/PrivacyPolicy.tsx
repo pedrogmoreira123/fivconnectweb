@@ -1,12 +1,10 @@
-import { ArrowLeft } from 'lucide-react';
 import { navigate } from '../hooks/useRoute';
-import { useTheme } from '../hooks/useTheme';
 
 function Section({ id, title, children }: { id?: string; title: string; children: React.ReactNode }) {
   return (
     <div id={id} className="mb-10 scroll-mt-8">
-      <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-3">{title}</h2>
-      <div className="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3 text-sm">
+      <h2 className="text-xl font-bold text-ink mb-3">{title}</h2>
+      <div className="text-ink-2 leading-relaxed space-y-3 text-sm">
         {children}
       </div>
     </div>
@@ -14,44 +12,25 @@ function Section({ id, title, children }: { id?: string; title: string; children
 }
 
 export default function PrivacyPolicy() {
-  const { theme } = useTheme();
-  const logoSrc = theme === 'dark' ? '/logo-branca.svg' : '/logo-preta.svg';
-
   return (
-    <div className="min-h-screen bg-cream-50 dark:bg-[hsl(25,8%,13%)] transition-colors duration-300">
-      {/* Header */}
-      <header className="border-b border-gray-200 dark:border-white/10 bg-cream-50/90 dark:bg-[hsl(25,8%,13%)]/90 backdrop-blur-md sticky top-0 z-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <a href="/" onClick={(e) => { e.preventDefault(); navigate('/'); }}>
-            <img src={logoSrc} alt="Fi.V Connect" className="h-10 w-auto" />
-          </a>
-          <button
-            onClick={() => navigate('/')}
-            className="inline-flex items-center gap-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 transition-colors"
-          >
-            <ArrowLeft size={16} />
-            Voltar ao site
-          </button>
-        </div>
-      </header>
-
+    <div className="min-h-screen bg-cream transition-colors duration-300">
       {/* Content */}
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16">
         {/* Title */}
         <div className="mb-12">
-          <span className="inline-block px-3 py-1 rounded-full bg-orange-100 dark:bg-orange-900/40 text-orange-700 dark:text-orange-300 text-xs font-semibold tracking-wider mb-4">
+          <span className="inline-block px-3 py-1 rounded-full bg-coral-soft text-coral text-xs font-semibold tracking-wider mb-4">
             LEGAL
           </span>
-          <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-3">
+          <h1 className="text-3xl sm:text-4xl font-bold text-ink mb-3">
             Política de Privacidade
           </h1>
-          <p className="text-sm text-gray-500 dark:text-gray-400">
-            Última atualização: <strong>a preencher</strong>
+          <p className="text-sm text-ink-2">
+            Última atualização: <strong>5 de maio de 2026</strong>
           </p>
         </div>
 
         {/* Intro */}
-        <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-10 text-sm">
+        <p className="text-ink-2 leading-relaxed mb-10 text-sm">
           A Fi.V Connect LTDA ("Fi.V Connect", "nós") respeita a privacidade dos seus usuários.
           Esta Política de Privacidade descreve como coletamos, usamos, armazenamos e protegemos
           as informações pessoais fornecidas ao utilizar nossos serviços. Ao acessar ou usar o
@@ -60,21 +39,21 @@ export default function PrivacyPolicy() {
 
         <Section title="1. Quem somos">
           <p>
-            <strong className="text-gray-800 dark:text-gray-100">Razão social:</strong> Fi.V Connect LTDA<br />
-            <strong className="text-gray-800 dark:text-gray-100">CNPJ:</strong> 66.624.400/0001-86<br />
-            <strong className="text-gray-800 dark:text-gray-100">Endereço:</strong> [a preencher]<br />
-            <strong className="text-gray-800 dark:text-gray-100">E-mail do DPO:</strong> contato@fivconnect.net
+            <strong className="text-ink">Razão social:</strong> F I. V CONNECT LTDA<br />
+            <strong className="text-ink">CNPJ:</strong> 66.624.400/0001-86<br />
+            <strong className="text-ink">Endereço:</strong> Rua Gaspar de Souza, 153 — São Bernardo do Campo/SP<br />
+            <strong className="text-ink">E-mail do DPO:</strong> contato@fivconnect.net
           </p>
         </Section>
 
         <Section title="2. Dados que coletamos">
           <p>Coletamos as seguintes categorias de dados pessoais:</p>
           <ul className="list-disc pl-5 space-y-1">
-            <li><strong className="text-gray-800 dark:text-gray-100">Dados de cadastro:</strong> nome, e-mail, telefone, razão social e CNPJ.</li>
-            <li><strong className="text-gray-800 dark:text-gray-100">Dados de uso:</strong> registros de acesso, funcionalidades utilizadas, logs de sistema e métricas de desempenho.</li>
-            <li><strong className="text-gray-800 dark:text-gray-100">Dados de pagamento:</strong> gerenciados por nosso processador de pagamentos. Não armazenamos dados de cartão em nossos servidores.</li>
-            <li><strong className="text-gray-800 dark:text-gray-100">Dados de comunicação:</strong> mensagens trocadas via WhatsApp gerenciadas pela plataforma, conforme autorizado pelo cliente.</li>
-            <li><strong className="text-gray-800 dark:text-gray-100">Dados de dispositivo:</strong> endereço IP, tipo de navegador, sistema operacional e identificadores de dispositivo.</li>
+            <li><strong className="text-ink">Dados de cadastro:</strong> nome, e-mail, telefone, razão social e CNPJ.</li>
+            <li><strong className="text-ink">Dados de uso:</strong> registros de acesso, funcionalidades utilizadas, logs de sistema e métricas de desempenho.</li>
+            <li><strong className="text-ink">Dados de pagamento:</strong> gerenciados por nosso processador de pagamentos. Não armazenamos dados de cartão em nossos servidores.</li>
+            <li><strong className="text-ink">Dados de comunicação:</strong> mensagens trocadas via WhatsApp gerenciadas pela plataforma, conforme autorizado pelo cliente.</li>
+            <li><strong className="text-ink">Dados de dispositivo:</strong> endereço IP, tipo de navegador, sistema operacional e identificadores de dispositivo.</li>
           </ul>
         </Section>
 
@@ -95,9 +74,9 @@ export default function PrivacyPolicy() {
             Não vendemos seus dados pessoais. Podemos compartilhar informações com:
           </p>
           <ul className="list-disc pl-5 space-y-1">
-            <li><strong className="text-gray-800 dark:text-gray-100">Prestadores de serviço:</strong> empresas que nos auxiliam na operação da plataforma (infraestrutura em nuvem, processamento de pagamentos, e-mail transacional), sempre sob acordos de confidencialidade;</li>
-            <li><strong className="text-gray-800 dark:text-gray-100">Autoridades públicas:</strong> quando exigido por lei, regulamento ou ordem judicial;</li>
-            <li><strong className="text-gray-800 dark:text-gray-100">Parceiros comerciais:</strong> somente com seu consentimento expresso.</li>
+            <li><strong className="text-ink">Prestadores de serviço:</strong> empresas que nos auxiliam na operação da plataforma (infraestrutura em nuvem, processamento de pagamentos, e-mail transacional), sempre sob acordos de confidencialidade;</li>
+            <li><strong className="text-ink">Autoridades públicas:</strong> quando exigido por lei, regulamento ou ordem judicial;</li>
+            <li><strong className="text-ink">Parceiros comerciais:</strong> somente com seu consentimento expresso.</li>
           </ul>
         </Section>
 
@@ -107,9 +86,9 @@ export default function PrivacyPolicy() {
             Os cookies podem ser:
           </p>
           <ul className="list-disc pl-5 space-y-1">
-            <li><strong className="text-gray-800 dark:text-gray-100">Essenciais:</strong> necessários para o funcionamento básico da plataforma (sessão, autenticação);</li>
-            <li><strong className="text-gray-800 dark:text-gray-100">Analíticos:</strong> nos ajudam a entender como a plataforma é usada (Google Analytics, etc.);</li>
-            <li><strong className="text-gray-800 dark:text-gray-100">Funcionais:</strong> lembram suas preferências (tema, idioma).</li>
+            <li><strong className="text-ink">Essenciais:</strong> necessários para o funcionamento básico da plataforma (sessão, autenticação);</li>
+            <li><strong className="text-ink">Analíticos:</strong> nos ajudam a entender como a plataforma é usada (Google Analytics, etc.);</li>
+            <li><strong className="text-ink">Funcionais:</strong> lembram suas preferências (tema, idioma).</li>
           </ul>
           <p>
             Você pode desabilitar cookies nas configurações do seu navegador, mas isso pode afetar
@@ -119,9 +98,14 @@ export default function PrivacyPolicy() {
 
         <Section title="6. Retenção de dados">
           <p>
-            Mantemos seus dados pessoais enquanto sua conta estiver ativa. Após o cancelamento,
-            os dados são retidos por até [a preencher] dias para fins de auditoria e cumprimento
-            de obrigações legais, após os quais são excluídos ou anonimizados.
+            <strong className="text-ink">Dados da conta/cadastro:</strong> mantidos enquanto a conta
+            estiver ativa e por até 90 (noventa) dias após o cancelamento, para permitir reativação
+            e exportação dos dados pelo CONTRATANTE.
+          </p>
+          <p>
+            <strong className="text-ink">Dados fiscais (notas, faturamento):</strong> mantidos por
+            5 (cinco) anos, em atendimento ao prazo previsto no Código Tributário Nacional. Após os
+            prazos aplicáveis, os dados são excluídos ou anonimizados de forma segura.
           </p>
         </Section>
 
@@ -156,7 +140,7 @@ export default function PrivacyPolicy() {
           </ul>
           <p>
             Para exercer seus direitos, entre em contato pelo e-mail{' '}
-            <a href="mailto:contato@fivconnect.net" className="text-orange-500 hover:underline">
+            <a href="mailto:contato@fivconnect.net" className="text-coral hover:underline">
               contato@fivconnect.net
             </a>
             . Responderemos em até 15 dias úteis.
@@ -177,12 +161,12 @@ export default function PrivacyPolicy() {
             Dúvidas sobre esta política ou sobre o tratamento dos seus dados:
           </p>
           <p>
-            <strong className="text-gray-800 dark:text-gray-100">E-mail:</strong>{' '}
-            <a href="mailto:contato@fivconnect.net" className="text-orange-500 hover:underline">
+            <strong className="text-ink">E-mail:</strong>{' '}
+            <a href="mailto:contato@fivconnect.net" className="text-coral hover:underline">
               contato@fivconnect.net
             </a><br />
-            <strong className="text-gray-800 dark:text-gray-100">WhatsApp:</strong>{' '}
-            <a href="https://wa.me/5511944745067" className="text-orange-500 hover:underline">
+            <strong className="text-ink">WhatsApp:</strong>{' '}
+            <a href="https://wa.me/5511944745067" className="text-coral hover:underline">
               +55 11 94474-5067
             </a>
           </p>
@@ -190,14 +174,14 @@ export default function PrivacyPolicy() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-gray-200 dark:border-white/10 py-8">
+      <footer className="border-t border-line py-8">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-gray-500 dark:text-gray-400">
+          <p className="text-xs text-ink-2">
             © 2026 Fi.V Connect — Fi.V Connect LTDA. Todos os direitos reservados.
           </p>
           <button
             onClick={() => navigate('/')}
-            className="text-xs text-orange-500 hover:underline font-medium"
+            className="text-xs text-coral hover:underline font-medium"
           >
             Voltar ao site
           </button>
